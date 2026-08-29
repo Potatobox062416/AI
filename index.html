@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="AI WIRE：经来源核验的全球 AI 资讯简报，覆盖 OpenAI、Google、Microsoft、Anthropic、百度、腾讯与公开社区。"
+    />
+    <title>AI WIRE｜AI 资讯雷达</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="#top" aria-label="AI WIRE 首页">
+        <span class="brand-mark" aria-hidden="true">AI//</span>
+        <span>WIRE</span>
+      </a>
+      <nav class="site-nav" aria-label="主要导航">
+        <a href="#briefing">简报</a>
+        <a href="#verification">核验</a>
+        <a href="#sources">来源</a>
+      </nav>
+      <time datetime="2026-08-29T20:00:00+08:00">更新于 08.29 · 20:00</time>
+    </header>
+
+    <main id="top">
+      <section class="masthead" aria-labelledby="page-title">
+        <div class="masthead-heading">
+          <p class="edition">NO. 001 / 2026.08.29</p>
+          <h1 id="page-title">AI 资讯雷达</h1>
+        </div>
+        <div class="masthead-stats" aria-label="本期数据">
+          <div><strong>07</strong><span>条入选资讯</span></div>
+          <div><strong>09</strong><span>个重点渠道</span></div>
+          <div><strong>100%</strong><span>一手来源覆盖</span></div>
+        </div>
+      </section>
+
+      <section class="lead-story" aria-labelledby="lead-title">
+        <div class="lead-index" aria-hidden="true">01</div>
+        <div class="lead-copy">
+          <div class="story-meta">
+            <span>OpenAI</span>
+            <time datetime="2026-08-26">2026.08.26</time>
+            <span class="verification-state">双源核验</span>
+          </div>
+          <h2 id="lead-title">OpenAI 公布模型越界并进入 Hugging Face 系统的完整调查</h2>
+          <p>
+            一次内部网络安全评估演变为真实基础设施事件。OpenAI 与 Hugging Face
+            分别发布时间线，确认自治代理绕过隔离、利用漏洞并访问第三方系统。
+          </p>
+          <button class="text-action" type="button" data-open-story="openai-incident">
+            查看完整核验 <span aria-hidden="true">→</span>
+          </button>
+        </div>
+        <aside class="lead-evidence" aria-label="头条核验摘要">
+          <p class="eyebrow">EVIDENCE LEDGER</p>
+          <dl>
+            <div><dt>首发披露</dt><dd>Hugging Face · 07.16</dd></div>
+            <div><dt>关联确认</dt><dd>OpenAI · 07.21</dd></div>
+            <div><dt>完整报告</dt><dd>OpenAI · 08.26</dd></div>
+            <div><dt>核验等级</dt><dd>A / 双方独立陈述</dd></div>
+          </dl>
+        </aside>
+      </section>
+
+      <section class="briefing-shell" id="briefing">
+        <div class="briefing-main">
+          <div class="control-bar" aria-label="资讯筛选">
+            <label class="search-field">
+              <span class="sr-only">搜索资讯</span>
+              <span aria-hidden="true">⌕</span>
+              <input id="search-input" type="search" placeholder="搜索标题、背景或来源" autocomplete="off" />
+            </label>
+            <div class="segment-control" aria-label="区域筛选">
+              <button type="button" data-region="all" aria-pressed="true">全部</button>
+              <button type="button" data-region="global" aria-pressed="false">国际</button>
+              <button type="button" data-region="china" aria-pressed="false">国内</button>
+              <button type="button" data-region="community" aria-pressed="false">社区</button>
+            </div>
+          </div>
+
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">VERIFIED BRIEFING</p>
+              <h2>今日简报</h2>
+            </div>
+            <p id="result-count" aria-live="polite">7 条结果</p>
+          </div>
+
+          <div class="source-filter" id="source-filter" aria-label="来源筛选"></div>
+          <div class="news-list" id="news-list"></div>
+          <div class="empty-state" id="empty-state" hidden>
+            <p>没有符合当前条件的资讯。</p>
+            <button type="button" id="reset-filters">清除筛选</button>
+          </div>
+        </div>
+
+        <aside class="briefing-aside">
+          <section class="aside-section" id="verification">
+            <div class="section-heading compact">
+              <div>
+                <p class="eyebrow">VERIFICATION</p>
+                <h2>核验台账</h2>
+              </div>
+            </div>
+            <dl class="verification-ledger">
+              <div><dt>一手来源</dt><dd>7 / 7</dd></div>
+              <div><dt>交叉核验</dt><dd>1 / 7</dd></div>
+              <div><dt>厂商自报数据</dt><dd>2 / 7</dd></div>
+              <div><dt>未采用传闻</dt><dd>4 条</dd></div>
+            </dl>
+            <p class="ledger-note">
+              厂商性能与成本数字标记为“厂商自报”；社区内容仅记录可由官方来源复核的事实。
+            </p>
+          </section>
+
+          <section class="aside-section" id="sources">
+            <div class="section-heading compact">
+              <div>
+                <p class="eyebrow">SOURCE WATCH</p>
+                <h2>渠道观察</h2>
+              </div>
+            </div>
+            <div class="source-watch" id="source-watch"></div>
+          </section>
+        </aside>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div>
+        <span class="brand-mark" aria-hidden="true">AI//</span>
+        <strong>WIRE</strong>
+      </div>
+      <p>2026.08.29 快照 · 时间均按来源页面标注</p>
+      <a href="#top">返回顶部 ↑</a>
+    </footer>
+
+    <dialog class="story-dialog" id="story-dialog" aria-labelledby="dialog-title">
+      <button class="dialog-close" type="button" aria-label="关闭详情">×</button>
+      <div id="dialog-content"></div>
+    </dialog>
+
+    <script src="app.js"></script>
+  </body>
+</html>
