@@ -334,11 +334,15 @@
     `).join("");
   }
 
+  function restaurantImageFiles(item) {
+    return [1, 2].map((index) => `assets/restaurants/${item.id}/${item.id}-${index}.jpg`);
+  }
+
   function restaurantImages(item) {
     const remoteImages = window.RESTAURANT_IMAGE_URLS?.[item.id];
     return Array.isArray(remoteImages) && remoteImages.length >= 2
       ? remoteImages.slice(0, 2)
-      : [1, 2].map((index) => `assets/restaurants/${item.id}/${item.id}-${index}.jpg`);
+      : restaurantImageFiles(item);
   }
 
   function loadRestaurantImageSources() {
@@ -359,7 +363,7 @@
     try {
       const sources = await loadRestaurantImageSources();
       if (!container.isConnected) return;
-      container.innerHTML = restaurantImages(item).map((file, index) => {
+      container.innerHTML = restaurantImageFiles(item).map((file, index) => {
         const source = sources.get(file);
         if (!source?.page) return `<span>配图${index + 1}：来源待补充</span>`;
         const label = source.title || source.videoTitle || `配图${index + 1}来源页面`;
@@ -1757,3 +1761,4 @@
 
   initialize();
 })();
+
