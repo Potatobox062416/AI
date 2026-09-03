@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="进京赶考：北京团队旅行规划、景点信息与门票预约助手。">
+  <title>进京赶考</title>
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#attractions" aria-label="进京赶考首页">
+      <span class="brand-mark" aria-hidden="true">京</span>
+      <span><strong>进京赶考</strong><small>团队旅行工作台</small></span>
+    </a>
+
+    <nav class="primary-nav" aria-label="主要导航">
+      <button class="nav-item is-active" type="button" data-view="attractions">
+        <i data-lucide="landmark" aria-hidden="true"></i><span>景点</span>
+      </button>
+      <button class="nav-item" type="button" data-view="planner">
+        <i data-lucide="route" aria-hidden="true"></i><span>行程</span>
+      </button>
+      <button class="nav-item" type="button" data-view="tickets">
+        <i data-lucide="ticket-check" aria-hidden="true"></i><span>票务</span>
+      </button>
+      <button class="nav-item" type="button" data-view="food">
+        <i data-lucide="utensils" aria-hidden="true"></i><span>美食</span>
+      </button>
+    </nav>
+
+    <div class="weather-brief" id="weather-brief" aria-live="polite">
+      <i data-lucide="cloud-sun" aria-hidden="true"></i>
+      <span><strong>北京</strong><small>等待行程日期</small></span>
+    </div>
+  </header>
+
+  <main>
+    <section class="view is-active" id="view-attractions" aria-labelledby="attractions-title">
+      <div class="hero-band">
+        <div class="hero-scrim"></div>
+        <div class="hero-content">
+          <p class="eyebrow">BEIJING FIELD DESK · 2026</p>
+          <h1 id="attractions-title">进京赶考</h1>
+          <p>北京景点、路线、预算与预约节点</p>
+          <div class="hero-metrics" aria-label="景点库摘要">
+            <span><strong>17</strong>处景点</span>
+            <span><strong>68</strong>张实景</span>
+            <span><strong>39</strong>家餐馆</span>
+          </div>
+        </div>
+        <label class="hero-search" for="attraction-search">
+          <i data-lucide="search" aria-hidden="true"></i>
+          <input id="attraction-search" type="search" placeholder="搜索景点、区域或游玩内容" autocomplete="off">
+          <kbd>Ctrl K</kbd>
+        </label>
+      </div>
+
+      <div class="workspace attraction-workspace">
+        <aside class="filter-rail" aria-label="景点筛选">
+          <div class="rail-heading">
+            <span>筛选</span>
+            <button class="icon-button" id="clear-filters" type="button" title="清除筛选" aria-label="清除筛选">
+              <i data-lucide="rotate-ccw" aria-hidden="true"></i>
+            </button>
+          </div>
+          <div class="filter-group">
+            <span class="filter-label">类型</span>
+            <div class="filter-stack" id="category-filters"></div>
+          </div>
+          <div class="filter-group">
+            <span class="filter-label">费用</span>
+            <label class="check-row"><input type="checkbox" id="free-only"><span>仅看免费</span></label>
+          </div>
+          <div class="filter-note">
+            <i data-lucide="badge-info" aria-hidden="true"></i>
+            <span>票价按成人常规全价整理，动态票与交通项目另行标注。</span>
+          </div>
+        </aside>
+
+        <div class="attraction-catalog">
+          <div class="section-toolbar">
+            <div>
+              <p class="section-kicker">ATTRACTION INDEX</p>
+              <h2>景点索引</h2>
+            </div>
+            <div class="catalog-status"><span id="attraction-count">17</span> 个结果</div>
+          </div>
+          <div class="attraction-grid" id="attraction-grid"></div>
+          <div class="empty-state" id="attraction-empty" hidden>
+            <i data-lucide="map-pin-off" aria-hidden="true"></i>
+            <strong>没有匹配的景点</strong>
+            <span>调整关键词或清除筛选。</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="view" id="view-planner" aria-labelledby="planner-title" hidden>
+      <div class="view-heading workspace">
+        <div>
+          <p class="section-kicker">TRIP WORKBENCH</p>
+          <h1 id="planner-title">旅游计划</h1>
+        </div>
+        <p id="planner-heading-note">输入团队与日期，生成可比较的北京行程。</p>
+      </div>
+
+      <div class="planner-layout workspace">
+        <form class="planner-form" id="planner-form">
+          <div class="form-section">
+            <div class="form-section-title"><span>团队</span><output id="team-count">4人</output></div>
+            <label class="field-label" for="team-ages">每个人的年龄</label>
+            <textarea id="team-ages" rows="2" inputmode="numeric" placeholder="例如：35、33、10、6">35、33、10、6</textarea>
+            <p class="field-message" id="age-message">用逗号或空格分隔，费用优惠将按年龄估算。</p>
+          </div>
+
+          <div class="form-section two-column-fields">
+            <label>
+              <span class="field-label">出发地</span>
+              <input id="origin" type="text" value="上海" autocomplete="address-level1">
+            </label>
+            <label>
+              <span class="field-label">返回地</span>
+              <input id="return-city" type="text" value="上海" autocomplete="address-level1">
+            </label>
+          </div>
+
+          <div class="form-section trip-time-fields">
+            <label>
+              <span class="field-label">到京时间</span>
+              <input id="arrival-datetime" type="datetime-local" value="2026-10-01T09:30" step="60" required>
+            </label>
+            <label>
+              <span class="field-label">离京时间</span>
+              <input id="departure-datetime" type="datetime-local" value="2026-10-05T18:00" step="60" required>
+            </label>
+            <output class="trip-duration" id="trip-duration" for="arrival-datetime departure-datetime" aria-live="polite">5天4晚</output>
+            <p class="field-message" id="trip-time-message">按到京日和离京日自动计算，包含首尾两天。</p>
+          </div>
+
+          <div class="form-section">
+            <span class="field-label">往返方式</span>
+            <div class="segmented" id="transport-mode" role="group" aria-label="往返方式">
+              <button class="is-selected" type="button" data-value="rail"><i data-lucide="train-front"></i>高铁</button>
+              <button type="button" data-value="air"><i data-lucide="plane"></i>飞机</button>
+              <button type="button" data-value="drive"><i data-lucide="car-front"></i>自驾</button>
+            </div>
+          </div>
+
+          <div class="form-section transport-options" id="transport-options" aria-live="polite"></div>
+
+          <div class="form-section">
+            <span class="field-label">游玩节奏</span>
+            <div class="segmented text-only" id="pace-mode" role="group" aria-label="游玩节奏">
+              <button type="button" data-value="early">特种兵</button>
+              <button class="is-selected" type="button" data-value="balanced">高效赶考</button>
+              <button type="button" data-value="relaxed">松弛漫游</button>
+            </div>
+          </div>
+
+          <button class="primary-button" type="submit">
+            <i data-lucide="sparkles" aria-hidden="true"></i>生成旅游计划
+          </button>
+          <p class="form-footnote">费用为距离模型与公开票价的区间估算，不等同于实时报价。</p>
+        </form>
+
+        <div class="planner-results">
+          <div class="weather-strip" id="weather-strip" aria-live="polite"></div>
+          <div class="plan-switcher" id="plan-switcher" role="tablist" aria-label="计划选择"></div>
+          <article class="plan-sheet" id="plan-sheet" aria-live="polite"></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="view" id="view-tickets" aria-labelledby="tickets-title" hidden>
+      <div class="view-heading workspace ticket-heading">
+        <div>
+          <p class="section-kicker">BOOKING DESK</p>
+          <h1 id="tickets-title">门票预订</h1>
+        </div>
+        <label class="plan-select-label" for="ticket-plan-select">
+          <span>当前计划</span>
+          <select id="ticket-plan-select"></select>
+        </label>
+      </div>
+
+      <div class="ticket-layout workspace">
+        <aside class="booking-summary">
+          <div class="booking-date">
+            <span>下一预约节点</span>
+            <strong id="next-booking-date">等待计划</strong>
+            <small id="next-booking-name">生成行程后显示</small>
+          </div>
+          <div class="summary-actions">
+            <button class="secondary-button" id="download-reminders" type="button">
+              <i data-lucide="calendar-plus"></i>下载预约日历
+            </button>
+            <button class="secondary-button" id="print-plan" type="button">
+              <i data-lucide="printer"></i>打印计划
+            </button>
+          </div>
+          <div class="booking-legend">
+            <span><i class="status-dot urgent"></i>需卡点预约</span>
+            <span><i class="status-dot advance"></i>建议提前购买</span>
+            <span><i class="status-dot open"></i>现场或免费</span>
+          </div>
+        </aside>
+        <div class="ticket-list" id="ticket-list"></div>
+      </div>
+    </section>
+
+    <section class="view" id="view-food" aria-labelledby="food-title" hidden>
+      <div class="view-heading workspace food-heading">
+        <div>
+          <p class="section-kicker">FOOD FIELD NOTES</p>
+          <h1 id="food-title">北京美食</h1>
+        </div>
+        <label class="food-search" for="food-search">
+          <i data-lucide="search"></i>
+          <input id="food-search" type="search" placeholder="搜索餐馆、风格或推荐菜" autocomplete="off">
+        </label>
+      </div>
+
+      <div class="food-workspace workspace">
+        <div class="food-filter-groups">
+          <div class="food-filter-bar" id="food-price-filters" role="group" aria-label="美食价位筛选"></div>
+          <div class="food-filter-bar" id="food-author-filters" role="group" aria-label="视频作者筛选"></div>
+        </div>
+        <div class="section-toolbar food-toolbar">
+          <div>
+            <p class="section-kicker">RESTAURANT INDEX</p>
+            <h2>餐馆与小吃</h2>
+          </div>
+          <div class="catalog-status"><span id="food-count">0</span> 个结果</div>
+        </div>
+        <div class="food-grid" id="food-grid"></div>
+        <p class="food-source-note"><i data-lucide="badge-info"></i>参考人均、营业状态与视频观点均可能变化；配图仅用于本地行程原型。计划生成时按区域和餐时匹配，临行须在餐厅或平台页面复核。</p>
+      </div>
+    </section>
+  </main>
+
+  <dialog class="attraction-dialog" id="attraction-dialog">
+    <button class="dialog-close icon-button" type="button" id="dialog-close" aria-label="关闭景点详情" title="关闭">
+      <i data-lucide="x"></i>
+    </button>
+    <div id="dialog-content"></div>
+  </dialog>
+
+  <dialog class="restaurant-dialog" id="restaurant-dialog">
+    <button class="dialog-close icon-button" type="button" id="restaurant-dialog-close" aria-label="关闭餐馆详情" title="关闭">
+      <i data-lucide="x"></i>
+    </button>
+    <div id="restaurant-dialog-content"></div>
+  </dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js"></script>
+  <script src="vendor/suncalc.js"></script>
+  <script src="data.js"></script>
+  <script src="food-data.js"></script>
+  <script src="food-data-daxiang.js"></script>
+  <script src="food-data-daba.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

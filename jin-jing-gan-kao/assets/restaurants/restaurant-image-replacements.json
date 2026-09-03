@@ -1,0 +1,134 @@
+[
+  {
+    "restaurant": "yin-san",
+    "file": "assets/restaurants/yin-san/yin-san-2.jpg",
+    "image": "https://ak-d.tripcdn.com/images/1mi5q12000fzxo68080D2.jpg?proc=source%2Ftrip",
+    "page": "https://hk.trip.com/moments/detail/beijing-1-125108628/"
+  },
+  {
+    "restaurant": "wulixiang",
+    "file": "assets/restaurants/wulixiang/wulixiang-2.jpg",
+    "image": "https://i2.hdslb.com/bfs/archive/d9b03db79de346f5220818673b0dc2f0a5850a2b.jpg",
+    "page": "https://www.bilibili.com/video/BV1FV411d79h/",
+    "title": "北京米其林探店| 米其林二星：屋里厢",
+    "verifiedNote": "B站官方元数据标题明确为北京屋里厢探店；封面与第1张大祥哥视频封面不同。"
+  },
+  {
+    "restaurant": "xiding",
+    "file": "assets/restaurants/xiding/xiding-2.jpg",
+    "image": "https://i0.hdslb.com/bfs/archive/9490717f6efaa1df97fabc87f0ed844d0b303d87.jpg",
+    "page": "https://www.bilibili.com/video/BV1LCxCzPE1T/",
+    "title": "特厨探店|十几块一个的饺子到底是什么味？！—喜鼎",
+    "verifiedNote": "B站官方元数据标题明确为喜鼎且视频标签含北京；作为北京喜鼎品牌菜品图，不作为蓝色港湾分店外观证据。"
+  },
+  {
+    "restaurant": "bistro108",
+    "file": "assets/restaurants/bistro108/bistro108-2.jpg",
+    "image": "https://www.oushinet.com/image/2023-04-08/thumb/1094410006172557312.jpg",
+    "page": "https://www.oushinet.com/static/content/ouzhong/ouzhongnews/2023-04-08/1094377940340719616.html",
+    "title": "欧洲时报：Bistro108巴黎餐吧门店与经营者实拍",
+    "verifiedNote": "欧洲时报专访正文明确点名北京Bistro108；图片可见BISTRO108门店招牌，与第1张视频封面不同。"
+  },
+  {
+    "restaurant": "yisitan",
+    "file": "assets/restaurants/yisitan/yisitan-2.jpg",
+    "image": "https://i2.hdslb.com/bfs/archive/56e0ec9b5b204799de6f7a6f1fe68be1adbbac82.jpg",
+    "page": "https://www.bilibili.com/video/BV176QMBUEio/",
+    "title": "北京豪华餐厅“伊斯坦丁”原来有这些小巧思！",
+    "verifiedNote": "B站官方元数据标题明确点名北京伊斯坦丁；封面文字包含伊斯坦丁，与第1张大霸子视频封面不同。"
+  },
+  {
+    "restaurant": "maiden-tower",
+    "file": "assets/restaurants/maiden-tower/maiden-tower-2.jpg",
+    "image": "https://japanese.beijing.gov.cn/specials/musteatmeals/exoticrestaurants/202411/W020241106554265119612.jpg",
+    "page": "https://japanese.beijing.gov.cn/specials/musteatmeals/exoticrestaurants/202411/t20241106_3935529.html",
+    "title": "北京市政府：阿塞拜疆国家品牌馆-少女塔餐厅",
+    "verifiedNote": "北京市政府页面将该图的title与alt明确标为阿塞拜疆国家品牌馆-少女塔餐厅；画面为品牌馆门店空间，与第1张视频封面不同。"
+  },
+  {
+    "restaurant": "five-guys",
+    "file": "assets/restaurants/five-guys/five-guys-2.jpg",
+    "image": "https://dynl.mktgcdn.com/p/_cHZXE9XpwDMdnEtTaqssEBuvqIGYKHRpWyIksydSjY/600x356.png",
+    "page": "https://restaurants.fiveguys.cn/101-chaoyang-north-road",
+    "title": "FIVE GUYS朝阳大悦城店官方页面 · Hand-Cut Fries",
+    "verification": "图片来自品牌官方朝阳店页面的Hand-Cut Fries栏目；本地转为JPEG，与第1张B站视频封面不同。"
+  },
+  {
+    "restaurant": "huifeng",
+    "file": "assets/restaurants/huifeng/huifeng-2.jpg",
+    "image": "https://qcloud.dpfile.com/pc/RdgOoQZRMiJRJ2T3-m3IzWkbs4WTV-jQ_ixWoJC7lI73XErsVVN0DbGQszSKsvw_l0cm-Lf9tDMlLZpO7rb3bg.jpg",
+    "page": "https://www.dianping.com/shop/508723/photos",
+    "title": "惠丰涮肉馆（德宝新园店）会员相册 · 羊肉",
+    "verification": "图片链接来自该门店专属相册，画面为涮肉羊肉盘；与第1张视频封面不同。"
+  },
+  {
+    "restaurant": "xiangchangxiang",
+    "file": "assets/restaurants/xiangchangxiang/xiangchangxiang-2.jpg",
+    "image": "https://dimg04.c-ctrip.com/images/1mh5f12000ais3tdf7AAD_W_640_10000.jpg?proc=autoorient",
+    "page": "https://you.ctrip.com/food/1/4936915.html",
+    "title": "湘肠香火锅店（团结湖店）· 湘味肥肠火锅",
+    "verification": "图片来自携程该门店六图相册，画面为肥肠火锅；与第1张视频封面不同。"
+  },
+  {
+    "restaurant": "tingli",
+    "file": "assets/restaurants/tingli/tingli-2.jpg",
+    "image": "https://r1.visitbeijing.com.cn/vbj-korean/2021/1118/3e30cde8f0621b6f4fd5f351edbe5544.png",
+    "page": "https://r.visitbeijing.or.kr/food/100"
+  },
+  {
+    "restaurant": "argentina-estate",
+    "file": "assets/restaurants/argentina-estate/argentina-estate-2.jpg",
+    "page": "https://www.bilibili.com/video/BV18V41127jv/"
+  },
+  {
+    "restaurant": "commune-kitchen",
+    "file": "assets/restaurants/commune-kitchen/commune-kitchen-2.jpg",
+    "page": "https://www.bilibili.com/video/BV1b5kPYMEaf/"
+  },
+  {
+    "restaurant": "feifu",
+    "file": "assets/restaurants/feifu/feifu-2.jpg",
+    "page": "https://www.bilibili.com/video/BV1T24y1T7zD/"
+  },
+  {
+    "restaurant": "taipo",
+    "file": "assets/restaurants/taipo/taipo-2.jpg",
+    "page": "https://www.bilibili.com/video/BV1HT4y1p7z3/"
+  },
+  {
+    "restaurant": "chaoshangchao",
+    "file": "assets/restaurants/chaoshangchao/chaoshangchao-2.jpg",
+    "page": "https://www.visitbeijing.com.cn/article/4FiK4AMqn5e"
+  },
+  {
+    "restaurant": "dadong",
+    "file": "assets/restaurants/dadong/dadong-2.jpg",
+    "page": "https://danielfooddiary.com/2018/05/09/dadong/"
+  },
+  {
+    "restaurant": "qulangyuan",
+    "file": "assets/restaurants/qulangyuan/qulangyuan-2.jpg",
+    "page": "https://www.wabisabiissue.com/city-explore/delicious-feast-in-the-hutong"
+  },
+  {
+    "restaurant": "trb",
+    "file": "assets/restaurants/trb/trb-2.jpg",
+    "page": "https://www.visitbeijing.com.cn/article/4Lnu37XLMJE"
+  },
+  {
+    "restaurant": "mai-thai",
+    "file": "assets/restaurants/mai-thai/mai-thai-1.jpg",
+    "image": "https://ak-d.tripcdn.com/images/0103t120009gg6p8c9B93_D_750_520_Q90.jpg?proc=autoorient",
+    "page": "https://hk.trip.com/restaurant/china/beijing/detail/restaurant-115334018/",
+    "title": "売泰（三里T+MALL店）· 猪脚饭",
+    "verification": "图片来自Trip.com该门店菜品相册，画面为猪脚饭；与第2张打抛饭及THE TACO BAR视频封面均不同。"
+  },
+  {
+    "restaurant": "mai-thai",
+    "file": "assets/restaurants/mai-thai/mai-thai-2.jpg",
+    "image": "https://ak-d.tripcdn.com/images/0104w120009tyxzog785A_D_750_520_Q90.jpg?proc=autoorient",
+    "page": "https://hk.trip.com/restaurant/china/beijing/detail/restaurant-115334018/",
+    "title": "売泰（三里T+MALL店）· 打抛饭",
+    "verification": "图片来自Trip.com该门店菜品相册，画面为打抛饭；与第1张猪脚饭及THE TACO BAR视频封面均不同。"
+  }
+]
