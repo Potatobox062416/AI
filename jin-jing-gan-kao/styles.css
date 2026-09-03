@@ -893,6 +893,251 @@ select:focus {
   line-height: 1.4;
 }
 
+.transport-live-note {
+  display: flex;
+  align-items: flex-start;
+  gap: 7px;
+  padding: 9px;
+  border-left: 3px solid var(--jade);
+  background: var(--jade-soft);
+  color: #315e57;
+  font-size: 9px;
+  line-height: 1.45;
+}
+
+.transport-live-note svg {
+  flex: 0 0 auto;
+  width: 14px;
+  height: 14px;
+}
+
+.transport-leg-panel {
+  padding-top: 10px;
+  border-top: 1px solid var(--line);
+}
+
+.transport-leg-head,
+.ticket-record-head,
+.ticket-record-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.transport-leg-head {
+  margin-bottom: 7px;
+}
+
+.transport-leg-head span,
+.transport-leg-head strong {
+  display: block;
+}
+
+.transport-leg-head span {
+  color: var(--muted);
+  font-size: 8px;
+}
+
+.transport-leg-head strong {
+  font-size: 10px;
+}
+
+.transport-leg-head em,
+.inventory {
+  font-size: 8px;
+  font-style: normal;
+  font-weight: 800;
+}
+
+.transport-leg-head em.available,
+.inventory.available {
+  color: var(--jade);
+}
+
+.transport-leg-head em.pending,
+.inventory.pending {
+  color: #9a641f;
+}
+
+.transport-leg-head em.blocked,
+.inventory.blocked {
+  color: var(--vermilion);
+}
+
+.ticket-record-list {
+  display: grid;
+  gap: 6px;
+}
+
+.ticket-record-empty {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 44px;
+  padding: 8px;
+  border: 1px dashed var(--line-strong);
+  color: var(--muted);
+  font-size: 9px;
+}
+
+.ticket-record-empty svg {
+  width: 15px;
+  height: 15px;
+}
+
+.ticket-record {
+  padding: 9px;
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--line-strong);
+  background: #fff;
+}
+
+.ticket-record.is-selected {
+  border-left-color: var(--jade);
+  background: var(--jade-soft);
+}
+
+.ticket-record-head strong {
+  font-family: var(--utility);
+  font-size: 13px;
+}
+
+.ticket-record-route {
+  display: grid;
+  grid-template-columns: 1fr 16px 1fr;
+  align-items: center;
+  gap: 4px;
+  margin-top: 5px;
+  font-size: 10px;
+}
+
+.ticket-record-route b:last-child {
+  text-align: right;
+}
+
+.ticket-record-route svg {
+  width: 13px;
+  height: 13px;
+  color: var(--muted);
+}
+
+.ticket-record-data {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.ticket-record-data span {
+  min-width: 0;
+}
+
+.ticket-record-data small,
+.ticket-record-data strong {
+  display: block;
+}
+
+.ticket-record-data small {
+  color: var(--muted);
+  font-size: 8px;
+}
+
+.ticket-record-data strong {
+  margin-top: 1px;
+  font-size: 9px;
+  overflow-wrap: anywhere;
+}
+
+.ticket-record-actions {
+  margin-top: 8px;
+  padding-top: 7px;
+  border-top: 1px solid var(--line);
+}
+
+.ticket-record-actions .text-button {
+  min-height: 30px;
+  padding-inline: 8px;
+  font-size: 9px;
+}
+
+.ticket-record-actions .icon-button {
+  width: 30px;
+  height: 30px;
+}
+
+.ticket-entry {
+  margin-top: 7px;
+  border: 1px solid var(--line);
+  background: #fafbfa;
+}
+
+.ticket-entry summary {
+  display: flex;
+  align-items: center;
+  min-height: 36px;
+  gap: 6px;
+  padding: 0 9px;
+  color: var(--jade);
+  font-size: 9px;
+  font-weight: 800;
+  cursor: pointer;
+  list-style: none;
+}
+
+.ticket-entry summary::-webkit-details-marker {
+  display: none;
+}
+
+.ticket-entry summary svg {
+  width: 14px;
+  height: 14px;
+}
+
+.ticket-entry-fields {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 7px;
+  padding: 9px;
+  border-top: 1px solid var(--line);
+}
+
+.ticket-entry-fields label span {
+  display: block;
+  margin-bottom: 3px;
+  color: var(--muted);
+  font-size: 8px;
+}
+
+.ticket-entry-fields input,
+.ticket-entry-fields select {
+  min-height: 34px;
+  padding-inline: 7px;
+  font-size: 9px;
+}
+
+.ticket-entry-fields label:nth-child(4),
+.ticket-entry-fields label:nth-child(5) {
+  grid-column: 1 / -1;
+}
+
+.ticket-save {
+  width: calc(100% - 18px);
+  min-height: 34px;
+  margin: 0 9px 9px;
+  font-size: 9px;
+}
+
+.ticket-entry-message {
+  margin: 0 9px 9px;
+  color: var(--muted);
+  font-size: 8px;
+}
+
+.ticket-entry-message.is-error {
+  color: var(--vermilion);
+}
+
 .primary-button,
 .secondary-button,
 .text-button {
@@ -917,6 +1162,19 @@ select:focus {
 .primary-button:hover {
   border-color: var(--vermilion-dark);
   background: var(--vermilion-dark);
+}
+
+.primary-button.inline {
+  width: auto;
+  min-height: 36px;
+  margin: 0;
+  padding-inline: 14px;
+}
+
+.secondary-button.compact {
+  min-height: 36px;
+  padding-inline: 12px;
+  font-size: 10px;
 }
 
 .form-footnote {
@@ -1018,6 +1276,252 @@ select:focus {
 .plan-tab.is-selected {
   border-color: var(--jade);
   background: var(--jade-soft);
+}
+
+.plan-editor {
+  margin-bottom: 12px;
+  border: 1px solid var(--line);
+  border-top: 3px solid var(--jade);
+  background: var(--surface);
+}
+
+.plan-editor-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 72px;
+  padding: 12px 16px;
+}
+
+.plan-editor-head span {
+  color: var(--muted);
+  font-family: var(--utility);
+  font-size: 8px;
+}
+
+.plan-editor-head h2 {
+  margin: 2px 0 0;
+  font-family: var(--display);
+  font-size: 20px;
+}
+
+.plan-editor-body {
+  border-top: 1px solid var(--line);
+}
+
+.plan-editor-request {
+  display: grid;
+  grid-template-columns: 90px minmax(0, 1fr);
+  gap: 10px 14px;
+  padding: 14px 16px;
+  background: #f7f9f7;
+}
+
+.plan-editor-request > label {
+  padding-top: 8px;
+  color: var(--muted);
+  font-size: 10px;
+  font-weight: 800;
+}
+
+.plan-editor-request textarea {
+  min-height: 54px;
+}
+
+.plan-editor-actions {
+  grid-column: 2;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+
+.plan-editor-actions .text-button {
+  min-height: 36px;
+  padding-inline: 10px;
+  border: 1px solid var(--line-strong);
+  font-size: 9px;
+}
+
+.plan-editor-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.55fr) minmax(220px, 0.75fr);
+  min-width: 0;
+}
+
+.custom-days {
+  min-width: 0;
+  border-right: 1px solid var(--line);
+}
+
+.custom-day + .custom-day {
+  border-top: 1px solid var(--line);
+}
+
+.custom-day > header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 42px;
+  padding: 7px 12px;
+  background: var(--sky);
+}
+
+.custom-day > header div {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.custom-day > header strong {
+  color: var(--vermilion);
+  font-family: var(--utility);
+}
+
+.custom-day > header span,
+.custom-day > header small {
+  color: var(--muted);
+  font-size: 9px;
+}
+
+.custom-item-list {
+  display: grid;
+  gap: 5px;
+  padding: 8px 10px;
+}
+
+.custom-item-row {
+  display: grid;
+  grid-template-columns: 72px minmax(150px, 1fr) 64px 102px;
+  align-items: end;
+  gap: 6px;
+  padding: 7px;
+  border-left: 3px solid var(--jade);
+  background: #f8faf9;
+}
+
+.custom-item-row.is-embedded {
+  border-left-color: var(--brass);
+}
+
+.custom-item-row label span {
+  display: block;
+  margin-bottom: 3px;
+  color: var(--muted);
+  font-size: 8px;
+}
+
+.custom-item-row input,
+.custom-item-row select {
+  min-height: 34px;
+  padding-inline: 7px;
+  font-size: 9px;
+}
+
+.custom-row-actions {
+  display: grid;
+  grid-template-columns: repeat(3, 30px);
+  gap: 4px;
+}
+
+.custom-row-actions .icon-button {
+  width: 30px;
+  height: 34px;
+  border-color: var(--line);
+  background: #fff;
+}
+
+.custom-row-actions .icon-button:disabled {
+  opacity: 0.35;
+}
+
+.custom-add-actions {
+  display: flex;
+  gap: 7px;
+  padding: 0 10px 10px;
+}
+
+.custom-add-actions .text-button {
+  min-height: 34px;
+  padding-inline: 9px;
+  border: 1px dashed var(--line-strong);
+  font-size: 9px;
+}
+
+.custom-advice {
+  min-width: 0;
+  background: #fbfcfb;
+}
+
+.custom-advice-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  min-height: 42px;
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--line);
+}
+
+.custom-advice-head span,
+.custom-advice-head strong {
+  font-size: 9px;
+}
+
+.custom-advice-head strong {
+  color: var(--vermilion);
+}
+
+#custom-advice-list {
+  display: grid;
+  gap: 6px;
+  padding: 10px;
+}
+
+.custom-advice-item {
+  display: grid;
+  grid-template-columns: 15px minmax(0, 1fr);
+  gap: 7px;
+  padding: 8px;
+  border-left: 3px solid var(--line-strong);
+  background: #fff;
+  color: var(--muted);
+  font-size: 9px;
+  line-height: 1.45;
+}
+
+.custom-advice-item svg {
+  width: 14px;
+  height: 14px;
+}
+
+.custom-advice-item.error {
+  border-left-color: var(--vermilion);
+  background: var(--danger-soft);
+  color: #7b342d;
+}
+
+.custom-advice-item.warning {
+  border-left-color: var(--brass);
+  background: #fbf3e5;
+  color: #735221;
+}
+
+.custom-advice-item.success,
+.custom-advice-item.info {
+  border-left-color: var(--jade);
+  background: var(--jade-soft);
+  color: #315e57;
+}
+
+.custom-empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 140px;
+  gap: 8px;
+  color: var(--muted);
+  font-size: 10px;
 }
 
 .plan-sheet {
@@ -2492,6 +2996,15 @@ button.meal-stop:hover {
   .dialog-content-body {
     grid-template-columns: 1fr;
   }
+
+  .plan-editor-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .custom-days {
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
+  }
 }
 
 @media (max-width: 600px) {
@@ -2567,6 +3080,49 @@ button.meal-stop:hover {
 
   .trip-time-fields input {
     font-size: 16px;
+  }
+
+  .ticket-entry-fields {
+    grid-template-columns: 1fr;
+  }
+
+  .ticket-entry-fields label:nth-child(4),
+  .ticket-entry-fields label:nth-child(5) {
+    grid-column: auto;
+  }
+
+  .plan-editor-head {
+    align-items: flex-start;
+  }
+
+  .plan-editor-request {
+    grid-template-columns: 1fr;
+  }
+
+  .plan-editor-request > label {
+    padding-top: 0;
+  }
+
+  .plan-editor-actions {
+    grid-column: 1;
+  }
+
+  .plan-editor-actions .primary-button.inline {
+    width: 100%;
+  }
+
+  .custom-item-row {
+    grid-template-columns: 78px minmax(0, 1fr);
+  }
+
+  .custom-item-select,
+  .custom-row-actions {
+    grid-column: 1 / -1;
+  }
+
+  .custom-row-actions {
+    display: flex;
+    justify-content: flex-end;
   }
 
   .weather-strip {
@@ -2776,6 +3332,7 @@ button.meal-stop:hover {
 @media print {
   .topbar,
   .planner-form,
+  .plan-editor,
   .weather-strip,
   .plan-switcher,
   .booking-summary,

@@ -41,6 +41,28 @@
       dinnerSegmentLabel: "酒店片区简餐"
     }
   };
+  const ticketModeConfig = {
+    rail: {
+      serviceLabel: "车次号",
+      fromLabel: "出发站",
+      toLabel: "到达站",
+      departLabel: "发车时间",
+      arriveLabel: "到达时间",
+      priceLabel: "二等座票价",
+      inventoryLabel: "二等座余票",
+      seatName: "二等座"
+    },
+    air: {
+      serviceLabel: "航班号",
+      fromLabel: "出发机场",
+      toLabel: "到达机场",
+      departLabel: "起飞时间",
+      arriveLabel: "落地时间",
+      priceLabel: "经济舱含税价",
+      inventoryLabel: "座位状态",
+      seatName: "经济舱"
+    }
+  };
   const visitRules = {
     "palace-museum": { open: "08:30", latestStart: "15:30", close: "17:00", mondayNotice: true },
     "national-museum": { open: "09:00", latestStart: "16:00", close: "17:30", mondayNotice: true },
@@ -91,6 +113,18 @@
     foodTier: "all",
     foodAuthor: "all",
     foodQuery: "",
+    transportRecords: {
+      rail: { outbound: [], return: [] },
+      air: { outbound: [], return: [] }
+    },
+    selectedTransport: {
+      rail: { outbound: null, return: null },
+      air: { outbound: null, return: null }
+    },
+    editorOpen: false,
+    customDraft: null,
+    customBasePlanId: null,
+    customRequestAdvice: [],
     intercity: { low: 3500, high: 4800, label: "距离模型估算" }
   };
 
@@ -115,6 +149,9 @@
     returnCity: document.querySelector("#return-city"),
     arrivalDateTime: document.querySelector("#arrival-datetime"),
     departureDateTime: document.querySelector("#departure-datetime"),
+    arrivalTimeLabel: document.querySelector("#arrival-time-label"),
+    departureTimeLabel: document.querySelector("#departure-time-label"),
+    timeBindingStatus: document.querySelector("#time-binding-status"),
     tripDuration: document.querySelector("#trip-duration"),
     tripTimeMessage: document.querySelector("#trip-time-message"),
     transportMode: document.querySelector("#transport-mode"),
@@ -123,6 +160,16 @@
     weatherStrip: document.querySelector("#weather-strip"),
     weatherBrief: document.querySelector("#weather-brief"),
     planSwitcher: document.querySelector("#plan-switcher"),
+    planEditor: document.querySelector("#plan-editor"),
+    planEditorBody: document.querySelector("#plan-editor-body"),
+    togglePlanEditor: document.querySelector("#toggle-plan-editor"),
+    adjustmentRequest: document.querySelector("#adjustment-request"),
+    loadCurrentPlan: document.querySelector("#load-current-plan"),
+    analyzeAdjustment: document.querySelector("#analyze-adjustment"),
+    saveCustomPlan: document.querySelector("#save-custom-plan"),
+    customDays: document.querySelector("#custom-days"),
+    customAdviceCount: document.querySelector("#custom-advice-count"),
+    customAdviceList: document.querySelector("#custom-advice-list"),
     planSheet: document.querySelector("#plan-sheet"),
     ticketPlanSelect: document.querySelector("#ticket-plan-select"),
     ticketList: document.querySelector("#ticket-list"),
@@ -145,6 +192,7 @@
   let planRefreshTimer = null;
   let planGenerationVersion = 0;
   let restaurantImageSourcesPromise = null;
+  let customUid = 0;
 
   function refreshIcons() {
     if (window.lucide) window.lucide.createIcons({ attrs: { "aria-hidden": "true" } });
@@ -526,9 +574,13 @@
     const totalMinutes = Math.round((departure - arrival) / 60000);
     const hours = Math.floor(totalMinutes / 60);
     const minutes = totalMinutes % 60;
+    const outbound = selectedTransportRecord("outbound");
+    const returnTrip = selectedTransportRecord("return");
     const modeNote = state.transportMode === "drive"
       ? "自驾时间按抵达、驶离酒店理解。"
-      : "高铁或飞机时间按抵达、计划离京时刻理解。";
+      : outbound || returnTrip
+        ? `已按${[outbound?.serviceNo, returnTrip?.serviceNo].filter(Boolean).join(" / ")}的实际时刻绑定。`
+        : "未绑定票单，当前时间为手动计划值。";
     els.tripTimeMessage.textContent = `共${hours}小时${minutes ? `${minutes}分钟` : ""} · ${modeNote}`;
 
     state.arrivalDateTime = els.arrivalDateTime.value;
@@ -543,6 +595,106 @@
     return `<div class="transport-option-row ${tone}"><div><strong>${title}</strong><span>${detail}</span></div><em>${status}</em></div>`;
   }
 
+  function selectedTransportRecord(leg, mode = state.transportMode) {
+    if (!state.transportRecords[mode]) return null;
+    const selectedId = state.selectedTransport[mode]?.[leg];
+    return state.transportRecords[mode][leg].find((record) => record.id === selectedId) || null;
+  }
+
+  function ticketSaleState(travelDate) {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const travel = new Date(travelDate);
+    travel.setHours(0, 0, 0, 0);
+    const saleDate = addDays(travel, -14);
+    if (travel < today) return { label: "日期已过", tone: "blocked" };
+    if (saleDate > today) return { label: `${formatDate(saleDate, true)}开售`, tone: "pending" };
+    return { label: "已进入15日预售窗口", tone: "available" };
+  }
+
+  function inventoryTone(value) {
+    if (value === "充足") return "available";
+    if (["紧张", "候补"].includes(value)) return "pending";
+    if (value === "无票") return "blocked";
+    return "unknown";
+  }
+
+  function ticketEntryForm(mode, leg, origin, destination) {
+    const config = ticketModeConfig[mode];
+    const outbound = leg === "outbound";
+    const fromPlaceholder = outbound ? origin : mode === "rail" ? "北京南" : "北京首都 / 大兴";
+    const toPlaceholder = outbound ? mode === "rail" ? "北京南" : "北京首都 / 大兴" : destination;
+    return `
+      <details class="ticket-entry" data-ticket-entry="${leg}">
+        <summary><i data-lucide="plus"></i>录入${outbound ? "去程" : "返程"}${mode === "rail" ? "车次" : "航班"}</summary>
+        <div class="ticket-entry-fields">
+          <label><span>${config.serviceLabel}</span><input data-ticket-field="serviceNo" type="text" placeholder="${mode === "rail" ? "例如 G2" : "例如 CA1502"}"></label>
+          <label><span>${config.fromLabel}</span><input data-ticket-field="from" type="text" placeholder="${fromPlaceholder}"></label>
+          <label><span>${config.toLabel}</span><input data-ticket-field="to" type="text" placeholder="${toPlaceholder}"></label>
+          <label><span>${config.departLabel}</span><input data-ticket-field="departAt" type="datetime-local" step="60"></label>
+          <label><span>${config.arriveLabel}</span><input data-ticket-field="arriveAt" type="datetime-local" step="60"></label>
+          <label><span>${config.priceLabel}</span><input data-ticket-field="price" type="number" min="0" step="0.01" placeholder="元/人"></label>
+          <label><span>${config.inventoryLabel}</span><select data-ticket-field="availability"><option>未知</option><option>充足</option><option>紧张</option>${mode === "rail" ? "<option>候补</option>" : ""}<option>无票</option></select></label>
+        </div>
+        <button class="secondary-button ticket-save" type="button" data-save-ticket="${leg}"><i data-lucide="check"></i>保存并采用</button>
+        <p class="ticket-entry-message" aria-live="polite"></p>
+      </details>`;
+  }
+
+  function renderTicketRecord(record, mode, leg, selectedId) {
+    const config = ticketModeConfig[mode];
+    const selected = record.id === selectedId;
+    return `
+      <article class="ticket-record ${selected ? "is-selected" : ""}">
+        <div class="ticket-record-head"><strong>${escapeHtml(record.serviceNo)}</strong><span class="inventory ${inventoryTone(record.availability)}">${escapeHtml(record.availability)}</span></div>
+        <div class="ticket-record-route"><b>${escapeHtml(record.from)}</b><i data-lucide="arrow-right"></i><b>${escapeHtml(record.to)}</b></div>
+        <div class="ticket-record-data">
+          <span><small>${config.departLabel}</small><strong>${formatDateTime(parseLocalDateTime(record.departAt))}</strong></span>
+          <span><small>${config.arriveLabel}</small><strong>${formatDateTime(parseLocalDateTime(record.arriveAt))}</strong></span>
+          <span><small>${config.priceLabel}</small><strong>${formatMoney(record.price)}/人</strong></span>
+          <span><small>记录来源</small><strong>用户录入 · ${escapeHtml(record.capturedAt)}</strong></span>
+        </div>
+        <div class="ticket-record-actions">
+          <button class="text-button" type="button" data-select-ticket="${record.id}" data-leg="${leg}">${selected ? '<i data-lucide="circle-check"></i>已采用' : '<i data-lucide="mouse-pointer-click"></i>采用'}</button>
+          <button class="icon-button" type="button" data-remove-ticket="${record.id}" data-leg="${leg}" aria-label="删除${escapeHtml(record.serviceNo)}" title="删除"><i data-lucide="trash-2"></i></button>
+        </div>
+      </article>`;
+  }
+
+  function transportLegPanel(mode, leg, travelDate, origin, destination) {
+    const records = state.transportRecords[mode][leg];
+    const selectedId = state.selectedTransport[mode][leg];
+    const selectedRecord = records.find((record) => record.id === selectedId);
+    const outbound = leg === "outbound";
+    const effectiveTravelDate = selectedRecord ? parseLocalDateTime(selectedRecord.departAt) : travelDate;
+    const status = mode === "rail" ? ticketSaleState(effectiveTravelDate) : { label: "前往航司实时查询", tone: "available" };
+    return `
+      <section class="transport-leg-panel">
+        <div class="transport-leg-head">
+          <div><span>${outbound ? "去程" : "返程"}候选</span><strong>${outbound ? `${origin} → 北京` : `北京 → ${destination}`}</strong></div>
+          <em class="${status.tone}">${status.label}</em>
+        </div>
+        <div class="ticket-record-list">
+          ${records.length ? records.map((record) => renderTicketRecord(record, mode, leg, selectedId)).join("") : `<div class="ticket-record-empty"><i data-lucide="ticket-x"></i><span>暂无已核验${mode === "rail" ? "车次" : "航班"}；从官方页面查询后在下方录入。</span></div>`}
+        </div>
+        ${ticketEntryForm(mode, leg, origin, destination)}
+      </section>`;
+  }
+
+  function updateTimeBindingLabels() {
+    if (state.transportMode === "drive") {
+      els.arrivalTimeLabel.textContent = "抵达北京时间";
+      els.departureTimeLabel.textContent = "驶离北京或酒店时间";
+      els.timeBindingStatus.textContent = "自驾时间";
+      return;
+    }
+    const outbound = selectedTransportRecord("outbound");
+    const returnTrip = selectedTransportRecord("return");
+    els.arrivalTimeLabel.textContent = outbound ? `${outbound.serviceNo} 到达${outbound.to}` : "计划到京时间";
+    els.departureTimeLabel.textContent = returnTrip ? `${returnTrip.serviceNo} 从${returnTrip.from}出发` : "计划离京时间";
+    els.timeBindingStatus.textContent = outbound && returnTrip ? "已绑定往返票单" : outbound || returnTrip ? "已绑定单程票单" : "未绑定票单";
+  }
+
   function renderTransportOptions() {
     const arrival = parseLocalDateTime(els.arrivalDateTime.value);
     const departure = parseLocalDateTime(els.departureDateTime.value);
@@ -550,40 +702,31 @@
     const destination = escapeHtml(els.returnCity.value.trim() || "返回地");
     if (!arrival || !departure || departure <= arrival) {
       els.transportOptions.innerHTML = '<div class="transport-options-empty">完善到京、离京时间后显示往返方案。</div>';
+      updateTimeBindingLabels();
       return;
     }
 
     const arrivalDate = new Date(arrival);
     const departureDate = new Date(departure);
-    const previousDate = addDays(arrivalDate, -1);
     let content = "";
     let links = [];
 
     if (state.transportMode === "rail") {
-      const previousDaySaleDate = addDays(previousDate, -14);
-      const sameDaySaleDate = addDays(arrivalDate, -14);
-      const returnSaleDate = addDays(departureDate, -14);
-      const earlyArrivalRisk = arrival.getHours() < 11;
       content = `
-        <div class="transport-options-head"><div><span>铁路往返方案</span><strong>${origin} → 北京 → ${destination}</strong></div><small>动态车次待12306开售</small></div>
-        ${transportOptionRow("前一日高铁 + 住宿", "推荐", `${formatDate(previousDate)}出发，避免当日早到不可行；采用后需同步提前到京时间。`, "recommended")}
-        ${transportOptionRow("前夜卧铺 / 夜间铁路", "待核验", `${formatDate(previousDate)}乘车，能否在${formatTime(arrival)}前抵京须等运行图与车票开售。`)}
-        ${transportOptionRow("当日高铁", earlyArrivalRisk ? "大概率不满足" : "开售后筛选", `${formatDate(arrivalDate)}同日乘车，候选必须在${formatTime(arrival)}前到达北京。`, earlyArrivalRisk ? "blocked" : "neutral")}
-        ${transportOptionRow("返程直达铁路", `${formatDate(departureDate)} ${formatTime(departure)}`, `北京 → ${destination}，实际车次、席别与到达时间待12306开售后选择。`)}
-        <div class="transport-sale-grid three"><span>${formatDate(previousDate)}方案开售日<strong>${formatDate(previousDaySaleDate, true)}</strong><small>${origin.includes("上海") ? "上海站14:45 / 虹桥13:45，前一日复核" : "按实际出发站起售时间"}</small></span><span>${formatDate(arrivalDate)}方案开售日<strong>${formatDate(sameDaySaleDate, true)}</strong><small>乘车日减14天，按实际车站起售时间</small></span><span>返程开售日<strong>${formatDate(returnSaleDate, true)}</strong><small>北京南参考12:45，前一日复核</small></span></div>`;
+        <div class="transport-options-head"><div><span>铁路班次工作台</span><strong>${origin} → 北京 → ${destination}</strong></div><small>二等座口径</small></div>
+        <div class="transport-live-note"><i data-lucide="shield-check"></i><span>12306当前预售期为15天。本站不跨站抓取或伪造实时余票；请在官方余票页核对后录入，记录将驱动实际到离京时间。</span></div>
+        ${transportLegPanel("rail", "outbound", arrivalDate, origin, destination)}
+        ${transportLegPanel("rail", "return", departureDate, origin, destination)}`;
       links = [
-        ["https://www.12306.cn/index/", "12306官方购票"],
+        ["https://hzfw.12306.cn/zgzfw/resources/web/ypcx.html", "12306官方余票查询"],
         ["https://www.12306.cn/index/view/infos/sale_time.html", "查询起售时间"]
       ];
     } else if (state.transportMode === "air") {
-      const hotelReady = addMinutes(arrival, 145);
       content = `
-        <div class="transport-options-head"><div><span>机票往返方案</span><strong>${origin} → 北京 → ${destination}</strong></div><small>以航司支付页为准</small></div>
-        ${transportOptionRow("前夜到京", "最稳妥", `${formatDate(previousDate)}晚间落地，减少国庆早班延误对D1的影响。`, "recommended")}
-        ${transportOptionRow("当日早班直飞", "实时核验", `筛选${formatTime(arrival)}前落地航班；按缓冲估算约${formatTime(hotelReady)}完成酒店寄存。`)}
-        ${transportOptionRow("双机场比价", "价格优先", "同时比较虹桥/浦东与首都/大兴，核对行李额、退改及进城时间。")}
-        ${transportOptionRow("返程直飞", `${formatDate(departureDate)} ${formatTime(departure)}`, `北京 → ${destination}，筛选接近计划离京时刻的航班并核对行李与退改。`)}
-        <div class="transport-sale-grid one"><span>查询提示<strong>前往航司或平台实时查询</strong><small>能否查询、库存、含税价与退改规则均以支付页为准</small></span></div>`;
+        <div class="transport-options-head"><div><span>航班工作台</span><strong>${origin} → 北京 → ${destination}</strong></div><small>经济舱口径</small></div>
+        <div class="transport-live-note"><i data-lucide="shield-check"></i><span>航司票价与座位状态会随查询变化。请从航司支付页核对后录入；落地与起飞时间将直接用于行程接驳。</span></div>
+        ${transportLegPanel("air", "outbound", arrivalDate, origin, destination)}
+        ${transportLegPanel("air", "return", departureDate, origin, destination)}`;
       links = [
         ["https://www.airchina.com.cn/", "中国国航"],
         ["https://m.ceair.com/Home?linkPgae=0", "中国东航"],
@@ -602,8 +745,81 @@
       ];
     }
 
-    els.transportOptions.innerHTML = `${content}<div class="transport-option-actions">${links.map(([url, label]) => `<a href="${url}" target="_blank" rel="noopener noreferrer">${label}<i data-lucide="external-link"></i></a>`).join("")}</div><p>当前为交通查询策略，不代表已有余票、确认车次、航班或锁定价格。</p>`;
+    els.transportOptions.innerHTML = `${content}<div class="transport-option-actions">${links.map(([url, label]) => `<a href="${url}" target="_blank" rel="noopener noreferrer">${label}<i data-lucide="external-link"></i></a>`).join("")}</div><p>${state.transportMode === "drive" ? "自驾时间按实际抵达和驶离时间填写。" : "票价和余票均为用户按官方查询结果录入的快照，不是本站实时售票承诺；支付前须再次核验。"}</p>`;
+    updateTimeBindingLabels();
     refreshIcons();
+  }
+
+  function adoptTransportRecord(mode, leg, recordId) {
+    const record = state.transportRecords[mode]?.[leg]?.find((item) => item.id === recordId);
+    if (!record) return;
+    state.selectedTransport[mode][leg] = recordId;
+    if (mode === state.transportMode) {
+      if (leg === "outbound") els.arrivalDateTime.value = record.arriveAt;
+      else els.departureDateTime.value = record.departAt;
+      syncTripRange();
+      renderTransportOptions();
+      schedulePlanRegeneration();
+    }
+  }
+
+  function saveTransportRecord(button) {
+    const mode = state.transportMode;
+    if (!ticketModeConfig[mode]) return;
+    const leg = button.dataset.saveTicket;
+    const entry = button.closest("[data-ticket-entry]");
+    const values = Object.fromEntries(Array.from(entry.querySelectorAll("[data-ticket-field]")).map((field) => [field.dataset.ticketField, field.value.trim()]));
+    const departAt = parseLocalDateTime(values.departAt);
+    const arriveAt = parseLocalDateTime(values.arriveAt);
+    const price = Number(values.price);
+    const message = entry.querySelector(".ticket-entry-message");
+    if (!values.serviceNo || !values.from || !values.to || !departAt || !arriveAt || arriveAt <= departAt || !Number.isFinite(price) || price <= 0) {
+      message.textContent = "请完整填写班次、站点、时间和票价；到达时间必须晚于出发时间。";
+      message.classList.add("is-error");
+      return;
+    }
+    const record = {
+      id: `${mode}-${leg}-${Date.now()}`,
+      serviceNo: values.serviceNo.toUpperCase(),
+      from: values.from,
+      to: values.to,
+      departAt: values.departAt,
+      arriveAt: values.arriveAt,
+      price,
+      availability: values.availability || "未知",
+      capturedAt: new Intl.DateTimeFormat("zh-CN", { month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit", hour12: false }).format(new Date())
+    };
+    state.transportRecords[mode][leg].push(record);
+    adoptTransportRecord(mode, leg, record.id);
+    showToast(`${record.serviceNo}已保存并采用。`);
+  }
+
+  function clearTransportBindingIfChanged(leg) {
+    const record = selectedTransportRecord(leg);
+    if (!record) return;
+    const currentValue = leg === "outbound" ? els.arrivalDateTime.value : els.departureDateTime.value;
+    const ticketValue = leg === "outbound" ? record.arriveAt : record.departAt;
+    if (currentValue !== ticketValue) state.selectedTransport[state.transportMode][leg] = null;
+  }
+
+  function handleTransportOptionClick(event) {
+    const saveButton = event.target.closest("[data-save-ticket]");
+    if (saveButton) {
+      saveTransportRecord(saveButton);
+      return;
+    }
+    const selectButton = event.target.closest("[data-select-ticket]");
+    if (selectButton) {
+      adoptTransportRecord(state.transportMode, selectButton.dataset.leg, selectButton.dataset.selectTicket);
+      return;
+    }
+    const removeButton = event.target.closest("[data-remove-ticket]");
+    if (!removeButton || !state.transportRecords[state.transportMode]) return;
+    const leg = removeButton.dataset.leg;
+    const recordId = removeButton.dataset.removeTicket;
+    state.transportRecords[state.transportMode][leg] = state.transportRecords[state.transportMode][leg].filter((record) => record.id !== recordId);
+    if (state.selectedTransport[state.transportMode][leg] === recordId) state.selectedTransport[state.transportMode][leg] = null;
+    renderTransportOptions();
   }
 
   function collectFormState() {
@@ -645,6 +861,16 @@
   }
 
   async function estimateIntercity() {
+    const outbound = selectedTransportRecord("outbound");
+    const returnTrip = selectedTransportRecord("return");
+    if (state.transportMode !== "drive" && outbound && returnTrip) {
+      const total = roundMoney((outbound.price + returnTrip.price) * state.ages.length, 10);
+      return {
+        low: total,
+        high: total,
+        label: `已选${ticketModeConfig[state.transportMode].seatName}票价按${state.ages.length}人全价估算，未自动扣除儿童优惠`
+      };
+    }
     const beijing = { lat: 39.9042, lon: 116.4074 };
     let distanceOut = 1000;
     let distanceBack = 1000;
@@ -792,11 +1018,17 @@
   }
 
   function buildJourneyWindow(profile) {
-    const rule = transferRules[state.transportMode];
+    const baseRule = transferRules[state.transportMode];
+    const outboundTicket = selectedTransportRecord("outbound");
+    const returnTicket = selectedTransportRecord("return");
+    const arrivalTerminal = outboundTicket?.to || baseRule.terminal;
+    const departureTerminal = returnTicket?.from || (state.transportMode === "air" ? "北京出发机场" : state.transportMode === "rail" ? "北京铁路出发站" : "酒店");
+    const rule = { ...baseRule, terminal: arrivalTerminal };
     const arrivalAt = parseLocalDateTime(state.arrivalDateTime);
     const departureAt = parseLocalDateTime(state.departureDateTime);
-    const arrivalSegments = buildSegmentTimeline(arrivalAt, rule.arrivalSegments);
-    const departureDefinitions = departureSegmentsFor(rule, departureAt);
+    const arrivalDefinitions = rule.arrivalSegments.map(([label, minutes]) => [label.includes("至酒店") ? `${arrivalTerminal}至酒店` : label, minutes]);
+    const departureDefinitions = departureSegmentsFor(rule, departureAt).map(([label, minutes]) => [label.startsWith("酒店至") ? `酒店至${departureTerminal}` : label, minutes]);
+    const arrivalSegments = buildSegmentTimeline(arrivalAt, arrivalDefinitions);
     const departureTotal = departureDefinitions.reduce((sum, segment) => sum + segment[1], 0);
     const leaveHotelAt = addMinutes(departureAt, -departureTotal);
     const departureSegments = buildSegmentTimeline(leaveHotelAt, departureDefinitions);
@@ -808,12 +1040,16 @@
       arrival: {
         startAt: arrivalAt,
         endAt: arrivalSegments.at(-1)?.endAt || arrivalAt,
+        terminal: arrivalTerminal,
+        serviceNo: outboundTicket?.serviceNo || null,
         totalMinutes: rule.arrivalSegments.reduce((sum, segment) => sum + segment[1], 0),
         segments: arrivalSegments
       },
       departure: {
         startAt: leaveHotelAt,
         endAt: departureAt,
+        terminal: departureTerminal,
+        serviceNo: returnTicket?.serviceNo || null,
         totalMinutes: departureTotal,
         segments: departureSegments,
         dinnerWindow: dinnerSegment ? { startAt: dinnerSegment.startAt, endAt: dinnerSegment.endAt } : null
@@ -907,7 +1143,7 @@
   function selectLunchVenue(items) {
     const ids = new Set(items.map((item) => item.id));
     if (ids.has("universal")) return { venue: restaurantById.get("three-broomsticks"), embeddedIn: "universal" };
-    if (ids.has("summer-palace")) return { venue: restaurantById.get("tingli"), embeddedIn: "summer-palace" };
+    if (ids.has("summer-palace")) return { venue: genericMeal("summer-palace-simple", "颐和园园内简餐", "西郊", [35, 75], ["热食", "面食", "饮品"], 45), embeddedIn: "summer-palace" };
     if (ids.has("badaling")) {
       if (state.transportMode === "drive") return { venue: restaurantById.get("commune-kitchen"), embeddedIn: null, extraTransit: 35 };
       return { venue: genericMeal("badaling-simple", "八达岭景区内简餐", "延庆", [35, 70], ["热饮", "面食", "便携套餐"]), embeddedIn: "badaling" };
@@ -1024,14 +1260,18 @@
       );
       if (shouldInsertLunch && lunchPlan.venue) {
         const service = mealServiceWindow(lunchPlan.venue, "lunch", window.date);
-        const routeMinutes = lunchPlan.extraTransit || 10;
+        const mealTransit = transitBetween(item, lunchPlan.venue);
+        const routeMinutes = lunchPlan.extraTransit || mealTransit.minutes;
         const earliest = atLocalTime(window.date, "11:15");
-        const mealStart = new Date(Math.max(addMinutes(cursor, routeMinutes).getTime(), earliest.getTime(), service?.openAt?.getTime() || 0));
-        const meal = buildMealEvent(lunchPlan.venue, "lunch", mealStart, { routeNote: `顺路接驳约${routeMinutes}分钟` });
+        const mealArrival = addMinutes(cursor, routeMinutes);
+        const mealStart = new Date(Math.max(mealArrival.getTime(), earliest.getTime(), service?.openAt?.getTime() || 0));
+        const meal = buildMealEvent(lunchPlan.venue, "lunch", mealStart, { routeNote: `与${item.name}往返各约${routeMinutes}分钟` });
         if (!service || meal.endAt <= service.closeAt) {
+          timeline.push({ type: "transit", label: mealTransit.label || "步行或短途交通", minutes: routeMinutes, departAt: new Date(cursor), arriveAt: new Date(mealArrival) });
           meals.push(meal);
           timeline.push(meal);
           lunchScheduled = true;
+          timeline.push({ type: "transit", label: mealTransit.label || "步行或短途交通", minutes: routeMinutes, departAt: new Date(meal.endAt), arriveAt: addMinutes(meal.endAt, routeMinutes) });
           cursor = addMinutes(meal.endAt, routeMinutes);
           if (!isFlagStop && rule?.open && cursor < atLocalTime(window.date, rule.open)) cursor = atLocalTime(window.date, rule.open);
         }
@@ -1327,6 +1567,8 @@
       renderActivePlan();
       renderTicketPlanSelect();
       renderTickets();
+      if (state.editorOpen && !state.customDraft) loadCurrentPlanIntoEditor();
+      else renderPlanEditor();
       showToast(`已生成${state.plans.length}套行程，费用按${state.ages.length}人估算。`);
     } finally {
       if (generationVersion !== planGenerationVersion) return;
@@ -1346,6 +1588,287 @@
       <button class="plan-tab ${plan.id === state.activePlanId ? "is-selected" : ""}" type="button" role="tab" aria-selected="${plan.id === state.activePlanId}" data-plan-id="${plan.id}">
         <strong>${index + 1}. ${plan.name}</strong><small>${plan.short}</small>
       </button>`).join("");
+  }
+
+  function draftEntity(item) {
+    if (item.kind === "custom-meal") return item.entity || null;
+    return item.kind === "meal" ? restaurantById.get(item.id) : attractionById.get(item.id);
+  }
+
+  function clockMinutes(clock) {
+    const [hours, minutes] = String(clock || "00:00").split(":").map(Number);
+    return hours * 60 + minutes;
+  }
+
+  function clockFromMinutes(total) {
+    const normalized = Math.max(0, Math.min(23 * 60 + 59, Math.round(total)));
+    return `${String(Math.floor(normalized / 60)).padStart(2, "0")}:${String(normalized % 60).padStart(2, "0")}`;
+  }
+
+  function currentEditorBasePlan() {
+    const active = state.plans.find((plan) => plan.id === state.activePlanId && plan.id !== "custom");
+    if (active) return active;
+    return state.plans.find((plan) => plan.id === state.customBasePlanId) || state.plans.find((plan) => plan.id !== "custom") || null;
+  }
+
+  function loadCurrentPlanIntoEditor() {
+    const plan = currentEditorBasePlan();
+    if (!plan) return;
+    state.customBasePlanId = plan.id;
+    state.customDraft = plan.days.map((day, dayIndex) => {
+      const items = [
+        ...day.stops.map((stop) => ({
+          uid: `custom-${++customUid}`,
+          kind: "attraction",
+          id: stop.attraction.id,
+          start: formatTime(stop.startAt),
+          duration: stop.stay,
+          embedded: false
+        })),
+        ...day.meals.map((meal) => ({
+          uid: `custom-${++customUid}`,
+          kind: restaurantById.has(meal.venue.id) ? "meal" : "custom-meal",
+          id: meal.venue.id,
+          start: formatTime(meal.startAt),
+          duration: meal.duration,
+          embedded: meal.includedInVisit,
+          entity: restaurantById.has(meal.venue.id) ? null : meal.venue
+        }))
+      ].filter((item) => draftEntity(item)).sort((left, right) => clockMinutes(left.start) - clockMinutes(right.start));
+      return { dayIndex, date: addDays(parseLocalDate(state.startDate), dayIndex), items };
+    });
+    state.customRequestAdvice = [];
+    renderPlanEditor();
+    showToast(`已载入“${plan.name}”作为自编底稿。`);
+  }
+
+  function customItemOptions(selectedValue, currentItem) {
+    const attractionOptions = attractions.map((item) => `<option value="attraction:${item.id}" ${selectedValue === `attraction:${item.id}` ? "selected" : ""}>${item.name}</option>`).join("");
+    const mealOptions = restaurants.map((item) => `<option value="meal:${item.id}" ${selectedValue === `meal:${item.id}` ? "selected" : ""}>${item.name}</option>`).join("");
+    const customMeal = currentItem?.kind === "custom-meal" && currentItem.entity
+      ? `<optgroup label="行程餐食"><option value="custom-meal:${currentItem.id}" selected>${currentItem.entity.name}</option></optgroup>`
+      : "";
+    return `<optgroup label="景点">${attractionOptions}</optgroup><optgroup label="餐馆">${mealOptions}</optgroup>${customMeal}`;
+  }
+
+  function renderCustomDays() {
+    if (!state.customDraft) {
+      els.customDays.innerHTML = '<div class="custom-empty"><i data-lucide="calendar-plus"></i><span>载入一个现有方案后开始编排。</span></div>';
+      return;
+    }
+    els.customDays.innerHTML = state.customDraft.map((day) => `
+      <section class="custom-day" data-custom-day="${day.dayIndex}">
+        <header><div><strong>D${day.dayIndex + 1}</strong><span>${formatDate(day.date)}</span></div><small>${day.items.length}项安排</small></header>
+        <div class="custom-item-list">
+          ${day.items.map((item, index) => `
+            <div class="custom-item-row ${item.embedded ? "is-embedded" : ""}" data-custom-item="${item.uid}">
+              <label><span>开始</span><input type="time" value="${item.start}" data-custom-field="start"></label>
+              <label class="custom-item-select"><span>安排</span><select data-custom-field="entity">${customItemOptions(`${item.kind}:${item.id}`, item)}</select></label>
+              <label><span>分钟</span><input type="number" min="15" max="720" step="15" value="${item.duration}" data-custom-field="duration"></label>
+              <div class="custom-row-actions">
+                <button class="icon-button" type="button" data-move-custom="up" ${index === 0 ? "disabled" : ""} aria-label="上移" title="上移"><i data-lucide="arrow-up"></i></button>
+                <button class="icon-button" type="button" data-move-custom="down" ${index === day.items.length - 1 ? "disabled" : ""} aria-label="下移" title="下移"><i data-lucide="arrow-down"></i></button>
+                <button class="icon-button" type="button" data-remove-custom aria-label="删除安排" title="删除"><i data-lucide="trash-2"></i></button>
+              </div>
+            </div>`).join("")}
+        </div>
+        <div class="custom-add-actions">
+          <button class="text-button" type="button" data-add-custom="attraction"><i data-lucide="landmark"></i>添加景点</button>
+          <button class="text-button" type="button" data-add-custom="meal"><i data-lucide="utensils"></i>添加用餐</button>
+        </div>
+      </section>`).join("");
+  }
+
+  function auditCustomDraft() {
+    if (!state.customDraft) return [];
+    const basePlan = currentEditorBasePlan();
+    if (!basePlan) return [];
+    const profile = profiles.find((item) => item.id === state.customBasePlanId) || profiles[0];
+    const advice = [];
+    const seenAttractions = new Map();
+    state.customDraft.forEach((day) => {
+      const date = addDays(parseLocalDate(state.startDate), day.dayIndex);
+      const entries = day.items.map((item) => {
+        const entity = draftEntity(item);
+        const startAt = atLocalTime(date, item.start);
+        return { item, entity, startAt, endAt: addMinutes(startAt, Number(item.duration) || 0) };
+      }).filter((entry) => entry.entity).sort((left, right) => left.startAt - right.startAt);
+
+      entries.forEach((entry, index) => {
+        const { item, entity, startAt, endAt } = entry;
+        const dayLabel = `D${day.dayIndex + 1}`;
+        if (day.dayIndex === 0 && startAt < basePlan.journey.arrival.endAt) {
+          advice.push({ severity: "error", dayIndex: day.dayIndex, text: `${dayLabel}的${entity.name}早于${formatTime(basePlan.journey.arrival.endAt)}完成到京接驳。` });
+        }
+        const departureDinner = basePlan.journey.departure.dinnerWindow;
+        const withinDepartureDinner = item.kind !== "attraction" && departureDinner && startAt >= departureDinner.startAt && endAt <= departureDinner.endAt;
+        if (dateKey(date) === dateKey(basePlan.journey.departure.startAt) && endAt > basePlan.journey.departure.startAt && !withinDepartureDinner) {
+          advice.push({ severity: "error", dayIndex: day.dayIndex, text: `${dayLabel}的${entity.name}晚于${formatTime(basePlan.journey.departure.startAt)}离店赶车窗口。` });
+        }
+        if (item.kind === "attraction") {
+          const rule = visitRules[entity.id];
+          if (rule?.open && startAt < atLocalTime(date, rule.open)) advice.push({ severity: "error", dayIndex: day.dayIndex, text: `${entity.name}${rule.open}开放，当前${item.start}开始。` });
+          if (rule?.latestStart && startAt > atLocalTime(date, rule.latestStart)) advice.push({ severity: "error", dayIndex: day.dayIndex, text: `${entity.name}最晚建议${rule.latestStart}入场，当前${item.start}开始。` });
+          if (rule?.close && endAt > atLocalTime(date, rule.close)) advice.push({ severity: "error", dayIndex: day.dayIndex, text: `${entity.name}预计${formatTime(endAt)}结束，超过${rule.close}闭园。` });
+          if (rule?.mondayNotice && date.getDay() === 1) advice.push({ severity: "warning", dayIndex: day.dayIndex, text: `${entity.name}周一常规闭馆，法定节假日是否开放须复核官方公告。` });
+          if (entity.id === "tiananmen") {
+            const flagInfo = buildFlagInfo(date, profile, basePlan.journey);
+            if (startAt > flagInfo.sunrise) advice.push({ severity: "warning", dayIndex: day.dayIndex, text: `天安门广场${item.start}开始，已错过当天${formatTime(flagInfo.sunrise)}升旗；若以升旗为主，应按候检窗口倒排。` });
+          }
+          const previousDay = seenAttractions.get(entity.id);
+          if (previousDay !== undefined) advice.push({ severity: "warning", dayIndex: day.dayIndex, text: `${entity.name}已在D${previousDay + 1}安排过，本日为重复游览。` });
+          else seenAttractions.set(entity.id, day.dayIndex);
+        }
+        if (item.kind !== "attraction" && entity.service && !withinDepartureDinner) {
+          const mealType = clockMinutes(item.start) < 15 * 60 ? "lunch" : "dinner";
+          const service = mealServiceWindow(entity, mealType, date);
+          if (service && (startAt < service.openAt || endAt > service.closeAt)) advice.push({ severity: "warning", dayIndex: day.dayIndex, text: `${entity.name}的用餐时段超出已记录的${mealType === "lunch" ? "午餐" : "晚餐"}营业窗口。` });
+        }
+        const previous = entries[index - 1];
+        if (previous && !item.embedded && !previous.item.embedded) {
+          if (startAt < previous.endAt) {
+            advice.push({ severity: "error", dayIndex: day.dayIndex, text: `${previous.entity.name}与${entity.name}重叠${Math.ceil((previous.endAt - startAt) / 60000)}分钟。` });
+          } else {
+            const transit = transitBetween(previous.entity, entity);
+            const gap = Math.round((startAt - previous.endAt) / 60000);
+            if (gap < transit.minutes) advice.push({ severity: "warning", dayIndex: day.dayIndex, text: `${previous.entity.name}到${entity.name}仅留${gap}分钟，建议至少预留${transit.minutes}分钟（${transit.label}）。` });
+          }
+        }
+      });
+
+      const mealEntries = entries.filter((entry) => entry.item.kind !== "attraction");
+      if (!mealEntries.some((entry) => clockMinutes(entry.item.start) >= 10 * 60 + 30 && clockMinutes(entry.item.start) <= 14 * 60 + 30)) {
+        advice.push({ severity: "warning", dayIndex: day.dayIndex, text: `D${day.dayIndex + 1}没有11:00—14:30之间的午餐安排。` });
+      }
+      const departureEarly = dateKey(date) === dateKey(basePlan.journey.departure.endAt) && basePlan.journey.departure.endAt.getHours() < 17;
+      if (!departureEarly && !mealEntries.some((entry) => clockMinutes(entry.item.start) >= 16 * 60 && clockMinutes(entry.item.start) <= 20 * 60 + 30)) {
+        advice.push({ severity: "warning", dayIndex: day.dayIndex, text: `D${day.dayIndex + 1}没有16:00—20:30之间的晚餐安排。` });
+      }
+    });
+    return [...advice, ...state.customRequestAdvice];
+  }
+
+  function renderCustomAdvice() {
+    const advice = auditCustomDraft();
+    const errors = advice.filter((item) => item.severity === "error").length;
+    const warnings = advice.filter((item) => item.severity === "warning").length;
+    els.customAdviceCount.textContent = state.customDraft ? `${errors}项冲突 · ${warnings}项提醒` : "等待编排";
+    els.customAdviceList.innerHTML = advice.length ? advice.map((item) => `
+      <div class="custom-advice-item ${item.severity}"><i data-lucide="${item.severity === "error" ? "circle-x" : item.severity === "warning" ? "triangle-alert" : "lightbulb"}"></i><span>${escapeHtml(item.text)}</span></div>`).join("") : state.customDraft ? '<div class="custom-advice-item success"><i data-lucide="badge-check"></i><span>当前自编计划未发现硬冲突。</span></div>' : '<div class="custom-advice-item info"><i data-lucide="info"></i><span>载入方案后显示逐日建议。</span></div>';
+  }
+
+  function renderPlanEditor() {
+    els.planEditorBody.hidden = !state.editorOpen;
+    els.togglePlanEditor.setAttribute("aria-expanded", String(state.editorOpen));
+    els.togglePlanEditor.querySelector("span").textContent = state.editorOpen ? "收起编排" : "开始编排";
+    if (state.editorOpen) {
+      renderCustomDays();
+      renderCustomAdvice();
+    }
+    refreshIcons();
+  }
+
+  function addCustomItem(dayIndex, kind) {
+    if (!state.customDraft) loadCurrentPlanIntoEditor();
+    const day = state.customDraft?.[dayIndex];
+    if (!day) return;
+    const used = new Set(day.items.filter((item) => item.kind === kind).map((item) => item.id));
+    const source = kind === "meal" ? restaurants : attractions;
+    const entity = source.find((item) => !used.has(item.id)) || source[0];
+    if (!entity) return;
+    const last = day.items.slice().sort((left, right) => clockMinutes(left.start) - clockMinutes(right.start)).at(-1);
+    const start = last ? clockFromMinutes(clockMinutes(last.start) + Number(last.duration) + 30) : "09:00";
+    day.items.push({ uid: `custom-${++customUid}`, kind, id: entity.id, start, duration: kind === "meal" ? entity.duration || 60 : Math.min(entity.duration, 240), embedded: false });
+    renderPlanEditor();
+  }
+
+  function analyzeAdjustmentRequest() {
+    if (!state.customDraft) loadCurrentPlanIntoEditor();
+    const request = els.adjustmentRequest.value.trim();
+    if (!request) {
+      showToast("请先填写调整要求。");
+      return;
+    }
+    const chineseDays = { 一: 1, 二: 2, 三: 3, 四: 4, 五: 5, 六: 6, 七: 7 };
+    const dayMatch = request.match(/D\s*(\d+)|第([一二三四五六七\d]+)天/i);
+    const requestedDay = dayMatch ? Number(dayMatch[1] || chineseDays[dayMatch[2]] || dayMatch[2]) - 1 : null;
+    const entities = [...attractions.map((item) => ({ ...item, kind: "attraction" })), ...restaurants.map((item) => ({ ...item, kind: "meal" }))];
+    const found = entities.filter((entity) => request.includes(entity.name) || request.includes(entity.name.replace(/[（(].*$/, "")));
+    const advice = [];
+    found.forEach((entity) => {
+      const scheduledDays = state.customDraft.filter((day) => day.items.some((item) => item.kind === entity.kind && item.id === entity.id)).map((day) => day.dayIndex);
+      if (requestedDay !== null && requestedDay >= 0 && requestedDay < state.days) {
+        advice.push({ severity: "info", dayIndex: requestedDay, text: scheduledDays.includes(requestedDay) ? `${entity.name}已在D${requestedDay + 1}，可继续调整开始时间。` : `${entity.name}当前不在D${requestedDay + 1}，可在该日使用“添加${entity.kind === "meal" ? "用餐" : "景点"}”后选择。` });
+      } else {
+        advice.push({ severity: "info", dayIndex: scheduledDays[0] ?? 0, text: scheduledDays.length ? `${entity.name}当前位于${scheduledDays.map((day) => `D${day + 1}`).join("、")}。` : `${entity.name}尚未加入自编计划。` });
+      }
+    });
+    if (request.includes("升旗")) {
+      const tiananmenDay = state.customDraft.find((day) => day.items.some((item) => item.id === "tiananmen"));
+      advice.push({ severity: "info", dayIndex: tiananmenDay?.dayIndex ?? 0, text: tiananmenDay ? `升旗应按D${tiananmenDay.dayIndex + 1}官方时刻倒排候检，当前仍需核对当日预约时段。` : "要求涉及升旗，但自编计划中没有天安门广场。" });
+    }
+    if (!advice.length) advice.push({ severity: "info", dayIndex: requestedDay ?? 0, text: "未识别到明确景点或餐馆名称；请写完整名称，或直接在逐日列表中增删。" });
+    state.customRequestAdvice = advice;
+    renderCustomAdvice();
+    refreshIcons();
+  }
+
+  function saveCustomPlan() {
+    if (!state.customDraft) {
+      loadCurrentPlanIntoEditor();
+      return;
+    }
+    const base = currentEditorBasePlan();
+    const profile = profiles.find((item) => item.id === state.customBasePlanId) || profiles[0];
+    if (!base || !profile) return;
+    const advice = auditCustomDraft();
+    const days = state.customDraft.map((draftDay) => {
+      const date = addDays(parseLocalDate(state.startDate), draftDay.dayIndex);
+      const timeline = draftDay.items.map((item) => {
+        const entity = draftEntity(item);
+        if (!entity) return null;
+        const startAt = atLocalTime(date, item.start);
+        if (item.kind !== "attraction") return buildMealEvent(entity, clockMinutes(item.start) < 15 * 60 ? "lunch" : "dinner", startAt, { duration: Number(item.duration), routeNote: "自编安排" });
+        return { type: "attraction", attraction: entity, startAt, endAt: addMinutes(startAt, Number(item.duration)), stay: Number(item.duration), displayHighlights: entity.highlights.slice(0, 2) };
+      }).filter(Boolean).sort((left, right) => left.startAt - right.startAt);
+      const stops = timeline.filter((item) => item.type === "attraction");
+      const meals = timeline.filter((item) => item.type === "meal");
+      const dayAdvice = advice.filter((item) => item.dayIndex === draftDay.dayIndex && item.severity !== "info");
+      return {
+        index: draftDay.dayIndex,
+        date,
+        title: timeline.length ? timeline.map((item) => item.type === "meal" ? item.venue.name : item.attraction.name).join(" · ") : "自由调整",
+        weatherNote: stops.length ? dayWeatherNote(draftDay.dayIndex, stops.map((stop) => stop.attraction)) : "自编日程",
+        window: { date, startAt: atLocalTime(date, "00:00"), endAt: atLocalTime(date, "23:59") },
+        omitted: [],
+        auditNotes: dayAdvice.map((item) => ({ kind: item.severity === "error" ? "warning" : "info", text: `自编校核：${item.text}` })),
+        stops,
+        meals,
+        timeline,
+        dinnerMeal: null,
+        outboundTransit: null,
+        inboundTransit: null
+      };
+    });
+    const customPlan = {
+      id: "custom",
+      name: "自编行程",
+      short: "手动排程与校核",
+      hotel: base.hotel,
+      hotelReason: base.hotelReason,
+      hotelRange: base.hotelRange,
+      journey: base.journey,
+      reviewNotes: [`自编方案包含${advice.filter((item) => item.severity === "error").length}项冲突、${advice.filter((item) => item.severity === "warning").length}项提醒；时间按手动输入保存。`],
+      days,
+      cost: calculatePlanCost(profile, days)
+    };
+    state.plans = [...state.plans.filter((plan) => plan.id !== "custom"), customPlan];
+    state.activePlanId = "custom";
+    renderPlanSwitcher();
+    renderActivePlan();
+    renderTicketPlanSelect();
+    renderTickets();
+    showToast("自编方案已保存到计划列表。");
   }
 
   function journeySegmentLabel(segments) {
@@ -1399,7 +1922,7 @@
           <i data-lucide="log-in"></i>
           <div>
             <span>到京通勤 · 国庆缓冲估算</span>
-            <strong>${formatDateTime(plan.journey.arrival.startAt)} ${plan.journey.mode === "drive" ? "抵达酒店" : `抵达${plan.journey.rule.terminal}`} → ${formatDateTime(plan.journey.arrival.endAt)} 完成寄存</strong>
+            <strong>${formatDateTime(plan.journey.arrival.startAt)} ${plan.journey.arrival.serviceNo ? `${plan.journey.arrival.serviceNo}抵达` : "抵达"}${plan.journey.mode === "drive" ? "酒店" : plan.journey.arrival.terminal} → ${formatDateTime(plan.journey.arrival.endAt)} 完成寄存</strong>
             <small>${journeySegmentLabel(plan.journey.arrival.segments)} · ${plan.journey.rule.route}</small>
           </div>
         </div>
@@ -1407,7 +1930,7 @@
           <i data-lucide="log-out"></i>
           <div>
             <span>离京通勤 · 国庆缓冲估算</span>
-            <strong>${formatDateTime(plan.journey.departure.startAt)} 离店 → ${formatDateTime(plan.journey.departure.endAt)} ${plan.journey.mode === "drive" ? "驶离酒店" : plan.journey.mode === "air" ? "航班计划离京" : "列车计划离京"}</strong>
+            <strong>${formatDateTime(plan.journey.departure.startAt)} 离店 → ${escapeHtml(plan.journey.departure.terminal)} → ${formatDateTime(plan.journey.departure.endAt)} ${plan.journey.departure.serviceNo ? `${plan.journey.departure.serviceNo}出发` : plan.journey.mode === "drive" ? "驶离酒店" : plan.journey.mode === "air" ? "航班计划离京" : "列车计划离京"}</strong>
             <small>${journeySegmentLabel(plan.journey.departure.segments)} · ${plan.journey.rule.route}</small>
           </div>
         </div>
@@ -1671,20 +2194,25 @@
 
     els.teamAges.addEventListener("input", updateAgeState);
     els.teamAges.addEventListener("change", schedulePlanRegeneration);
-    els.arrivalDateTime.addEventListener("input", () => { syncTripRange(); renderTransportOptions(); });
-    els.departureDateTime.addEventListener("input", () => { syncTripRange(); renderTransportOptions(); });
+    els.arrivalDateTime.addEventListener("input", () => { clearTransportBindingIfChanged("outbound"); syncTripRange(); renderTransportOptions(); });
+    els.departureDateTime.addEventListener("input", () => { clearTransportBindingIfChanged("return"); syncTripRange(); renderTransportOptions(); });
     els.origin.addEventListener("input", renderTransportOptions);
     els.returnCity.addEventListener("input", renderTransportOptions);
     els.arrivalDateTime.addEventListener("change", schedulePlanRegeneration);
     els.departureDateTime.addEventListener("change", schedulePlanRegeneration);
     els.origin.addEventListener("change", schedulePlanRegeneration);
     els.returnCity.addEventListener("change", schedulePlanRegeneration);
+    els.transportOptions.addEventListener("click", handleTransportOptionClick);
 
     els.transportMode.addEventListener("click", (event) => {
       const button = event.target.closest("button[data-value]");
       if (!button) return;
       state.transportMode = button.dataset.value;
       selectSegment(els.transportMode, button);
+      const outbound = selectedTransportRecord("outbound");
+      const returnTrip = selectedTransportRecord("return");
+      if (outbound) els.arrivalDateTime.value = outbound.arriveAt;
+      if (returnTrip) els.departureDateTime.value = returnTrip.departAt;
       syncTripRange();
       renderTransportOptions();
       schedulePlanRegeneration();
@@ -1711,6 +2239,66 @@
       renderActivePlan();
       renderTicketPlanSelect();
       renderTickets();
+    });
+
+    els.togglePlanEditor.addEventListener("click", () => {
+      state.editorOpen = !state.editorOpen;
+      if (state.editorOpen && !state.customDraft) loadCurrentPlanIntoEditor();
+      renderPlanEditor();
+    });
+    els.loadCurrentPlan.addEventListener("click", loadCurrentPlanIntoEditor);
+    els.analyzeAdjustment.addEventListener("click", analyzeAdjustmentRequest);
+    els.saveCustomPlan.addEventListener("click", saveCustomPlan);
+    els.customDays.addEventListener("click", (event) => {
+      const dayElement = event.target.closest("[data-custom-day]");
+      if (!dayElement || !state.customDraft) return;
+      const dayIndex = Number(dayElement.dataset.customDay);
+      const day = state.customDraft[dayIndex];
+      const addButton = event.target.closest("[data-add-custom]");
+      if (addButton) {
+        addCustomItem(dayIndex, addButton.dataset.addCustom);
+        return;
+      }
+      const row = event.target.closest("[data-custom-item]");
+      if (!row) return;
+      const itemIndex = day.items.findIndex((item) => item.uid === row.dataset.customItem);
+      if (itemIndex < 0) return;
+      if (event.target.closest("[data-remove-custom]")) {
+        day.items.splice(itemIndex, 1);
+        renderPlanEditor();
+        return;
+      }
+      const moveButton = event.target.closest("[data-move-custom]");
+      if (!moveButton) return;
+      const targetIndex = moveButton.dataset.moveCustom === "up" ? itemIndex - 1 : itemIndex + 1;
+      if (targetIndex < 0 || targetIndex >= day.items.length) return;
+      const currentStart = day.items[itemIndex].start;
+      day.items[itemIndex].start = day.items[targetIndex].start;
+      day.items[targetIndex].start = currentStart;
+      [day.items[itemIndex], day.items[targetIndex]] = [day.items[targetIndex], day.items[itemIndex]];
+      renderPlanEditor();
+    });
+    els.customDays.addEventListener("change", (event) => {
+      const field = event.target.closest("[data-custom-field]");
+      const row = event.target.closest("[data-custom-item]");
+      const dayElement = event.target.closest("[data-custom-day]");
+      if (!field || !row || !dayElement || !state.customDraft) return;
+      const day = state.customDraft[Number(dayElement.dataset.customDay)];
+      const item = day.items.find((entry) => entry.uid === row.dataset.customItem);
+      if (!item) return;
+      if (field.dataset.customField === "entity") {
+        const [kind, id] = field.value.split(":");
+        item.kind = kind;
+        item.id = id;
+        item.embedded = false;
+      } else if (field.dataset.customField === "duration") {
+        item.duration = Math.max(15, Math.min(720, Number(field.value) || 60));
+      } else {
+        item.start = field.value;
+      }
+      state.customRequestAdvice = [];
+      renderCustomAdvice();
+      refreshIcons();
     });
 
     els.planSheet.addEventListener("click", (event) => {
@@ -1761,4 +2349,3 @@
 
   initialize();
 })();
-

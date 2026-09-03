@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="进京赶考：北京团队旅行规划、景点信息与门票预约助手。">
   <title>进京赶考</title>
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css?v=20260903-3">
 </head>
 <body>
   <header class="topbar">
@@ -125,19 +125,6 @@
             </label>
           </div>
 
-          <div class="form-section trip-time-fields">
-            <label>
-              <span class="field-label">到京时间</span>
-              <input id="arrival-datetime" type="datetime-local" value="2026-10-01T09:30" step="60" required>
-            </label>
-            <label>
-              <span class="field-label">离京时间</span>
-              <input id="departure-datetime" type="datetime-local" value="2026-10-05T18:00" step="60" required>
-            </label>
-            <output class="trip-duration" id="trip-duration" for="arrival-datetime departure-datetime" aria-live="polite">5天4晚</output>
-            <p class="field-message" id="trip-time-message">按到京日和离京日自动计算，包含首尾两天。</p>
-          </div>
-
           <div class="form-section">
             <span class="field-label">往返方式</span>
             <div class="segmented" id="transport-mode" role="group" aria-label="往返方式">
@@ -148,6 +135,20 @@
           </div>
 
           <div class="form-section transport-options" id="transport-options" aria-live="polite"></div>
+
+          <div class="form-section trip-time-fields">
+            <div class="form-section-title"><span>实际行程时间</span><output id="time-binding-status">未绑定票单</output></div>
+            <label>
+              <span class="field-label" id="arrival-time-label">计划到京时间</span>
+              <input id="arrival-datetime" type="datetime-local" value="2026-10-01T09:30" step="60" required>
+            </label>
+            <label>
+              <span class="field-label" id="departure-time-label">计划离京时间</span>
+              <input id="departure-datetime" type="datetime-local" value="2026-10-05T18:00" step="60" required>
+            </label>
+            <output class="trip-duration" id="trip-duration" for="arrival-datetime departure-datetime" aria-live="polite">5天4晚</output>
+            <p class="field-message" id="trip-time-message">选择班次后自动采用到站或落地时间；也可手动修改。</p>
+          </div>
 
           <div class="form-section">
             <span class="field-label">游玩节奏</span>
@@ -167,6 +168,35 @@
         <div class="planner-results">
           <div class="weather-strip" id="weather-strip" aria-live="polite"></div>
           <div class="plan-switcher" id="plan-switcher" role="tablist" aria-label="计划选择"></div>
+          <section class="plan-editor" id="plan-editor" aria-labelledby="plan-editor-title">
+            <header class="plan-editor-head">
+              <div>
+                <span>MANUAL SCHEDULE</span>
+                <h2 id="plan-editor-title">自行编排行程</h2>
+              </div>
+              <button class="secondary-button compact" id="toggle-plan-editor" type="button" aria-expanded="false">
+                <i data-lucide="pencil-line"></i><span>开始编排</span>
+              </button>
+            </header>
+            <div class="plan-editor-body" id="plan-editor-body" hidden>
+              <div class="plan-editor-request">
+                <label for="adjustment-request">调整要求</label>
+                <textarea id="adjustment-request" rows="2" placeholder="例如：D2加入颐和园，D3晚饭想吃烤鸭"></textarea>
+                <div class="plan-editor-actions">
+                  <button class="text-button" id="load-current-plan" type="button"><i data-lucide="import"></i>载入当前方案</button>
+                  <button class="text-button" id="analyze-adjustment" type="button"><i data-lucide="scan-search"></i>分析调整要求</button>
+                  <button class="primary-button inline" id="save-custom-plan" type="button"><i data-lucide="save"></i>保存自编方案</button>
+                </div>
+              </div>
+              <div class="plan-editor-grid">
+                <div class="custom-days" id="custom-days"></div>
+                <aside class="custom-advice" aria-live="polite">
+                  <div class="custom-advice-head"><span>计划校核</span><strong id="custom-advice-count">等待编排</strong></div>
+                  <div id="custom-advice-list"></div>
+                </aside>
+              </div>
+            </div>
+          </section>
           <article class="plan-sheet" id="plan-sheet" aria-live="polite"></article>
         </div>
       </div>
@@ -262,7 +292,6 @@
   <script src="food-data-daxiang.js"></script>
   <script src="food-data-daba.js"></script>
   <script src="deploy-images.js?v=20260903-2"></script>
-  <script src="app.js?v=20260903-2"></script>
+  <script src="app.js?v=20260903-3"></script>
 </body>
 </html>
-
