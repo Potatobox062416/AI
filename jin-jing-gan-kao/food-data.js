@@ -3,7 +3,7 @@
     {
       id: "yin-san", name: "尹三豆汁（天坛店）", tier: "budget", tierLabel: "¥", price: [10, 25],
       district: "东城区", zone: "南城", address: "东晓市街176号，天坛北门附近", style: "老北京早餐",
-      mealTypes: ["breakfast", "lunch"], duration: 45, service: { lunch: ["05:30", "12:30"] },
+      mealTypes: ["breakfast"], duration: 45, service: { breakfast: ["05:30", "12:30"] },
       dishes: ["豆汁", "焦圈", "面茶", "麻豆腐"], anchors: ["temple-heaven"],
       description: "适合天坛早场后的京味早餐，豆汁发酵风味明显，第一次尝试建议少量搭配焦圈。",
       constraint: "仅适合早餐或早午餐，晚到可能售罄；国庆营业时间需复核。",
@@ -89,6 +89,16 @@
       constraint: "建议预约，酒水和高价海鲜会显著提高人均。",
       fact: { label: "携程门店页", url: "https://gs.ctrip.com/html5/you/foods/fooddetail/1/7049512.html" },
       video: { creator: "特厨隋卞", title: "北京烤鸭的天花板——大董", url: "https://www.bilibili.com/video/BV1GV4y1M76d/" }
+    },
+    {
+      id: "shaguoju", name: "砂锅居（西四店）", tier: "mid", tierLabel: "¥¥", price: [80, 130],
+      district: "西城区", zone: "什刹海", address: "西四南大街60号", style: "老字号砂锅与京鲁菜",
+      mealTypes: ["lunch", "dinner"], duration: 80, service: { lunch: ["11:00", "15:00"], dinner: ["17:00", "21:30"] },
+      dishes: ["砂锅白肉", "砂锅吊子", "爆三样", "干炸小丸子"], anchors: ["palace-museum", "beihai", "prince-gong", "shichahai"],
+      description: "西四老字号，适合故宫西侧、北海或恭王府行程中的正餐，砂锅白肉与传统京鲁菜更符合午晚餐需求。",
+      constraint: "特厨视频反映拍摄当时体验；当前价格、菜量、国庆营业与排队须在门店页复核。",
+      fact: { label: "北京旅游网", url: "https://s.visitbeijing.com.cn/food/31" },
+      video: { creator: "特厨隋卞", bvid: "BV1ka411n7Nd", title: "八大居之首——砂锅居", url: "https://www.bilibili.com/video/BV1ka411n7Nd/" }
     },
     {
       id: "trb", name: "TRB Hutong", tier: "premium", tierLabel: "¥¥¥", price: [800, 1500],

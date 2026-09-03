@@ -3,7 +3,8 @@
 
   const attractions = window.ATTRACTIONS || [];
   const profiles = window.PLAN_PROFILES || [];
-  const restaurants = window.RESTAURANTS || [];
+  const approvedFoodCreators = new Set(["大祥哥来了", "大霸子来了", "特厨隋卞"]);
+  const restaurants = (window.RESTAURANTS || []).filter((item) => approvedFoodCreators.has(item.video?.creator));
   const attractionById = new Map(attractions.map((item) => [item.id, item]));
   const restaurantById = new Map(restaurants.map((item) => [item.id, item]));
   const categoryOrder = ["全部", "古都", "园林", "博物馆", "长城", "亲子", "现代", "街区"];
@@ -373,10 +374,10 @@
       const creator = item.video?.creator || "";
       if (creator === "大祥哥来了") counts.daxiang += 1;
       else if (creator === "大霸子来了") counts.daba += 1;
-      else counts.other += 1;
+      else if (creator === "特厨隋卞") counts.suibian += 1;
       return counts;
-    }, { all: restaurants.length, daxiang: 0, daba: 0, other: 0 });
-    const authorFilters = [["all", "全部来源"], ["daxiang", "大祥哥来了"], ["daba", "大霸子来了"], ["other", "其他核验"]];
+    }, { all: restaurants.length, daxiang: 0, daba: 0, suibian: 0 });
+    const authorFilters = [["all", "全部来源"], ["daxiang", "大祥哥来了"], ["daba", "大霸子来了"], ["suibian", "特厨隋卞"]];
     els.foodAuthorFilters.innerHTML = authorFilters.map(([value, label]) => `
       <button class="food-filter ${state.foodAuthor === value ? "is-selected" : ""}" type="button" data-food-author="${value}">${label} ${authorCounts[value]}</button>
     `).join("");
@@ -431,7 +432,7 @@
       const authorMatch = state.foodAuthor === "all"
         || (state.foodAuthor === "daxiang" && creator === "大祥哥来了")
         || (state.foodAuthor === "daba" && creator === "大霸子来了")
-        || (state.foodAuthor === "other" && !["大祥哥来了", "大霸子来了"].includes(creator));
+        || (state.foodAuthor === "suibian" && creator === "特厨隋卞");
       const haystack = [item.name, item.district, item.zone, item.address, item.style, item.description, ...item.dishes].join(" ").toLowerCase();
       return tierMatch && authorMatch && (!query || haystack.includes(query));
     });
@@ -1140,31 +1141,44 @@
     };
   }
 
-  function selectLunchVenue(items) {
+  function firstAvailableRestaurant(ids, mealType, usedRestaurantIds) {
+    const preferred = ids.map((id) => restaurantById.get(id)).filter(Boolean);
+    const fallback = restaurants.filter((item) => item.mealTypes.includes(mealType));
+    return [...preferred, ...fallback].find((item) => item.mealTypes.includes(mealType) && !usedRestaurantIds.has(item.id)) || null;
+  }
+
+  function selectLunchVenue(items, usedRestaurantIds = new Set()) {
     const ids = new Set(items.map((item) => item.id));
-    if (ids.has("universal")) return { venue: restaurantById.get("three-broomsticks"), embeddedIn: "universal" };
+    if (ids.has("universal")) return { venue: genericMeal("universal-simple", "环球影城园内简餐", "通州", [80, 150], ["主题套餐", "热食", "饮品"], 55), embeddedIn: "universal" };
     if (ids.has("summer-palace")) return { venue: genericMeal("summer-palace-simple", "颐和园园内简餐", "西郊", [35, 75], ["热食", "面食", "饮品"], 45), embeddedIn: "summer-palace" };
     if (ids.has("badaling")) {
-      if (state.transportMode === "drive") return { venue: restaurantById.get("commune-kitchen"), embeddedIn: null, extraTransit: 35 };
+      const wallLunch = firstAvailableRestaurant(["laofang-bbq"], "lunch", usedRestaurantIds);
+      if (state.transportMode === "drive" && wallLunch) return { venue: wallLunch, embeddedIn: null, extraTransit: 35 };
       return { venue: genericMeal("badaling-simple", "八达岭景区内简餐", "延庆", [35, 70], ["热饮", "面食", "便携套餐"]), embeddedIn: "badaling" };
     }
     if (ids.has("mutianyu")) return { venue: genericMeal("mutianyu-simple", "慕田峪景区内简餐", "怀柔", [35, 70], ["面食", "热饮", "便携套餐"]), embeddedIn: "mutianyu" };
-    if (ids.has("temple-heaven")) return { venue: restaurantById.get("yin-san"), embeddedIn: null };
-    if (ids.has("prince-gong") || ids.has("beihai") || ids.has("shichahai")) return { venue: restaurantById.get("huguosi"), embeddedIn: null };
-    if (ids.has("palace-museum") || ids.has("tiananmen")) return { venue: restaurantById.get("duyichu"), embeddedIn: null };
-    if (ids.has("art-798") || ids.has("olympic-park")) return { venue: restaurantById.get("dadong"), embeddedIn: null };
-    return { venue: restaurantById.get("duyichu"), embeddedIn: null };
+    if (ids.has("temple-heaven")) return { venue: genericMeal("temple-heaven-lunch", "天坛周边午餐", "南城", [45, 90], ["京味热菜", "面食", "时蔬"], 60), embeddedIn: null };
+    let venue = null;
+    if (ids.has("beijing-zoo")) venue = firstAvailableRestaurant(["huifeng", "taipo", "chaishi"], "lunch", usedRestaurantIds);
+    else if (ids.has("prince-gong") || ids.has("beihai") || ids.has("shichahai")) venue = firstAvailableRestaurant(["shaguoju", "taipo", "chaishi", "side-street"], "lunch", usedRestaurantIds);
+    else if (ids.has("palace-museum") || ids.has("tiananmen") || ids.has("national-museum")) venue = firstAvailableRestaurant(["shaguoju", "side-street", "jiangniu", "dadong"], "lunch", usedRestaurantIds);
+    else if (ids.has("art-798") || ids.has("olympic-park")) venue = firstAvailableRestaurant(["dadong", "yisitan", "jinghualou", "five-guys", "xiding"], "lunch", usedRestaurantIds);
+    else if (ids.has("lama-temple")) venue = firstAvailableRestaurant(["jiangniu", "side-street", "mai-thai", "maiden-tower"], "lunch", usedRestaurantIds);
+    venue ||= firstAvailableRestaurant(["jiangniu", "side-street", "chaishi", "five-guys"], "lunch", usedRestaurantIds);
+    return { venue: venue || genericMeal("city-lunch", "行程片区午餐", items[0]?.zone || "中轴线", [45, 90], ["本地热菜", "面食", "时蔬"], 60), embeddedIn: null };
   }
 
-  function selectDinnerVenue(profile, dayIndex) {
+  function selectDinnerVenue(profile, dayIndex, usedRestaurantIds = new Set()) {
     const options = {
-      classic: ["siji-minfu", "liu-ji", "duyichu", "siji-minfu", "nanmen", "trb", "dadong"],
-      family: ["nanmen", "duyichu", "siji-minfu", "huguosi", "nanmen", "dadong", "liu-ji"],
-      culture: ["trb", "siji-minfu", "nanmen", "liu-ji", "trb", "duyichu", "dadong"],
-      modern: ["dadong", "trb", "siji-minfu", "dadong", "trb", "nanmen", "liu-ji"],
-      relaxed: ["nanmen", "trb", "siji-minfu", "nanmen", "duyichu", "dadong", "huguosi"]
+      classic: ["nanmen", "liu-ji", "dadong", "jiangniu", "taipo", "side-street", "jinghualou"],
+      family: ["nanmen", "jiangniu", "five-guys", "taipo", "yisitan", "liu-ji", "side-street"],
+      culture: ["nanmen", "liu-ji", "qulangyuan", "jinghualou", "taipo", "jiangniu", "dadong"],
+      modern: ["dadong", "five-guys", "yisitan", "xiding", "jiangniu", "mai-thai", "taco-bar"],
+      relaxed: ["nanmen", "taipo", "side-street", "jiangniu", "jinghualou", "liu-ji", "dadong"]
     };
-    return restaurantById.get((options[profile.id] || options.classic)[dayIndex % 7]);
+    const ordered = options[profile.id] || options.classic;
+    const rotated = [...ordered.slice(dayIndex % ordered.length), ...ordered.slice(0, dayIndex % ordered.length)];
+    return firstAvailableRestaurant(rotated, "dinner", usedRestaurantIds);
   }
 
   function mealServiceWindow(venue, mealType, date) {
@@ -1188,7 +1202,7 @@
     };
   }
 
-  function buildDinnerMeal(profile, dayIndex, date, inboundTransit, journey) {
+  function buildDinnerMeal(profile, dayIndex, date, inboundTransit, journey, usedRestaurantIds = new Set()) {
     if (dayIndex === state.days - 1) {
       const dinnerWindow = journey.departure.dinnerWindow;
       if (!dinnerWindow || dateKey(dinnerWindow.startAt) !== dateKey(date)) return null;
@@ -1198,8 +1212,11 @@
         routeNote: state.transportMode === "drive" ? "用餐后退房装车，再按计划驶离" : state.transportMode === "air" ? "完成值机安检后用餐，随后进入登机等候" : "抵达铁路站后用餐，随后完成安检、检票与候车"
       });
     }
-    const venue = selectDinnerVenue(profile, dayIndex);
-    if (!venue) return null;
+    const venue = selectDinnerVenue(profile, dayIndex, usedRestaurantIds);
+    if (!venue) {
+      const fallback = genericMeal("hotel-dinner", "酒店片区晚餐", profile.hotelZone, [45, 95], ["本地热菜", "面食", "时蔬"], 60);
+      return buildMealEvent(fallback, "dinner", inboundTransit?.arriveAt ? addMinutes(inboundTransit.arriveAt, 25) : atLocalTime(date, "17:30"), { routeNote: "酒店周边步行选择" });
+    }
     const service = mealServiceWindow(venue, "dinner", date);
     const hotelReady = inboundTransit?.arriveAt || atLocalTime(date, "17:00");
     let startAt = new Date(Math.max(addMinutes(hotelReady, 25).getTime(), service?.openAt?.getTime() || 0));
@@ -1213,10 +1230,10 @@
     return buildMealEvent(venue, "dinner", startAt, { routeNote: "从酒店短途前往，建议提前取号或预约" });
   }
 
-  function layoutScheduledItems(items, window, profile, flagInfo) {
+  function layoutScheduledItems(items, window, profile, flagInfo, usedRestaurantIds = new Set()) {
     if (!items.length || window.startAt >= window.endAt) return null;
     const usesFlagWindow = flagInfo?.feasible && items[0]?.id === "tiananmen";
-    const lunchPlan = selectLunchVenue(items);
+    const lunchPlan = selectLunchVenue(items, usedRestaurantIds);
     const outbound = usesFlagWindow ? flagInfo.hotelCommute : hotelTransit(profile, items[0]);
     const inbound = hotelTransit(profile, items.at(-1), true);
     const outboundTransit = {
@@ -1354,7 +1371,7 @@
     return { valid: true, outboundTransit, stops, inboundTransit, meals, timeline };
   }
 
-  function scheduleDay(ids, dayIndex, profile, journey) {
+  function scheduleDay(ids, dayIndex, profile, journey, usedRestaurantIds = new Set()) {
     const originalItems = ids.map((id) => attractionById.get(id)).filter(Boolean);
     const date = addDays(parseLocalDate(state.startDate), dayIndex);
     const tiananmenIndex = originalItems.findIndex((item) => item.id === "tiananmen");
@@ -1366,12 +1383,12 @@
     const window = getDayWindow(dayIndex, requestedItems, journey, flagInfo);
     const scheduledItems = requestedItems.slice();
     const constraintNotes = [];
-    let layout = layoutScheduledItems(scheduledItems, window, profile, flagInfo);
+    let layout = layoutScheduledItems(scheduledItems, window, profile, flagInfo, usedRestaurantIds);
 
     while (scheduledItems.length && (!layout || !layout.valid || layout.inboundTransit.arriveAt > window.endAt)) {
       if (layout?.constraintIssue) constraintNotes.push(layout.constraintIssue);
       scheduledItems.pop();
-      layout = layoutScheduledItems(scheduledItems, window, profile, flagInfo);
+      layout = layoutScheduledItems(scheduledItems, window, profile, flagInfo, usedRestaurantIds);
     }
 
     const omitted = originalItems.filter((item) => !scheduledItems.includes(item));
@@ -1417,8 +1434,15 @@
       }
     });
     constraintNotes.forEach((text) => auditNotes.push({ kind: "warning", text }));
-    const dinnerMeal = buildDinnerMeal(profile, dayIndex, date, layout?.inboundTransit || null, journey);
+    const usedBeforeDinner = new Set(usedRestaurantIds);
+    (layout?.meals || []).forEach((meal) => {
+      if (restaurantById.has(meal.venue.id)) usedBeforeDinner.add(meal.venue.id);
+    });
+    const dinnerMeal = buildDinnerMeal(profile, dayIndex, date, layout?.inboundTransit || null, journey, usedBeforeDinner);
     const meals = [...(layout?.meals || []), ...(dinnerMeal ? [dinnerMeal] : [])];
+    meals.forEach((meal) => {
+      if (restaurantById.has(meal.venue.id)) usedRestaurantIds.add(meal.venue.id);
+    });
     if (!meals.some((meal) => meal.mealType === "lunch") && scheduledItems.length) {
       auditNotes.push({ kind: "warning", text: "当天时间窗口内没有形成可靠午餐时段，建议减少一个景点后重新生成。" });
     }
@@ -1530,7 +1554,8 @@
   function buildPlan(profile) {
     const journey = buildJourneyWindow(profile);
     const prepared = prepareRouteDays(profile, journey);
-    const scheduledDays = prepared.routes.map((ids, index) => scheduleDay(ids, index, profile, journey));
+    const usedRestaurantIds = new Set();
+    const scheduledDays = prepared.routes.map((ids, index) => scheduleDay(ids, index, profile, journey, usedRestaurantIds));
     return {
       id: profile.id,
       name: profile.name,
@@ -1603,6 +1628,12 @@
   function clockFromMinutes(total) {
     const normalized = Math.max(0, Math.min(23 * 60 + 59, Math.round(total)));
     return `${String(Math.floor(normalized / 60)).padStart(2, "0")}:${String(normalized % 60).padStart(2, "0")}`;
+  }
+
+  function mealTypeForClock(clock) {
+    const minutes = clockMinutes(clock);
+    if (minutes < 10 * 60 + 30) return "breakfast";
+    return minutes < 15 * 60 ? "lunch" : "dinner";
   }
 
   function currentEditorBasePlan() {
@@ -1720,9 +1751,11 @@
           else seenAttractions.set(entity.id, day.dayIndex);
         }
         if (item.kind !== "attraction" && entity.service && !withinDepartureDinner) {
-          const mealType = clockMinutes(item.start) < 15 * 60 ? "lunch" : "dinner";
+          const mealType = mealTypeForClock(item.start);
+          const mealLabel = mealType === "breakfast" ? "早餐" : mealType === "lunch" ? "午餐" : "晚餐";
+          if (entity.mealTypes && !entity.mealTypes.includes(mealType)) advice.push({ severity: "warning", dayIndex: day.dayIndex, text: `${entity.name}不适合作为${mealLabel}，请调整时间或餐馆。` });
           const service = mealServiceWindow(entity, mealType, date);
-          if (service && (startAt < service.openAt || endAt > service.closeAt)) advice.push({ severity: "warning", dayIndex: day.dayIndex, text: `${entity.name}的用餐时段超出已记录的${mealType === "lunch" ? "午餐" : "晚餐"}营业窗口。` });
+          if (service && (startAt < service.openAt || endAt > service.closeAt)) advice.push({ severity: "warning", dayIndex: day.dayIndex, text: `${entity.name}的用餐时段超出已记录的${mealLabel}营业窗口。` });
         }
         const previous = entries[index - 1];
         if (previous && !item.embedded && !previous.item.embedded) {
@@ -1828,7 +1861,7 @@
         const entity = draftEntity(item);
         if (!entity) return null;
         const startAt = atLocalTime(date, item.start);
-        if (item.kind !== "attraction") return buildMealEvent(entity, clockMinutes(item.start) < 15 * 60 ? "lunch" : "dinner", startAt, { duration: Number(item.duration), routeNote: "自编安排" });
+        if (item.kind !== "attraction") return buildMealEvent(entity, mealTypeForClock(item.start), startAt, { duration: Number(item.duration), routeNote: "自编安排" });
         return { type: "attraction", attraction: entity, startAt, endAt: addMinutes(startAt, Number(item.duration)), stay: Number(item.duration), displayHighlights: entity.highlights.slice(0, 2) };
       }).filter(Boolean).sort((left, right) => left.startAt - right.startAt);
       const stops = timeline.filter((item) => item.type === "attraction");
@@ -1876,7 +1909,7 @@
   }
 
   function renderMealEvent(meal) {
-    const label = meal.mealType === "lunch" ? "午饭" : "晚饭";
+    const label = meal.mealType === "breakfast" ? "早餐" : meal.mealType === "lunch" ? "午饭" : "晚饭";
     const content = `
       <i data-lucide="utensils"></i>
       <time>${formatTime(meal.startAt)}—${formatTime(meal.endAt)}</time>

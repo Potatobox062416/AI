@@ -144,5 +144,21 @@
     "page": "https://hk.trip.com/restaurant/china/beijing/detail/restaurant-115334018/",
     "title": "売泰（三里T+MALL店）· 打抛饭",
     "verification": "图片来自Trip.com该门店菜品相册，画面为打抛饭；与第1张猪脚饭及THE TACO BAR视频封面均不同。"
+  },
+  {
+    "restaurant": "shaguoju",
+    "file": "assets/restaurants/shaguoju/shaguoju-1.jpg",
+    "image": "https://i2.hdslb.com/bfs/archive/5cb2ffd02fa2e5e563b0b44e1071b01d050ea89a.jpg",
+    "page": "https://www.bilibili.com/video/BV1ka411n7Nd/",
+    "title": "特厨隋卞：八大居之首——砂锅居",
+    "verification": "B站官方元数据确认作者为特厨隋卞，视频标题明确指向砂锅居。"
+  },
+  {
+    "restaurant": "shaguoju",
+    "file": "assets/restaurants/shaguoju/shaguoju-2.jpg",
+    "image": "https://img-rs.huanqiucdn.cn/dp/api/files/imageDir/66b5b6fa3f56b872927f3a2cee3e3df6.png",
+    "page": "https://www.visitbeijing.com.cn/article/4Nljbtl8lso",
+    "title": "北京旅游网：砂锅居西四店外观",
+    "verification": "北京旅游网页面图片，门头清晰显示砂锅居。"
   }
 ]

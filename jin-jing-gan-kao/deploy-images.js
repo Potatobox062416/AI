@@ -111,25 +111,9 @@
     "https://i2.hdslb.com/bfs/archive/ccc7580fddbf4fffadf27a22c2ac0cde16ec1201.jpg",
     "https://ak-d.tripcdn.com/images/1mi5q12000fzxo68080D2.jpg?proc=source%2Ftrip"
   ],
-  "menkuang": [
-    "https://i1.hdslb.com/bfs/archive/65a5d5b2a58fc2129ddfc8cfdd1eae1739170bd2.jpg",
-    "https://i0.hdslb.com/bfs/archive/58f2b990ba1c90fed7354d907a78ed18a0909385.jpg"
-  ],
-  "duyichu": [
-    "https://i2.hdslb.com/bfs/archive/496467aae395e3a4f04012fa0d1a2d3c9dfab5c1.jpg",
-    "https://i2.hdslb.com/bfs/archive/7a119d711cac9244a76fdd0f3759256659cc1c3e.jpg"
-  ],
-  "huguosi": [
-    "https://i0.hdslb.com/bfs/archive/0a84478ffd979d2175d096b96cd8d15b524aa899.jpg",
-    "https://i1.hdslb.com/bfs/archive/48c7ee06fc43edc4a6e21fc7e8d14bb3f136c8f4.jpg"
-  ],
   "liu-ji": [
     "https://i0.hdslb.com/bfs/archive/01499c3c29be1f0f60f53c02d3554ad286a26b4a.jpg",
     "https://i1.hdslb.com/bfs/archive/2f7e1666464cce6a880834d7f5fac2b1eb5079cc.jpg"
-  ],
-  "siji-minfu": [
-    "https://i1.hdslb.com/bfs/archive/aaaed6d339a3d07dc14214cf7792380f8bae9f97.jpg",
-    "https://i2.hdslb.com/bfs/archive/0df1e4ef04b96156bd265e4ed73f653bbb25d201.jpg"
   ],
   "nanmen": [
     "https://i2.hdslb.com/bfs/archive/4a2b8b404c447baf0caf066190b41787059d4f09.jpg",
@@ -142,18 +126,6 @@
   "dadong": [
     "https://i2.hdslb.com/bfs/archive/ac13213d25869ca349c9b53a1002d991817df851.jpg",
     "https://danielfooddiary.com/wp-content/uploads/2018/05/dadongduck3.jpg"
-  ],
-  "trb": [
-    "https://i0.hdslb.com/bfs/archive/e4d3d399c10d741f8e170ddb5e0a99f5477f88f9.jpg",
-    "https://oss-rs.visitbeijing.com.cn/imageDir/80706883de43c90618e629b9d1a710b8.png"
-  ],
-  "three-broomsticks": [
-    "https://i0.hdslb.com/bfs/archive/4afd23de04208ec5d191e4bc9ed324716892c3c0.jpg",
-    "https://i2.hdslb.com/bfs/archive/73cf16b44116a6846f9ef44cafc2bdd1ab2950b8.jpg"
-  ],
-  "commune-kitchen": [
-    "https://i1.hdslb.com/bfs/archive/9ab2b77acbbd98f4f50f6e6f3b03d1ecab511e09.jpg",
-    "https://i0.hdslb.com/bfs/archive/f2823191c17949b54f32771b5c6969bf9b934ad4.jpg"
   ],
   "jiangniu": [
     "https://i1.hdslb.com/bfs/archive/d0f7edd56018f325babbeffd7264ef5acac1c97a.jpg",
@@ -262,6 +234,10 @@
   "taco-bar": [
     "https://i0.hdslb.com/bfs/archive/8f93c47c6d7730265fa759893c69fc818612481c.jpg",
     "https://i2.hdslb.com/bfs/archive/440de86ddf7e087a98fe2f606c649a49536e9e29.jpg"
+  ],
+  "shaguoju": [
+    "https://i2.hdslb.com/bfs/archive/5cb2ffd02fa2e5e563b0b44e1071b01d050ea89a.jpg",
+    "https://img-rs.huanqiucdn.cn/dp/api/files/imageDir/66b5b6fa3f56b872927f3a2cee3e3df6.png"
   ]
 };
 })();
