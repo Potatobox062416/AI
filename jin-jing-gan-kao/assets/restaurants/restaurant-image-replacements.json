@@ -78,42 +78,56 @@
   {
     "restaurant": "argentina-estate",
     "file": "assets/restaurants/argentina-estate/argentina-estate-2.jpg",
-    "page": "https://www.bilibili.com/video/BV18V41127jv/"
+    "page": "https://www.bilibili.com/video/BV18V41127jv/",
+    "image": "https://i1.hdslb.com/bfs/archive/555b9862b09d08e65cae226e435b8e4c67ce8a61.jpg",
+    "title": "婚礼日记01｜北京草坪婚礼场地PK｜禧园｜阿根廷庄园｜澄空间｜悉苑"
   },
   {
     "restaurant": "commune-kitchen",
     "file": "assets/restaurants/commune-kitchen/commune-kitchen-2.jpg",
-    "page": "https://www.bilibili.com/video/BV1b5kPYMEaf/"
+    "page": "https://www.bilibili.com/video/BV1b5kPYMEaf/",
+    "image": "https://i0.hdslb.com/bfs/archive/f2823191c17949b54f32771b5c6969bf9b934ad4.jpg",
+    "title": "长城脚下的公社 | 12个大师的建筑作品"
   },
   {
     "restaurant": "feifu",
     "file": "assets/restaurants/feifu/feifu-2.jpg",
-    "page": "https://www.bilibili.com/video/BV1T24y1T7zD/"
+    "page": "https://www.bilibili.com/video/BV1T24y1T7zD/",
+    "image": "https://i1.hdslb.com/bfs/archive/33e54dfff2985b024e11b60115ba43918b8fcfe5.jpg",
+    "title": "北京热门广式大排档味道怎么样？"
   },
   {
     "restaurant": "taipo",
     "file": "assets/restaurants/taipo/taipo-2.jpg",
-    "page": "https://www.bilibili.com/video/BV1HT4y1p7z3/"
+    "page": "https://www.bilibili.com/video/BV1HT4y1p7z3/",
+    "image": "https://i1.hdslb.com/bfs/archive/4b870ad4b29558b343b905403346cb248a6243e1.jpg",
+    "title": "探店记——太婆天府山珍火锅店"
   },
   {
     "restaurant": "chaoshangchao",
     "file": "assets/restaurants/chaoshangchao/chaoshangchao-2.jpg",
-    "page": "https://www.visitbeijing.com.cn/article/4FiK4AMqn5e"
+    "page": "https://www.visitbeijing.com.cn/article/4FiK4AMqn5e",
+    "image": "https://img-rs.huanqiucdn.cn/dp/api/files/imageDir/805be4370984793a7250383ac0b1f1d2.png",
+    "title": "北京文旅：潮上潮餐厅入口",
+    "verifiedNote": "原图与本地已验收图片画面一致；本地版本经过重新压缩，因此字节哈希不同。"
   },
   {
     "restaurant": "dadong",
     "file": "assets/restaurants/dadong/dadong-2.jpg",
-    "page": "https://danielfooddiary.com/2018/05/09/dadong/"
+    "page": "https://danielfooddiary.com/2018/05/09/dadong/",
+    "image": "https://danielfooddiary.com/wp-content/uploads/2018/05/dadongduck3.jpg"
   },
   {
     "restaurant": "qulangyuan",
     "file": "assets/restaurants/qulangyuan/qulangyuan-2.jpg",
-    "page": "https://www.wabisabiissue.com/city-explore/delicious-feast-in-the-hutong"
+    "page": "https://www.wabisabiissue.com/city-explore/delicious-feast-in-the-hutong",
+    "image": "https://www.wabisabiissue.com/files/resize/1280/00afe0e3d86fa42c34d897f12a5753b9.jpg"
   },
   {
     "restaurant": "trb",
     "file": "assets/restaurants/trb/trb-2.jpg",
-    "page": "https://www.visitbeijing.com.cn/article/4Lnu37XLMJE"
+    "page": "https://www.visitbeijing.com.cn/article/4Lnu37XLMJE",
+    "image": "https://oss-rs.visitbeijing.com.cn/imageDir/80706883de43c90618e629b9d1a710b8.png"
   },
   {
     "restaurant": "mai-thai",

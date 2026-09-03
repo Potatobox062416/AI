@@ -294,7 +294,7 @@
       <article class="attraction-card">
         <button class="card-button" type="button" data-attraction-id="${item.id}" aria-label="查看${item.name}详情">
           <div class="card-image">
-            <img src="${item.images[0]}" alt="${item.name}实景" loading="lazy">
+            <img src="${item.images[0]}" alt="${item.name}实景" loading="lazy" referrerpolicy="no-referrer">
             <span class="card-category">${item.category}</span>
           </div>
           <div class="card-body">
@@ -335,7 +335,10 @@
   }
 
   function restaurantImages(item) {
-    return [1, 2].map((index) => `assets/restaurants/${item.id}/${item.id}-${index}.jpg`);
+    const remoteImages = window.RESTAURANT_IMAGE_URLS?.[item.id];
+    return Array.isArray(remoteImages) && remoteImages.length >= 2
+      ? remoteImages.slice(0, 2)
+      : [1, 2].map((index) => `assets/restaurants/${item.id}/${item.id}-${index}.jpg`);
   }
 
   function loadRestaurantImageSources() {
@@ -385,7 +388,7 @@
       const images = restaurantImages(item);
       return `<article class="food-card ${item.tier}">
         <button class="food-card-button" type="button" data-restaurant-id="${item.id}" aria-label="查看${item.name}详情">
-          <div class="food-card-image"><img src="${images[0]}" alt="${item.name}门店或菜品" loading="lazy"><span>${item.style}</span></div>
+          <div class="food-card-image"><img src="${images[0]}" alt="${item.name}门店或菜品" loading="lazy" referrerpolicy="no-referrer"><span>${item.style}</span></div>
           <div class="food-card-content">
             <div class="food-card-topline"><span>${item.district}</span><strong>${item.tierLabel} · ${formatMoneyRange(...item.price)}/人</strong></div>
             <h3>${item.name}</h3>
@@ -409,7 +412,7 @@
     if (!item) return;
     const images = restaurantImages(item);
     els.restaurantDialogContent.innerHTML = `
-      <div class="restaurant-gallery">${images.map((src, index) => `<img src="${src}" alt="${item.name}配图${index + 1}">`).join("")}</div>
+      <div class="restaurant-gallery">${images.map((src, index) => `<img src="${src}" alt="${item.name}配图${index + 1}" referrerpolicy="no-referrer">`).join("")}</div>
       <div class="restaurant-detail-head ${item.tier}">
         <p class="section-kicker">${item.style.toUpperCase()}</p>
         <h2>${item.name}</h2>
@@ -443,7 +446,7 @@
 
     els.dialogContent.innerHTML = `
       <div class="dialog-gallery" aria-label="${item.name}四图相册">
-        ${item.images.map((src, index) => `<figure><img src="${src}" alt="${item.name}实景图${index + 1}"></figure>`).join("")}
+        ${item.images.map((src, index) => `<figure><img src="${src}" alt="${item.name}实景图${index + 1}" referrerpolicy="no-referrer"></figure>`).join("")}
       </div>
       <div class="dialog-content-body">
         <div>

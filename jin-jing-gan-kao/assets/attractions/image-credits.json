@@ -1,0 +1,546 @@
+[
+  {
+    "attraction": "palace-museum",
+    "file": "assets/attractions/palace-museum/palace-museum-1.jpg",
+    "title": "File:Beijing pano.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Beijing_pano.jpg",
+    "license": "CC BY-SA 3.0",
+    "artist": "Andi Buchner"
+  },
+  {
+    "attraction": "palace-museum",
+    "file": "assets/attractions/palace-museum/palace-museum-2.jpg",
+    "title": "File:Corner Tower of Forbidden City (20240627).jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Corner_Tower_of_Forbidden_City_(20240627).jpg",
+    "license": "CC BY-SA 4.0",
+    "artist": "CNHowey"
+  },
+  {
+    "attraction": "palace-museum",
+    "file": "assets/attractions/palace-museum/palace-museum-3.jpg",
+    "title": "File:Forbidden City Panorama, Beijing - panoramio.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Forbidden_City_Panorama,_Beijing_-_panoramio.jpg",
+    "license": "CC BY 3.0",
+    "artist": "Petr Kraumann"
+  },
+  {
+    "attraction": "palace-museum",
+    "file": "assets/attractions/palace-museum/palace-museum-4.jpg",
+    "title": "File:Forbidden City Panorama 1.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Forbidden_City_Panorama_1.jpg",
+    "license": "CC BY-SA 3.0",
+    "artist": "Tojan76"
+  },
+  {
+    "attraction": "tiananmen",
+    "file": "assets/attractions/tiananmen/tiananmen-1.jpg",
+    "title": "File:Beijing -Tiananmen Square 2016 pic04.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Beijing_-Tiananmen_Square_2016_pic04.jpg",
+    "license": "CC BY-SA 4.0",
+    "artist": "RomanM82"
+  },
+  {
+    "attraction": "tiananmen",
+    "file": "assets/attractions/tiananmen/tiananmen-2.jpg",
+    "title": "File:Beijing -Tiananmen Square 2016 pic09.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Beijing_-Tiananmen_Square_2016_pic09.jpg",
+    "license": "CC BY-SA 4.0",
+    "artist": "RomanM82"
+  },
+  {
+    "attraction": "tiananmen",
+    "file": "assets/attractions/tiananmen/tiananmen-3.jpg",
+    "title": "File:Beijing China Tiananmen-Square-01.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Beijing_China_Tiananmen-Square-01.jpg",
+    "license": "CC BY-SA 3.0",
+    "artist": "CEphoto, Uwe Aranas"
+  },
+  {
+    "attraction": "tiananmen",
+    "file": "assets/attractions/tiananmen/tiananmen-4.jpg",
+    "title": "File:Beijing China Tiananmen-Square-02.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Beijing_China_Tiananmen-Square-02.jpg",
+    "license": "CC BY-SA 3.0",
+    "artist": "CEphoto, Uwe Aranas"
+  },
+  {
+    "attraction": "national-museum",
+    "file": "assets/attractions/national-museum/national-museum-1.jpg",
+    "title": "File:20200110 National Museum of China-1.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:20200110_National_Museum_of_China-1.jpg",
+    "license": "CC0",
+    "artist": "\nBalon Greyjoy"
+  },
+  {
+    "attraction": "national-museum",
+    "file": "assets/attractions/national-museum/national-museum-2.jpg",
+    "title": "File:20200110 National Museum of China-2.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:20200110_National_Museum_of_China-2.jpg",
+    "license": "CC0",
+    "artist": "\nBalon Greyjoy"
+  },
+  {
+    "attraction": "national-museum",
+    "file": "assets/attractions/national-museum/national-museum-3.jpg",
+    "title": "File:20200110 National Museum of China-3.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:20200110_National_Museum_of_China-3.jpg",
+    "license": "CC0",
+    "artist": "\nBalon Greyjoy"
+  },
+  {
+    "attraction": "national-museum",
+    "file": "assets/attractions/national-museum/national-museum-4.jpg",
+    "title": "File:20200110 National Museum of China-4.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:20200110_National_Museum_of_China-4.jpg",
+    "license": "CC0",
+    "artist": "\nBalon Greyjoy"
+  },
+  {
+    "attraction": "jingshan",
+    "file": "assets/attractions/jingshan/jingshan-1.jpg",
+    "title": "File:Beijing Forbidden City Viewed from Jingshan Park (10553754905).jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Beijing_Forbidden_City_Viewed_from_Jingshan_Park_(10553754905).jpg",
+    "license": "CC0",
+    "artist": "Gary Todd from Xinzheng, China"
+  },
+  {
+    "attraction": "jingshan",
+    "file": "assets/attractions/jingshan/jingshan-2.jpg",
+    "title": "File:Beijing Jingshan Park Pavilion (10553761515).jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Beijing_Jingshan_Park_Pavilion_(10553761515).jpg",
+    "license": "CC0",
+    "artist": "Gary Todd from Xinzheng, China"
+  },
+  {
+    "attraction": "jingshan",
+    "file": "assets/attractions/jingshan/jingshan-3.jpg",
+    "title": "File:Beijing Jingshan Park Pavilion (10553770266).jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Beijing_Jingshan_Park_Pavilion_(10553770266).jpg",
+    "license": "CC0",
+    "artist": "Gary Todd from Xinzheng, China"
+  },
+  {
+    "attraction": "jingshan",
+    "file": "assets/attractions/jingshan/jingshan-4.jpg",
+    "title": "File:Beijing Jingshan Park View of 1991 Skyline (10553984093).jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Beijing_Jingshan_Park_View_of_1991_Skyline_(10553984093).jpg",
+    "license": "CC0",
+    "artist": "Gary Todd from Xinzheng, China"
+  },
+  {
+    "attraction": "temple-heaven",
+    "file": "assets/attractions/temple-heaven/temple-heaven-1.jpg",
+    "title": "File:20200110 Temple of Heaven-1.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:20200110_Temple_of_Heaven-1.jpg",
+    "license": "CC0",
+    "artist": "\nBalon Greyjoy"
+  },
+  {
+    "attraction": "temple-heaven",
+    "file": "assets/attractions/temple-heaven/temple-heaven-2.jpg",
+    "title": "File:Beijing, Tiantan, Imperial Vault of Heaven WLF 2023.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Beijing,_Tiantan,_Imperial_Vault_of_Heaven_WLF_2023.jpg",
+    "license": "CC BY-SA 4.0",
+    "artist": "Pierre André Leclercq"
+  },
+  {
+    "attraction": "temple-heaven",
+    "file": "assets/attractions/temple-heaven/temple-heaven-3.jpg",
+    "title": "File:Temple of Heaven, Beijing, China (26434809999).jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Temple_of_Heaven,_Beijing,_China_(26434809999).jpg",
+    "license": "CC BY 2.0",
+    "artist": "Andrey Filippov 安德烈 from Moscow, Russia"
+  },
+  {
+    "attraction": "temple-heaven",
+    "file": "assets/attractions/temple-heaven/temple-heaven-4.jpg",
+    "title": "File:Temple of Heaven, Beijing, China (36243505613).jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Temple_of_Heaven,_Beijing,_China_(36243505613).jpg",
+    "license": "CC BY 2.0",
+    "artist": "Andrey Filippov 安德烈 from Moscow, Russia"
+  },
+  {
+    "attraction": "summer-palace",
+    "file": "assets/attractions/summer-palace/summer-palace-1.jpg",
+    "title": "File:20090530 Beijing Summer Palace 8467.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:20090530_Beijing_Summer_Palace_8467.jpg",
+    "license": "CC BY-SA 4.0",
+    "artist": "Jakub Hałun"
+  },
+  {
+    "attraction": "summer-palace",
+    "file": "assets/attractions/summer-palace/summer-palace-2.jpg",
+    "title": "File:A girl in traditional Chinese dress at the Summer Palace, Beijing.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:A_girl_in_traditional_Chinese_dress_at_the_Summer_Palace,_Beijing.jpg",
+    "license": "CC BY-SA 4.0",
+    "artist": "Lloyd Tudor"
+  },
+  {
+    "attraction": "summer-palace",
+    "file": "assets/attractions/summer-palace/summer-palace-3.jpg",
+    "title": "File:Beijing-1978 Lake Summer Palace Paul Burns.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Beijing-1978_Lake_Summer_Palace_Paul_Burns.jpg",
+    "license": "CC BY-SA 4.0",
+    "artist": "Paul Burns"
+  },
+  {
+    "attraction": "summer-palace",
+    "file": "assets/attractions/summer-palace/summer-palace-4.jpg",
+    "title": "File:Beijing China Summer-Palace-01.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Beijing_China_Summer-Palace-01.jpg",
+    "license": "CC BY-SA 3.0",
+    "artist": "CEphoto, Uwe Aranas"
+  },
+  {
+    "attraction": "yuanmingyuan",
+    "file": "assets/attractions/yuanmingyuan/yuanmingyuan-1.jpg",
+    "title": "File:20090731 Remains of the Old Summer Palace 02.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:20090731_Remains_of_the_Old_Summer_Palace_02.jpg",
+    "license": "CC BY-SA 4.0",
+    "artist": "Windmemories"
+  },
+  {
+    "attraction": "yuanmingyuan",
+    "file": "assets/attractions/yuanmingyuan/yuanmingyuan-2.jpg",
+    "title": "File:A male mandarin duck in the Yuanmingyuan Wetland in Beijing in March 2024.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:A_male_mandarin_duck_in_the_Yuanmingyuan_Wetland_in_Beijing_in_March_2024.jpg",
+    "license": "CC BY-SA 4.0",
+    "artist": "FlyingBatt"
+  },
+  {
+    "attraction": "yuanmingyuan",
+    "file": "assets/attractions/yuanmingyuan/yuanmingyuan-3.jpg",
+    "title": "File:Belvedere of the God of Literature, Summer Palace, Beijing, 6–18 October, 1860.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Belvedere_of_the_God_of_Literature,_Summer_Palace,_Beijing,_6%E2%80%9318_October,_1860.jpg",
+    "license": "Public domain",
+    "artist": "Felice Beato"
+  },
+  {
+    "attraction": "yuanmingyuan",
+    "file": "assets/attractions/yuanmingyuan/yuanmingyuan-4.jpg",
+    "title": "File:East Gate of Yuanmingyuan Park (20250426175242).jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:East_Gate_of_Yuanmingyuan_Park_(20250426175242).jpg",
+    "license": "CC BY-SA 4.0",
+    "artist": "N509FZ"
+  },
+  {
+    "attraction": "beihai",
+    "file": "assets/attractions/beihai/beihai-1.jpg",
+    "title": "File:Beihai Park Brücke-20110104-RM-105624.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Beihai_Park_Br%C3%BCcke-20110104-RM-105624.jpg",
+    "license": "CC BY-SA 4.0",
+    "artist": "Ermell"
+  },
+  {
+    "attraction": "beihai",
+    "file": "assets/attractions/beihai/beihai-2.jpg",
+    "title": "File:Beihai Park Brücke-20110104-RM-110001.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Beihai_Park_Br%C3%BCcke-20110104-RM-110001.jpg",
+    "license": "CC BY-SA 4.0",
+    "artist": "Ermell"
+  },
+  {
+    "attraction": "beihai",
+    "file": "assets/attractions/beihai/beihai-3.jpg",
+    "title": "File:Beihai Park Kunming Lake Winter-20110104-RM-140211.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Beihai_Park_Kunming_Lake_Winter-20110104-RM-140211.jpg",
+    "license": "CC BY-SA 4.0",
+    "artist": "Ermell"
+  },
+  {
+    "attraction": "beihai",
+    "file": "assets/attractions/beihai/beihai-4.jpg",
+    "title": "File:Beihai Park Tempel-20110104-RM-114911.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Beihai_Park_Tempel-20110104-RM-114911.jpg",
+    "license": "CC BY-SA 4.0",
+    "artist": "Ermell"
+  },
+  {
+    "attraction": "prince-gong",
+    "file": "assets/attractions/prince-gong/prince-gong-1.jpg",
+    "title": "File:2014.08.17.154735 Dingfu Jie Prince Gong's Mansion Beijing.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:2014.08.17.154735_Dingfu_Jie_Prince_Gong%27s_Mansion_Beijing.jpg",
+    "license": "CC0",
+    "artist": "Hermann Luyken"
+  },
+  {
+    "attraction": "prince-gong",
+    "file": "assets/attractions/prince-gong/prince-gong-2.jpg",
+    "title": "File:2014.08.17.154948 Entrance Prince Gong's Mansion Beijing.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:2014.08.17.154948_Entrance_Prince_Gong%27s_Mansion_Beijing.jpg",
+    "license": "CC0",
+    "artist": "Hermann Luyken"
+  },
+  {
+    "attraction": "prince-gong",
+    "file": "assets/attractions/prince-gong/prince-gong-3.jpg",
+    "title": "File:2014.08.17.155256 Prince Gong's Mansion Beijing.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:2014.08.17.155256_Prince_Gong%27s_Mansion_Beijing.jpg",
+    "license": "CC0",
+    "artist": "Hermann Luyken"
+  },
+  {
+    "attraction": "prince-gong",
+    "file": "assets/attractions/prince-gong/prince-gong-4.jpg",
+    "title": "File:2014.08.17.160013 Prince Gong's Mansion Beijing.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:2014.08.17.160013_Prince_Gong%27s_Mansion_Beijing.jpg",
+    "license": "CC0",
+    "artist": "Hermann Luyken"
+  },
+  {
+    "attraction": "lama-temple",
+    "file": "assets/attractions/lama-temple/lama-temple-1.jpg",
+    "title": "File:Beijing-Lamakloster Yonghe-22-Hof2-Opfernde-gje.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Beijing-Lamakloster_Yonghe-22-Hof2-Opfernde-gje.jpg",
+    "license": "CC BY-SA 4.0",
+    "artist": "Gerd Eichmann"
+  },
+  {
+    "attraction": "lama-temple",
+    "file": "assets/attractions/lama-temple/lama-temple-2.jpg",
+    "title": "File:Beijing-Lamakloster Yonghe-30-Guide-gje.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Beijing-Lamakloster_Yonghe-30-Guide-gje.jpg",
+    "license": "CC BY-SA 4.0",
+    "artist": "Gerd Eichmann"
+  },
+  {
+    "attraction": "lama-temple",
+    "file": "assets/attractions/lama-temple/lama-temple-3.jpg",
+    "title": "File:Beijing-Lamakloster Yonghe-46-Betender-gje.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Beijing-Lamakloster_Yonghe-46-Betender-gje.jpg",
+    "license": "CC BY-SA 4.0",
+    "artist": "Gerd Eichmann"
+  },
+  {
+    "attraction": "lama-temple",
+    "file": "assets/attractions/lama-temple/lama-temple-4.jpg",
+    "title": "File:Beijing-Lamakloster Yonghe-52-Hof3-Seerosen-gje.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Beijing-Lamakloster_Yonghe-52-Hof3-Seerosen-gje.jpg",
+    "license": "CC BY-SA 4.0",
+    "artist": "Gerd Eichmann"
+  },
+  {
+    "attraction": "shichahai",
+    "file": "assets/attractions/shichahai/shichahai-1.jpg",
+    "title": "File:2016-09-11 Shichahai Beijing anagoria 02.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:2016-09-11_Shichahai_Beijing_anagoria_02.jpg",
+    "license": "CC BY 3.0",
+    "artist": "Anagoria"
+  },
+  {
+    "attraction": "shichahai",
+    "file": "assets/attractions/shichahai/shichahai-2.jpg",
+    "title": "File:2016-09-11 Shichahai Beijing anagoria 10.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:2016-09-11_Shichahai_Beijing_anagoria_10.jpg",
+    "license": "CC BY 3.0",
+    "artist": "Anagoria"
+  },
+  {
+    "attraction": "shichahai",
+    "file": "assets/attractions/shichahai/shichahai-3.jpg",
+    "title": "File:2016-09-11 Shichahai Beijing anagoria 15.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:2016-09-11_Shichahai_Beijing_anagoria_15.jpg",
+    "license": "CC BY 3.0",
+    "artist": "Anagoria"
+  },
+  {
+    "attraction": "shichahai",
+    "file": "assets/attractions/shichahai/shichahai-4.jpg",
+    "title": "File:2016-09-11 Shichahai Beijing anagoria 16.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:2016-09-11_Shichahai_Beijing_anagoria_16.jpg",
+    "license": "CC BY 3.0",
+    "artist": "Anagoria"
+  },
+  {
+    "attraction": "badaling",
+    "file": "assets/attractions/badaling/badaling-1.jpg",
+    "title": "File:Badalingchangcheng railway station building.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Badalingchangcheng_railway_station_building.jpg",
+    "license": "CC BY-SA 4.0",
+    "artist": "Pcnl"
+  },
+  {
+    "attraction": "badaling",
+    "file": "assets/attractions/badaling/badaling-2.jpg",
+    "title": "File:Boarding channel of Badaling Great Wall Railway Station (20220109163307).jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Boarding_channel_of_Badaling_Great_Wall_Railway_Station_(20220109163307).jpg",
+    "license": "CC BY-SA 4.0",
+    "artist": "N509FZ"
+  },
+  {
+    "attraction": "badaling",
+    "file": "assets/attractions/badaling/badaling-3.jpg",
+    "title": "File:Boarding escalator entrance of Badaling Great Wall Railway Station (20220109162828).jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Boarding_escalator_entrance_of_Badaling_Great_Wall_Railway_Station_(20220109162828).jpg",
+    "license": "CC BY-SA 4.0",
+    "artist": "N509FZ"
+  },
+  {
+    "attraction": "badaling",
+    "file": "assets/attractions/badaling/badaling-4.jpg",
+    "title": "File:Boarding faregates of Badaling Great Wall Railway Station (20220109162527).jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Boarding_faregates_of_Badaling_Great_Wall_Railway_Station_(20220109162527).jpg",
+    "license": "CC BY-SA 4.0",
+    "artist": "N509FZ"
+  },
+  {
+    "attraction": "mutianyu",
+    "file": "assets/attractions/mutianyu/mutianyu-1.jpg",
+    "title": "File:66954-The-Great-Wall, Mutianyu.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:66954-The-Great-Wall,_Mutianyu.jpg",
+    "license": "CC BY 2.0",
+    "artist": "xiquinhosilva"
+  },
+  {
+    "attraction": "mutianyu",
+    "file": "assets/attractions/mutianyu/mutianyu-2.jpg",
+    "title": "File:67016-The-Great-Wall, Mutianyu.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:67016-The-Great-Wall,_Mutianyu.jpg",
+    "license": "CC BY 2.0",
+    "artist": "xiquinhosilva"
+  },
+  {
+    "attraction": "mutianyu",
+    "file": "assets/attractions/mutianyu/mutianyu-3.jpg",
+    "title": "File:67052-The-Great-Wall, Mutianyu.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:67052-The-Great-Wall,_Mutianyu.jpg",
+    "license": "CC BY 2.0",
+    "artist": "xiquinhosilva"
+  },
+  {
+    "attraction": "mutianyu",
+    "file": "assets/attractions/mutianyu/mutianyu-4.jpg",
+    "title": "File:67054-The-Great-Wall, Mutianyu.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:67054-The-Great-Wall,_Mutianyu.jpg",
+    "license": "CC BY 2.0",
+    "artist": "xiquinhosilva"
+  },
+  {
+    "attraction": "beijing-zoo",
+    "file": "assets/attractions/beijing-zoo/beijing-zoo-1.jpg",
+    "title": "File:Ailuropoda melanoleuca - Beijing Zoo.JPG",
+    "source": "https://commons.wikimedia.org/wiki/File:Ailuropoda_melanoleuca_-_Beijing_Zoo.JPG",
+    "license": "CC BY 3.0",
+    "artist": "JZ85"
+  },
+  {
+    "attraction": "beijing-zoo",
+    "file": "assets/attractions/beijing-zoo/beijing-zoo-2.jpg",
+    "title": "File:Beijing Zoo Giant Panda (9870661185).jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Beijing_Zoo_Giant_Panda_(9870661185).jpg",
+    "license": "CC0",
+    "artist": "Gary Todd from Xinzheng, China"
+  },
+  {
+    "attraction": "beijing-zoo",
+    "file": "assets/attractions/beijing-zoo/beijing-zoo-3.jpg",
+    "title": "File:Beijing Zoo Giant Panda (9870667604).jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Beijing_Zoo_Giant_Panda_(9870667604).jpg",
+    "license": "CC0",
+    "artist": "Gary Todd from Xinzheng, China"
+  },
+  {
+    "attraction": "beijing-zoo",
+    "file": "assets/attractions/beijing-zoo/beijing-zoo-4.jpg",
+    "title": "File:Beijing Zoo Giant Panda (9870667704).jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Beijing_Zoo_Giant_Panda_(9870667704).jpg",
+    "license": "CC0",
+    "artist": "Gary Todd from Xinzheng, China"
+  },
+  {
+    "attraction": "art-798",
+    "file": "assets/attractions/art-798/art-798-1.jpg",
+    "title": "File:798 Art District banner.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:798_Art_District_banner.jpg",
+    "license": "CC BY-SA 4.0",
+    "artist": "Codas"
+  },
+  {
+    "attraction": "art-798",
+    "file": "assets/attractions/art-798/art-798-2.jpg",
+    "title": "File:798 Art District beijing inside of a gallery.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:798_Art_District_beijing_inside_of_a_gallery.jpg",
+    "license": "CC BY 2.0",
+    "artist": "Khalid Albaih"
+  },
+  {
+    "attraction": "art-798",
+    "file": "assets/attractions/art-798/art-798-3.jpg",
+    "title": "File:798 Art Zone - panoramio (1).jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:798_Art_Zone_-_panoramio_(1).jpg",
+    "license": "CC BY 3.0",
+    "artist": "Immanuel Giel"
+  },
+  {
+    "attraction": "art-798",
+    "file": "assets/attractions/art-798/art-798-4.jpg",
+    "title": "File:Beijing - Art 789 Zone - Mariage picture.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Beijing_-_Art_789_Zone_-_Mariage_picture.jpg",
+    "license": "CC BY-SA 4.0",
+    "artist": "Vanvelthem Cédric"
+  },
+  {
+    "attraction": "olympic-park",
+    "file": "assets/attractions/olympic-park/olympic-park-1.jpg",
+    "title": "File:\"Bird nest\" - Olympic Stadium, Beijing, China - panoramio.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:%22Bird_nest%22_-_Olympic_Stadium,_Beijing,_China_-_panoramio.jpg",
+    "license": "CC BY-SA 3.0",
+    "artist": "Aaron Zhu"
+  },
+  {
+    "attraction": "olympic-park",
+    "file": "assets/attractions/olympic-park/olympic-park-2.jpg",
+    "title": "File:Beijing, Birds Nest - National Stadium - panoramio.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Beijing,_Birds_Nest_-_National_Stadium_-_panoramio.jpg",
+    "license": "CC BY 3.0",
+    "artist": "Scorewith German"
+  },
+  {
+    "attraction": "olympic-park",
+    "file": "assets/attractions/olympic-park/olympic-park-3.jpg",
+    "title": "File:Beijing, Birds Nest - National Stadium - panoramio (1).jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Beijing,_Birds_Nest_-_National_Stadium_-_panoramio_(1).jpg",
+    "license": "CC BY 3.0",
+    "artist": "Scorewith German"
+  },
+  {
+    "attraction": "olympic-park",
+    "file": "assets/attractions/olympic-park/olympic-park-4.jpg",
+    "title": "File:Beijing Bird nest.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Beijing_Bird_nest.jpg",
+    "license": "CC BY-SA 4.0",
+    "artist": "Muhammad Nauman Irshad"
+  },
+  {
+    "attraction": "universal",
+    "file": "assets/attractions/universal/universal-1.jpg",
+    "title": "File:2633126 at Universal Resort, Universal Blvd (20210826122908).jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:2633126_at_Universal_Resort,_Universal_Blvd_(20210826122908).jpg",
+    "license": "CC BY-SA 4.0",
+    "artist": "N509FZ"
+  },
+  {
+    "attraction": "universal",
+    "file": "assets/attractions/universal/universal-2.jpg",
+    "title": "File:5727621 at Universal Resort, Universal Blvd (20210826122713).jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:5727621_at_Universal_Resort,_Universal_Blvd_(20210826122713).jpg",
+    "license": "CC BY-SA 4.0",
+    "artist": "N509FZ"
+  },
+  {
+    "attraction": "universal",
+    "file": "assets/attractions/universal/universal-3.jpg",
+    "title": "File:5727621 at Universal Resort, Universal Blvd (20210826122714).jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:5727621_at_Universal_Resort,_Universal_Blvd_(20210826122714).jpg",
+    "license": "CC BY-SA 4.0",
+    "artist": "N509FZ"
+  },
+  {
+    "attraction": "universal",
+    "file": "assets/attractions/universal/universal-4.jpg",
+    "title": "File:5735448 at Universal Resort, Universal Blvd (20210826122124).jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:5735448_at_Universal_Resort,_Universal_Blvd_(20210826122124).jpg",
+    "license": "CC BY-SA 4.0",
+    "artist": "N509FZ"
+  }
+]

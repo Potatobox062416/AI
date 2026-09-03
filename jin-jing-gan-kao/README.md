@@ -16,7 +16,7 @@ python -m http.server 4173 --bind 127.0.0.1
 
 - GitHub Pages 子站目标：`https://potatobox062416.github.io/AI/jin-jing-gan-kao/`。
 - 页面代码发布到 `Potatobox062416/AI` 仓库的 `jin-jing-gan-kao/`，不会覆盖仓库根目录原站点。
-- `scripts/build-deploy-assets.mjs` 在 GitHub Actions 中按来源清单下载并校验部署图片；工作流模板为 `scripts/deploy-assets-workflow.yml`。
+- `scripts/build-remote-image-map.mjs` 根据来源台账生成 `deploy-images.js`；部署版通过远程来源加载图片，不把约59 MB本地图片复制到公开仓库。
 - 餐馆视频封面和平台资料图的开放许可未逐张确认；详情页保留来源，公开使用范围应由发布者继续复核。
 
 ## 数据说明
