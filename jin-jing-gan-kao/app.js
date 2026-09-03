@@ -13,6 +13,38 @@
     balanced: { label: "高效赶考", start: "07:20", end: "20:45", durationFactor: 0.86 },
     relaxed: { label: "松弛漫游", start: "08:30", end: "19:30", durationFactor: 1 }
   };
+  const travelStyleRules = {
+    saver: {
+      label: "省钱侦察兵",
+      note: "经济型住宿，优先低价餐馆与公共交通。",
+      hotelLabel: "地铁沿线经济型",
+      hotelLowFactor: 0.72,
+      hotelHighFactor: 0.78,
+      genericMealFactor: 0.78,
+      localTransitFactor: 0.82,
+      tierOrder: ["budget", "mid", "premium"]
+    },
+    value: {
+      label: "精算课代表",
+      note: "住宿、餐饮与市内交通保持性价比均衡。",
+      hotelLabel: "通勤便利型",
+      hotelLowFactor: 1,
+      hotelHighFactor: 1,
+      genericMealFactor: 1,
+      localTransitFactor: 1,
+      tierOrder: ["mid", "budget", "premium"]
+    },
+    premium: {
+      label: "钞能力玩家",
+      note: "高星或精品住宿，优先进阶餐馆并增加出租车预算。",
+      hotelLabel: "高星或精品酒店",
+      hotelLowFactor: 1.5,
+      hotelHighFactor: 1.68,
+      genericMealFactor: 1.28,
+      localTransitFactor: 1.45,
+      tierOrder: ["premium", "mid", "budget"]
+    }
+  };
   const visitRules = {
     "palace-museum": { open: "08:30", latestStart: "15:30", close: "17:00", mondayNotice: true },
     "national-museum": { open: "09:00", latestStart: "16:00", close: "17:30", mondayNotice: true },
@@ -57,6 +89,7 @@
     query: "",
     freeOnly: false,
     pace: "balanced",
+    travelStyle: "value",
     members: [
       { id: "member-1", name: "成员1", gender: "male", age: 35 },
       { id: "member-2", name: "成员2", gender: "female", age: 33 },
@@ -106,6 +139,8 @@
     tripDuration: document.querySelector("#trip-duration"),
     tripTimeMessage: document.querySelector("#trip-time-message"),
     paceMode: document.querySelector("#pace-mode"),
+    travelStyleMode: document.querySelector("#travel-style-mode"),
+    travelStyleNote: document.querySelector("#travel-style-note"),
     weatherStrip: document.querySelector("#weather-strip"),
     weatherBrief: document.querySelector("#weather-brief"),
     planSwitcher: document.querySelector("#plan-switcher"),
@@ -240,6 +275,29 @@
       .map(([value, label]) => `${label}${genderCounts[value]}人`);
     notes.push(`分房参考：${genderParts.join("、")}；系统不推断同住关系`);
     return `${notes.join("；")}。`;
+  }
+
+  function renderTravelStyleNote() {
+    els.travelStyleNote.textContent = travelStyleRules[state.travelStyle].note;
+  }
+
+  function profileForTravelStyle(profile) {
+    const rule = travelStyleRules[state.travelStyle];
+    const hotelRange = [
+      roundMoney(profile.hotelRange[0] * rule.hotelLowFactor, 10),
+      roundMoney(profile.hotelRange[1] * rule.hotelHighFactor, 10)
+    ];
+    const hotelReason = state.travelStyle === "saver"
+      ? `优先选择地铁站步行范围内的经济型酒店或家庭房；${profile.hotelReason}`
+      : state.travelStyle === "premium"
+        ? `优先选择同片区高星或精品酒店，并保留更灵活的出租车接驳；${profile.hotelReason}`
+        : profile.hotelReason;
+    return {
+      ...profile,
+      hotel: `${profile.hotel} · ${rule.hotelLabel}`,
+      hotelReason,
+      hotelRange
+    };
   }
 
   function formatDuration(minutes) {
@@ -1098,8 +1156,9 @@
   }
 
   function genericMeal(id, name, zone, price, dishes, duration = 45) {
+    const factor = travelStyleRules[state.travelStyle].genericMealFactor;
     return {
-      id, name, zone, price, dishes, duration, tierLabel: "¥",
+      id, name, zone, price: price.map((value) => roundMoney(value * factor, 5)), dishes, duration, tierLabel: "¥",
       constraint: "现场选择，以当天营业和排队情况为准。",
       fact: null,
       video: null,
@@ -1108,9 +1167,13 @@
   }
 
   function firstAvailableRestaurant(ids, mealType, usedRestaurantIds) {
-    const preferred = ids.map((id) => restaurantById.get(id)).filter(Boolean);
-    const fallback = restaurants.filter((item) => item.mealTypes.includes(mealType));
-    return [...preferred, ...fallback].find((item) => item.mealTypes.includes(mealType) && !usedRestaurantIds.has(item.id)) || null;
+    const tierOrder = travelStyleRules[state.travelStyle].tierOrder;
+    const rank = (item) => tierOrder.indexOf(item.tier);
+    const available = (item) => item.mealTypes.includes(mealType) && !usedRestaurantIds.has(item.id);
+    const preferred = ids.map((id) => restaurantById.get(id)).filter(Boolean).filter(available).sort((a, b) => rank(a) - rank(b));
+    const preferredIds = new Set(preferred.map((item) => item.id));
+    const fallback = restaurants.filter(available).filter((item) => !preferredIds.has(item.id)).sort((a, b) => rank(a) - rank(b));
+    return preferred[0] || fallback[0] || null;
   }
 
   function selectLunchVenue(items, usedRestaurantIds = new Set()) {
@@ -1459,7 +1522,7 @@
     const foodHigh = roundMoney(foodTotals[1] * profile.foodFactor);
     const hasWall = uniqueItems.has("badaling") || uniqueItems.has("mutianyu");
     const hasUniversal = uniqueItems.has("universal");
-    const localBase = state.ages.length * state.days * 32 + (hasWall ? state.ages.length * 110 : 0) + (hasUniversal ? state.ages.length * 18 : 0);
+    const localBase = (state.ages.length * state.days * 32 + (hasWall ? state.ages.length * 110 : 0) + (hasUniversal ? state.ages.length * 18 : 0)) * travelStyleRules[state.travelStyle].localTransitFactor;
     const localLow = roundMoney(localBase * 0.85);
     const localHigh = roundMoney(localBase * 1.35);
     const ticketLow = roundMoney(ticketTotal * 0.92);
@@ -1509,7 +1572,8 @@
     return { routes, reviewNotes };
   }
 
-  function buildPlan(profile) {
+  function buildPlan(baseProfile) {
+    const profile = profileForTravelStyle(baseProfile);
     const journey = buildJourneyWindow(profile);
     const prepared = prepareRouteDays(profile, journey);
     const usedRestaurantIds = new Set();
@@ -1521,6 +1585,7 @@
       hotel: profile.hotel,
       hotelReason: profile.hotelReason,
       hotelRange: profile.hotelRange,
+      travelStyle: travelStyleRules[state.travelStyle].label,
       journey,
       reviewNotes: prepared.reviewNotes,
       days: scheduledDays,
@@ -1847,10 +1912,11 @@
       hotel: base.hotel,
       hotelReason: base.hotelReason,
       hotelRange: base.hotelRange,
+      travelStyle: travelStyleRules[state.travelStyle].label,
       journey: base.journey,
       reviewNotes: [`自编方案包含${advice.filter((item) => item.severity === "error").length}项冲突、${advice.filter((item) => item.severity === "warning").length}项提醒；时间按手动输入保存。`],
       days,
-      cost: calculatePlanCost(profile, days)
+      cost: calculatePlanCost({ ...profile, hotelRange: base.hotelRange }, days)
     };
     state.plans = [...state.plans.filter((plan) => plan.id !== "custom"), customPlan];
     state.activePlanId = "custom";
@@ -1896,7 +1962,7 @@
           <h2>${plan.name} · ${state.days}天${state.nights}晚</h2>
           <p>${formatDateTime(plan.journey.arrival.startAt)}到京 · ${formatDateTime(plan.journey.departure.endAt)}离京 · ${state.members.length}人</p>
         </div>
-        <div class="plan-total"><span>北京行程费用区间</span><strong>${formatMoneyRange(...plan.cost.total)}</strong><small>约${formatMoney(plan.cost.total[0] / state.ages.length)}—${formatMoney(plan.cost.total[1] / state.ages.length)}/人</small></div>
+        <div class="plan-total"><span>${plan.travelStyle} · 北京行程费用区间</span><strong>${formatMoneyRange(...plan.cost.total)}</strong><small>约${formatMoney(plan.cost.total[0] / state.ages.length)}—${formatMoney(plan.cost.total[1] / state.ages.length)}/人</small></div>
       </header>
       <section class="team-plan-band" aria-label="团队成员与排程参考">
         <div><span>团队成员</span><strong>${state.members.length}人</strong></div>
@@ -1904,7 +1970,7 @@
         <small>${escapeHtml(teamPlanningNote())}</small>
       </section>
       <div class="hotel-band">
-        <div><span>酒店选址</span><strong>${plan.hotel}</strong></div>
+        <div><span>酒店选址 · ${plan.travelStyle}</span><strong>${plan.hotel}</strong></div>
         <p>${plan.hotelReason}</p>
         <b>${formatMoney(plan.hotelRange[0])}—${formatMoney(plan.hotelRange[1])}/间夜</b>
       </div>
@@ -1957,7 +2023,7 @@
         <div class="cost-item"><span>餐饮</span><strong>${formatMoneyRange(...plan.cost.food)}</strong></div>
         <div class="cost-item"><span>市内交通</span><strong>${formatMoneyRange(...plan.cost.local)}</strong></div>
       </div>
-      <div class="plan-caveat"><i data-lucide="triangle-alert"></i><span>${overallWeatherAdvice()} 当前为“${paceRules[state.pace].label}”节奏；行程规则与美食资料核验于2026-09-03，静态站点不会在每次生成时实时抓取平台。费用不含进出北京的大交通，索道、游船、优速通和购物未计入。</span></div>`;
+      <div class="plan-caveat"><i data-lucide="triangle-alert"></i><span>${overallWeatherAdvice()} 当前为“${paceRules[state.pace].label}”节奏与“${plan.travelStyle}”方式；行程规则与美食资料核验于2026-09-03，静态站点不会在每次生成时实时抓取平台。费用不含进出北京的大交通，索道、游船、优速通和购物未计入。</span></div>`;
     refreshIcons();
   }
 
@@ -2200,6 +2266,15 @@
       schedulePlanRegeneration();
     });
 
+    els.travelStyleMode.addEventListener("click", (event) => {
+      const button = event.target.closest("button[data-value]");
+      if (!button) return;
+      state.travelStyle = button.dataset.value;
+      selectSegment(els.travelStyleMode, button);
+      renderTravelStyleNote();
+      schedulePlanRegeneration();
+    });
+
     els.plannerForm.addEventListener("submit", async (event) => {
       event.preventDefault();
       await generatePlans();
@@ -2316,6 +2391,7 @@
     renderRestaurants();
     renderTeamMembers();
     captureTeamState();
+    renderTravelStyleNote();
     setupEvents();
     refreshIcons();
     await generatePlans();

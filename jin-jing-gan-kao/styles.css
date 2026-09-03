@@ -795,6 +795,35 @@ select:focus {
   color: #fff;
 }
 
+.travel-style-segmented button {
+  flex-direction: column;
+  min-height: 58px;
+  gap: 3px;
+  padding: 6px 4px;
+  line-height: 1.2;
+  white-space: normal;
+}
+
+.travel-style-segmented button svg {
+  width: 17px;
+  height: 17px;
+}
+
+.travel-style-segmented button span {
+  display: block;
+}
+
+.travel-style-note {
+  display: block;
+  min-height: 30px;
+  margin-top: 9px;
+  padding: 5px 0 0 10px;
+  border-left: 3px solid var(--brass);
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
 .transport-options {
   display: grid;
   gap: 8px;

@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="进京赶考：北京团队旅行规划、景点信息与门票预约助手。">
-  <title>进京赶考</title>  <link rel="stylesheet" href="styles.css?v=20260903-5">
+  <title>进京赶考</title>  <link rel="stylesheet" href="styles.css?v=20260903-6">
 </head>
 <body>
   <header class="topbar">
@@ -136,6 +136,16 @@
               <button class="is-selected" type="button" data-value="balanced">高效赶考</button>
               <button type="button" data-value="relaxed">松弛漫游</button>
             </div>
+          </div>
+
+          <div class="form-section travel-style-section">
+            <span class="field-label">游玩方式</span>
+            <div class="segmented travel-style-segmented" id="travel-style-mode" role="group" aria-label="游玩方式">
+              <button type="button" data-value="saver"><i data-lucide="piggy-bank"></i><span>省钱侦察兵</span></button>
+              <button class="is-selected" type="button" data-value="value"><i data-lucide="badge-dollar-sign"></i><span>精算课代表</span></button>
+              <button type="button" data-value="premium"><i data-lucide="gem"></i><span>钞能力玩家</span></button>
+            </div>
+            <output class="travel-style-note" id="travel-style-note">住宿、餐饮与市内交通保持性价比均衡。</output>
           </div>
 
           <button class="primary-button" type="submit">
@@ -271,7 +281,7 @@
   <script src="food-data.js?v=20260903-5"></script>
   <script src="food-data-daxiang.js?v=20260903-5"></script>
   <script src="food-data-daba.js?v=20260903-5"></script>
-  <script src="app.js?v=20260903-10"></script>
+  <script src="app.js?v=20260903-11"></script>
 </body>
 </html>
 
