@@ -1,0 +1,580 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <meta name="description" content="模塑记忆棉生产管理系统本地 HTML 站点">
+  <title>首页 · 模塑记忆棉生产管理系统</title>
+  <link rel="stylesheet" href="./assets/styles.css">
+</head>
+<body>
+  <div class="app-shell theme-precision">
+    <aside class="sidebar" aria-label="主导航">
+      <div class="brand-lockup">
+        <span class="brand-mark"><img src="./assets/logo.png" alt="优梦 Logo"></span>
+        <span class="brand-copy"><strong>模塑记忆棉</strong><small>生产管理系统</small></span>
+      </div>
+
+      <label class="nav-search">
+        <span data-icon="search"></span>
+        <input type="search" data-nav-search placeholder="搜索板块" aria-label="搜索板块">
+        <small data-search-count></small>
+      </label>
+
+      <nav class="app-nav"></nav>
+
+      <div class="sidebar-footer">
+        <div class="connection-state"><span class="status-light"></span><span><b>本地服务</b><small>连接正常</small></span></div>
+        <button class="user-chip" type="button" data-tooltip="当前账户">
+          <span class="avatar">管</span><span class="user-copy"><b>系统管理员</b><small>ADMIN</small></span>
+        </button>
+      </div>
+    </aside>
+
+    <div class="sidebar-overlay" aria-hidden="true"></div>
+
+    <main class="main-stage">
+      <header class="topbar">
+        <div class="topbar-leading">
+          <button class="icon-button mobile-menu" type="button" data-open-sidebar aria-label="打开导航" aria-expanded="false"><span data-icon="menu"></span></button>
+          <button class="icon-button collapse-control" type="button" data-collapse-sidebar data-tooltip="收起侧栏" aria-label="切换侧栏" aria-pressed="false"><span data-icon="panel-left-close"></span></button>
+          <div class="location"><span>优梦制造中心</span><b>/</b><strong data-page-title>首页</strong></div>
+        </div>
+        <div class="topbar-actions">
+          <time class="system-clock" data-clock></time>
+          <button class="icon-button" type="button" data-tooltip="通知" aria-label="通知"><span data-icon="bell"></span><i class="notice-dot"></i></button>
+          <div class="standalone-badge" aria-label="独立站点">
+            <span>LOCAL ERP</span><b>独立站点</b>
+          </div>
+        </div>
+      </header>
+
+      <div class="workspace">
+        <section class="page-intro" aria-labelledby="page-title">
+          <div class="title-block">
+            <div class="eyebrow"><span class="eyebrow-line"></span><span data-page-eyebrow>运营总览</span></div>
+            <h1 id="page-title" data-page-title>首页</h1>
+            <p data-page-description>今日工作入口与关键业务状态</p>
+          </div>
+          <div class="module-stamp">
+            <span>MODULE</span>
+            <strong data-module-code>HOME</strong>
+            <small><i></i>FRAME READY</small>
+          </div>
+        </section>
+
+        <section class="orders-workspace module-workspace" data-orders-workspace data-module-workspace="orders" aria-label="订单管理工作区" hidden>
+          <div class="order-command-bar">
+            <div class="order-tabs" role="tablist" aria-label="订单管理视图">
+              <button class="order-tab is-active" type="button" role="tab" aria-selected="true" data-order-tab="ledger">
+                <span data-icon="clipboard-list"></span><span>订单台账</span><small data-order-count="ledger">00</small>
+              </button>
+              <button class="order-tab" type="button" role="tab" aria-selected="false" data-order-tab="work-orders">
+                <span data-icon="factory"></span><span>随工单记录</span><small data-order-count="work-orders">00</small>
+              </button>
+              <button class="order-tab" type="button" role="tab" aria-selected="false" data-order-tab="costs">
+                <span data-icon="database"></span><span>订单成本</span><small data-order-count="costs">00</small>
+              </button>
+            </div>
+            <div class="order-tools">
+              <label class="order-query">
+                <span data-icon="search"></span>
+                <input type="search" data-order-search placeholder="搜索订单、客户或产品" aria-label="搜索订单记录">
+              </label>
+              <label class="order-filter">
+                <span class="sr-only">订单状态</span>
+                <select data-order-status aria-label="筛选订单状态">
+                  <option value="all">全部状态</option>
+                  <option value="pending">待排产</option>
+                  <option value="running">生产中</option>
+                  <option value="done">已完成</option>
+                </select>
+              </label>
+              <button class="command-button is-primary" type="button" data-order-action="new-order" data-show-tabs="ledger"><span class="button-symbol">+</span><span>新建订单</span></button>
+              <button class="command-button" type="button" data-order-action="new-work-order" data-show-tabs="work-orders"><span data-icon="factory"></span><span>录入随工单</span></button>
+              <button class="command-button" type="button" data-order-action="print" data-show-tabs="work-orders"><span>打印空白随工单</span></button>
+            </div>
+          </div>
+
+          <article class="order-panel" data-order-view="ledger">
+            <header class="order-panel-head">
+              <div><span class="panel-kicker">ORDER LEDGER</span><h2>订单台账</h2></div>
+              <div class="panel-meta"><b data-view-count="ledger">0 条记录</b></div>
+            </header>
+            <div class="order-table-wrap">
+              <table class="order-table">
+                <thead><tr><th>订单</th><th>客户 / 产品</th><th>数量 / 交期</th><th>类型 / 业务</th><th>进度 / 合格率</th><th>备注</th><th>操作</th></tr></thead>
+                <tbody data-order-tbody="ledger"></tbody>
+              </table>
+            </div>
+          </article>
+
+          <article class="order-panel" data-order-view="work-orders" hidden>
+            <header class="order-panel-head"><div><span class="panel-kicker">WORK ORDER LOG</span><h2>随工单记录</h2></div><div class="panel-meta"><b data-view-count="work-orders">0 条记录</b></div></header>
+            <div class="order-table-wrap">
+              <table class="order-table is-wide">
+                <thead><tr><th>订单编号</th><th>生产日期 / 负责人</th><th>产品类型 / 配方 / 目标硬度</th><th>总数 / 合格</th><th>次品 / 调试</th><th>合格率 / 有效工时</th><th>创建时间</th><th>操作</th></tr></thead>
+                <tbody data-order-tbody="work-orders"></tbody>
+              </table>
+            </div>
+          </article>
+
+          <article class="order-panel" data-order-view="costs" hidden>
+            <header class="order-panel-head"><div><span class="panel-kicker">COST ALLOCATION</span><h2>订单成本</h2></div><div class="panel-meta"><b data-view-count="costs">0 条记录</b></div></header>
+            <div class="cost-summary" aria-label="订单成本摘要">
+              <span><small>订单总成本</small><strong>—</strong></span><span><small>原材料占比</small><strong>—</strong></span><span><small>人工成本占比</small><strong>—</strong></span><span><small>平均单位合格成本</small><strong>—</strong></span>
+            </div>
+            <div class="order-table-wrap">
+              <table class="order-table is-wide">
+                <thead><tr><th>订单</th><th>客户 / 产品</th><th>配料 / 随工单</th><th>原材料成本</th><th>人工成本</th><th>试样浪费成本</th><th>订单总成本</th><th>单位合格成本</th></tr></thead>
+                <tbody data-order-tbody="costs"></tbody>
+              </table>
+            </div>
+          </article>
+        </section>
+
+        <section class="sample-workspace module-workspace" data-module-workspace="samples" aria-label="样品管理工作区" hidden>
+          <div class="order-command-bar module-command-bar">
+            <div class="order-tabs sample-tabs" role="tablist" aria-label="样品管理视图">
+              <button class="order-tab is-active" type="button" role="tab" aria-selected="true" data-sample-tab="tasks">
+                <span data-icon="clipboard-list"></span><span>样品任务</span><small data-sample-count="tasks">00</small>
+              </button>
+              <button class="order-tab" type="button" role="tab" aria-selected="false" data-sample-tab="production">
+                <span data-icon="factory"></span><span>生产记录</span><small data-sample-count="production">00</small>
+              </button>
+              <button class="order-tab" type="button" role="tab" aria-selected="false" data-sample-tab="shipping">
+                <span data-icon="package-search"></span><span>发货记录</span><small data-sample-count="shipping">00</small>
+              </button>
+              <button class="order-tab" type="button" role="tab" aria-selected="false" data-sample-tab="inventory">
+                <span data-icon="boxes"></span><span>样品库存</span><small data-sample-count="inventory">00</small>
+              </button>
+            </div>
+            <div class="order-tools module-tools">
+              <label class="order-query">
+                <span data-icon="search"></span>
+                <input type="search" data-sample-search placeholder="搜索样品任务" aria-label="搜索样品管理记录">
+              </label>
+              <label class="order-filter">
+                <span class="sr-only">记录状态</span>
+                <select data-sample-status aria-label="筛选记录状态">
+                  <option value="all">全部状态</option>
+                  <option value="pending">待处理</option>
+                  <option value="running">进行中</option>
+                  <option value="done">已完成</option>
+                </select>
+              </label>
+              <button class="command-button is-primary" type="button" data-sample-action="new" data-show-sample-view="tasks"><span class="button-symbol">+</span><span>新建样品</span></button>
+              <button class="command-button is-primary" type="button" data-sample-action="new-production" data-show-sample-view="production" disabled title="请先创建样品任务"><span class="button-symbol">+</span><span>新增生产记录</span></button>
+              <button class="command-button is-primary" type="button" data-sample-action="new-shipping" data-show-sample-view="shipping" disabled title="请先建立样品库存"><span class="button-symbol">+</span><span>新增发货</span></button>
+            </div>
+          </div>
+
+          <article class="order-panel sample-panel" data-sample-view="tasks">
+            <header class="order-panel-head"><div><span class="panel-kicker">SAMPLE TASKS</span><h2>样品任务</h2></div><div class="panel-meta"><b data-sample-view-count="tasks">0 条记录</b></div></header>
+            <div class="order-table-wrap">
+              <table class="order-table is-wide sample-task-table">
+                <thead><tr><th>样品单号</th><th>关联订单</th><th>客户 / 产品</th><th>类型 / 模具</th><th>计划日期 / 数量</th><th>配方 / 参数</th><th>负责人 / 发货</th><th>备注</th></tr></thead>
+                <tbody data-sample-task-tbody></tbody>
+              </table>
+            </div>
+          </article>
+
+          <article class="order-panel sample-panel" data-sample-view="production" hidden>
+            <header class="order-panel-head"><div><span class="panel-kicker">PRODUCTION LOG</span><h2>生产记录</h2></div><div class="panel-meta"><b data-sample-view-count="production">0 条记录</b></div></header>
+            <div class="order-table-wrap">
+              <table class="order-table is-wide sample-production-table">
+                <thead><tr><th>关联样品任务</th><th>数量</th><th>负责人 / 生产时间</th><th>温度参数</th><th>A泵参数</th><th>B泵参数</th><th>备注</th></tr></thead>
+                <tbody data-sample-production-tbody></tbody>
+              </table>
+            </div>
+          </article>
+
+          <article class="order-panel sample-panel" data-sample-view="shipping" hidden>
+            <header class="order-panel-head"><div><span class="panel-kicker">SHIPPING LOG</span><h2>发货记录</h2></div><div class="panel-meta"><b data-sample-view-count="shipping">0 条记录</b></div></header>
+            <div class="order-table-wrap">
+              <table class="order-table is-wide sample-shipping-table">
+                <thead><tr><th>关联样品任务</th><th>样品单号</th><th>客户 / 产品</th><th>产品类型 / 业务人员</th><th>发货日期 / 数量</th><th>发货人</th><th>备注</th></tr></thead>
+                <tbody data-sample-shipping-tbody></tbody>
+              </table>
+            </div>
+          </article>
+
+          <article class="order-panel sample-panel" data-sample-view="inventory" hidden>
+            <header class="order-panel-head"><div><span class="panel-kicker">SAMPLE INVENTORY</span><h2>样品库存</h2></div><div class="panel-meta"><b data-sample-view-count="inventory">0 条记录</b></div></header>
+            <div class="order-table-wrap">
+              <table class="order-table is-wide sample-inventory-table">
+                <thead><tr><th>关联样品任务</th><th>样品单号</th><th>客户 / 产品</th><th>产品类型</th><th>累计入库</th><th>累计出库</th><th>当前库存</th><th>最近变动</th></tr></thead>
+                <tbody data-sample-inventory-tbody></tbody>
+              </table>
+            </div>
+          </article>
+        </section>
+
+        <section class="production-workspace module-workspace" data-module-workspace="production" aria-label="生产管理工作区" hidden>
+          <div class="order-command-bar module-command-bar">
+            <div class="order-tabs production-tabs" role="tablist" aria-label="生产管理视图">
+              <button class="order-tab is-active" type="button" role="tab" aria-selected="true" data-production-tab="schedule">
+                <span data-icon="clipboard-list"></span><span>生产排期</span><small data-production-count="schedule">00</small>
+              </button>
+              <button class="order-tab" type="button" role="tab" aria-selected="false" data-production-tab="batching">
+                <span data-icon="flask-conical"></span><span>配料记录</span><small data-production-count="batching">00</small>
+              </button>
+            </div>
+            <div class="order-tools module-tools">
+              <label class="order-query">
+                <span data-icon="search"></span>
+                <input type="search" data-production-search placeholder="搜索生产排期" aria-label="搜索生产管理记录">
+              </label>
+              <label class="order-filter">
+                <span class="sr-only">记录状态</span>
+                <select data-production-status aria-label="筛选记录状态">
+                  <option value="all">全部状态</option>
+                  <option value="pending">待处理</option>
+                  <option value="running">进行中</option>
+                  <option value="done">已完成</option>
+                  <option value="cancelled">已取消</option>
+                </select>
+              </label>
+              <button class="command-button is-primary" type="button" data-production-action="new-schedule" data-show-production-view="schedule"><span class="button-symbol">+</span><span>新增排期</span></button>
+            </div>
+          </div>
+
+          <article class="order-panel production-panel" data-production-view="schedule">
+            <header class="order-panel-head"><div><span class="panel-kicker">PRODUCTION SCHEDULE</span><h2>生产排期</h2></div><div class="panel-meta"><b data-production-view-count="schedule">0 条记录</b></div></header>
+            <div class="schedule-view-body">
+              <section class="schedule-gantt" aria-label="生产排期预览">
+                <header><div><small>PRODUCTION TIMELINE</small><strong data-schedule-gantt-title></strong></div><div><button class="calendar-nav" type="button" data-calendar-prev aria-label="上个月">‹</button><button class="calendar-today" type="button" data-calendar-today>本月</button><button class="calendar-nav" type="button" data-calendar-next aria-label="下个月">›</button></div></header>
+                <div class="schedule-gantt-scroll">
+                  <div class="schedule-gantt-board" data-schedule-gantt></div>
+                </div>
+              </section>
+              <div class="order-table-wrap schedule-table-wrap">
+                <table class="order-table is-wide production-schedule-table">
+                  <thead><tr><th>排期 / 交货日期</th><th>订单 / 客户</th><th>产品 / 模具</th><th>班次</th><th>计划数量</th><th>日产能 / 预计天数</th><th>状态</th><th>负责人</th><th>备注</th><th>操作</th></tr></thead>
+                  <tbody data-production-schedule-tbody></tbody>
+                </table>
+              </div>
+            </div>
+          </article>
+
+          <article class="order-panel production-panel" data-production-view="batching" hidden>
+            <header class="order-panel-head"><div><span class="panel-kicker">BATCHING RECORDS</span><h2>配料记录</h2></div><div class="panel-meta"><b data-production-view-count="batching">0 条记录</b></div></header>
+            <div class="empty-canvas production-empty-frame">
+              <div class="status-rings" aria-hidden="true"><i></i><i></i><i></i></div>
+              <strong data-production-empty>暂无配料记录</strong><small>BATCHING WORKSPACE</small>
+            </div>
+          </article>
+        </section>
+
+        <section class="formula-workspace module-workspace" data-module-workspace="formulas" aria-label="记忆棉配方工作区" hidden>
+          <div class="order-command-bar module-command-bar formula-command-bar">
+            <div class="order-tools module-tools formula-tools">
+              <label class="order-query">
+                <span data-icon="search"></span>
+                <input type="search" data-formula-search placeholder="搜索配方代码、名称或适用产品" aria-label="搜索记忆棉配方记录">
+              </label>
+              <label class="order-filter">
+                <span class="sr-only">配方状态</span>
+                <select data-formula-status aria-label="筛选配方状态">
+                  <option value="all">全部状态</option>
+                  <option value="draft">草稿</option>
+                  <option value="active">使用中</option>
+                  <option value="inactive">已停用</option>
+                </select>
+              </label>
+              <button class="command-button is-primary" type="button" data-formula-action="new"><span class="button-symbol">+</span><span>新增配方</span></button>
+            </div>
+          </div>
+
+          <article class="order-panel formula-panel">
+            <header class="order-panel-head"><div><span class="panel-kicker">MEMORY FOAM FORMULAS</span><h2>记忆棉配方</h2></div><div class="panel-meta"><b data-formula-count>0 条记录</b></div></header>
+            <div class="order-table-wrap">
+              <table class="order-table is-wide formula-table">
+                <thead><tr><th>配方代码</th><th>配方名称 / 适用产品</th><th>硬度 / 发泡重量</th><th>A料 / B料组成</th><th>状态 / 负责人</th><th>备注</th></tr></thead>
+                <tbody data-formula-tbody></tbody>
+              </table>
+            </div>
+          </article>
+        </section>
+
+        <section class="standard-workspace module-workspace" data-module-workspace="standards" aria-label="记忆棉标准工作区" hidden>
+          <div class="order-command-bar module-command-bar standard-command-bar">
+            <div class="order-tools module-tools standard-tools">
+              <label class="order-query">
+                <span data-icon="search"></span>
+                <input type="search" data-standard-search placeholder="搜索标准名称或文件名" aria-label="搜索记忆棉标准文件">
+              </label>
+              <button class="command-button is-primary" type="button" data-standard-action="upload"><span class="button-symbol">+</span><span>新增记忆棉标准</span></button>
+              <input type="file" data-standard-file accept=".docx,application/vnd.openxmlformats-officedocument.wordprocessingml.document" hidden>
+            </div>
+          </div>
+
+          <article class="order-panel standard-panel">
+            <header class="order-panel-head"><div><span class="panel-kicker">MEMORY FOAM STANDARDS</span><h2>记忆棉标准</h2></div><div class="panel-meta"><b data-standard-count>0 份文件</b></div></header>
+            <div class="order-table-wrap">
+              <table class="order-table standard-table">
+                <thead><tr><th>标准名称</th><th>文件名</th><th>文件大小</th><th>上传时间</th><th>操作</th></tr></thead>
+                <tbody data-standard-tbody></tbody>
+              </table>
+            </div>
+          </article>
+        </section>
+
+        <section class="work-grid" aria-label="板块页面框架">
+          <article class="module-frame frame-main">
+            <header><span data-frame-label>运营摘要</span><small>FRAME 01</small></header>
+            <div class="empty-canvas">
+              <span class="corner corner-a"></span><span class="corner corner-b"></span>
+              <div class="canvas-glyph"><span></span><span></span><span></span></div>
+              <strong data-empty-title>运营摘要</strong><small>PRIMARY WORKSPACE</small>
+            </div>
+          </article>
+          <article class="module-frame frame-side">
+            <header><span data-frame-label>关键状态</span><small>FRAME 02</small></header>
+            <div class="empty-canvas compact">
+              <div class="status-rings" aria-hidden="true"><i></i><i></i><i></i></div>
+              <strong data-empty-title>关键状态</strong><small>STATUS AREA</small>
+            </div>
+          </article>
+          <article class="module-frame frame-footer">
+            <header><span data-frame-label>待办区域</span><small>FRAME 03</small></header>
+            <div class="empty-canvas linear">
+              <div class="line-sequence" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+              <strong data-empty-title>待办区域</strong><small>DETAIL AREA</small>
+            </div>
+          </article>
+        </section>
+      </div>
+    </main>
+  </div>
+  <dialog class="order-dialog" data-order-dialog="new-order">
+    <form method="dialog" data-order-form="new-order">
+      <header><div><small>NEW SALES ORDER</small><h2>新建订单</h2></div><button class="dialog-close" type="button" data-dialog-close aria-label="关闭">&times;</button></header>
+      <div class="dialog-form-grid">
+        <label><span>订单编号</span><input name="orderNo" required placeholder="请输入订单编号"></label>
+        <label><span>客户名称</span><input name="customer" required placeholder="客户名称"></label>
+        <label><span>产品名称</span><input name="product" required placeholder="产品名称"></label>
+        <label><span>订单数量</span><input name="quantity" type="number" min="1" required placeholder="0"></label>
+        <label><span>产品类型</span><select name="productType"><option>复合枕</option><option>非复合枕</option></select></label>
+        <label><span>业务人员</span><input name="businessPerson" required placeholder="业务人员"></label>
+        <label><span>下单日期</span><input name="orderDate" type="date" required></label>
+        <label><span>交货日期</span><input name="deliveryDate" type="date" required></label>
+        <label class="is-full"><span>备注</span><textarea name="notes" rows="3" placeholder="订单备注"></textarea></label>
+      </div>
+      <footer><button class="command-button" type="button" data-dialog-close>取消</button><button class="command-button is-primary" type="submit">保存订单</button></footer>
+    </form>
+  </dialog>
+
+  <dialog class="order-dialog work-order-dialog" data-order-dialog="new-work-order">
+    <form method="dialog" data-order-form="new-work-order">
+      <header><div><small>PRODUCTION WORK ORDER</small><h2>录入随工单</h2></div><button class="dialog-close" type="button" data-dialog-close aria-label="关闭">&times;</button></header>
+      <div class="dialog-form-grid work-order-form-grid">
+        <div class="dialog-section-title"><span>01</span><b>基本信息</b></div>
+        <label class="field-span-2"><span>订单编号</span><select name="orderNo" data-work-order-order-select required><option value="">请选择订单编号</option></select></label>
+        <label><span>生产日期</span><input name="productionDate" type="date" required></label>
+        <label><span>负责人</span><input name="owner" required placeholder="请输入负责人"></label>
+        <label><span>产品类型</span><select name="productType" required><option value="复合枕">复合枕</option><option value="非复合枕">非复合枕</option></select></label>
+        <label class="field-span-2"><span>配方代码</span><input name="formulaCode" list="workOrderFormulaOptions" required placeholder="选择或输入配方代码"></label>
+
+        <div class="dialog-section-title"><span>02</span><b>生产参数</b></div>
+        <label><span>A料温度</span><span class="input-with-unit"><input name="aTemp" type="number" step="0.01" required><b>°C</b></span></label>
+        <label><span>B料温度</span><span class="input-with-unit"><input name="bTemp" type="number" step="0.01" required><b>°C</b></span></label>
+        <label><span>模具温度</span><span class="input-with-unit"><input name="moldTemp" type="number" step="0.01" required><b>°C</b></span></label>
+        <label><span>A泵转速</span><input name="aPumpSpeed" type="number" step="0.01" required></label>
+        <label><span>A料流量</span><input name="aFlow" type="number" step="0.01" required></label>
+        <label><span>B泵转速</span><input name="bPumpSpeed" type="number" step="0.01" required></label>
+        <label><span>B料流量</span><input name="bFlow" type="number" step="0.01" required></label>
+
+        <div class="dialog-section-title"><span>03</span><b>生产详情</b></div>
+        <label class="computed-field work-order-detail-full"><span>生产总数</span><span class="computed-display" data-work-order-computed="totalProduced">—</span></label>
+        <label class="work-order-detail-quarter"><span>合格数量</span><input name="qualifiedQty" type="number" min="0" step="1" required></label>
+        <label class="computed-field work-order-detail-quarter"><span>合格率</span><span class="computed-display" data-work-order-computed="yieldRate">—</span></label>
+        <label class="computed-field work-order-detail-quarter"><span>次品数量</span><span class="computed-display" data-work-order-computed="defectQty">—</span></label>
+        <label class="work-order-detail-quarter"><span>调试次品数</span><input name="debugDefectQty" type="number" min="0" step="1" required></label>
+        <label class="work-order-detail-half"><span>外观次品数</span><input name="appearanceDefectQty" type="number" min="0" step="1" required></label>
+        <label class="computed-field work-order-detail-half"><span>外观次品率</span><span class="computed-display" data-work-order-computed="appearanceRate">—</span></label>
+        <label class="work-order-detail-half"><span>尺寸次品数</span><input name="dimensionDefectQty" type="number" min="0" step="1" required></label>
+        <label class="computed-field work-order-detail-half"><span>尺寸次品率</span><span class="computed-display" data-work-order-computed="dimensionRate">—</span></label>
+        <label class="work-order-detail-half"><span>脏污次品数</span><input name="stainDefectQty" type="number" min="0" step="1" required></label>
+        <label class="computed-field work-order-detail-half"><span>脏污次品率</span><span class="computed-display" data-work-order-computed="stainRate">—</span></label>
+        <label class="work-order-detail-half"><span>硬度次品数</span><input name="hardnessDefectQty" type="number" min="0" step="1" required></label>
+        <label class="computed-field work-order-detail-half"><span>硬度次品率</span><span class="computed-display" data-work-order-computed="hardnessRate">—</span></label>
+
+        <div class="dialog-section-title"><span>04</span><b>开机时长</b></div>
+        <label class="computed-field field-span-2"><span>有效工时</span><span class="computed-display" data-work-order-computed="effectiveHours">—</span></label>
+        <label><span>准备时间</span><span class="input-with-unit"><input name="prepHours" type="number" min="0" step="0.01" required><b>小时</b></span></label>
+        <label><span>故障时间</span><span class="input-with-unit"><input name="faultHours" type="number" min="0" step="0.01" required><b>小时</b></span></label>
+        <label><span>总工时</span><span class="input-with-unit"><input name="totalHours" type="number" min="0" step="0.01" required><b>小时</b></span></label>
+        <label class="computed-field"><span>故障率</span><span class="computed-display" data-work-order-computed="faultRate">—</span></label>
+
+        <div class="dialog-section-title"><span>05</span><b>人工成本</b></div>
+        <label><span>工人数</span><span class="input-with-unit"><input name="workerCount" type="number" min="0" step="1"><b>人</b></span></label>
+        <label><span>人工单价</span><span class="input-with-unit"><input name="laborRatePerHour" type="number" min="0" step="0.01"><b>元/人时</b></span></label>
+        <label class="computed-field field-span-2"><span>人工成本</span><span class="computed-display" data-work-order-computed="laborCost">—</span></label>
+      </div>
+      <datalist id="workOrderFormulaOptions"></datalist>
+      <footer><button class="command-button" type="button" data-dialog-close>取消</button><button class="command-button is-primary" type="submit">保存随工单</button></footer>
+    </form>
+  </dialog>
+
+  <dialog class="order-dialog sample-dialog" data-sample-dialog>
+    <form method="dialog" data-sample-form>
+      <header><div><small>NEW SAMPLE TASK</small><h2>新建样品</h2></div><button class="dialog-close" type="button" data-dialog-close aria-label="关闭">&times;</button></header>
+      <div class="dialog-form-grid">
+        <label><span>样品单号</span><input name="sampleNo" placeholder="可不填写"></label>
+        <label><span>关联订单</span><select name="relatedOrder" data-sample-order-select><option value="">不关联订单</option></select></label>
+        <label><span>客户</span><input name="customer" required placeholder="请输入客户名称"></label>
+        <label><span>产品名称</span><input name="productName" required placeholder="请输入产品名称"></label>
+        <label><span>产品类型</span><select name="productType" required><option value="复合枕">复合枕</option><option value="非复合枕">非复合枕</option></select></label>
+        <label><span>计划日期</span><input name="plannedDate" type="date" required></label>
+        <label><span>模具选择</span><input name="mold" list="sampleMoldOptions" placeholder="选择或输入模具"></label>
+        <label><span>数量</span><input name="quantity" type="number" min="1" step="1" required placeholder="请输入数量"></label>
+        <label class="switch-field"><span>是否需要发货</span><span class="switch-control"><input name="needsShipping" type="checkbox"><span class="switch-track" aria-hidden="true"><i></i></span><b data-shipping-label>不需要</b></span></label>
+        <label><span>记忆棉配方</span><input name="formula" required placeholder="请输入记忆棉配方"></label>
+        <label><span>重量</span><span class="input-with-unit"><input name="weight" type="number" min="0" step="0.1" required placeholder="请输入重量"><b>g</b></span></label>
+        <label><span>40%压陷硬度</span><span class="input-with-unit"><input name="hardness" type="number" min="0" step="0.1" required placeholder="请输入硬度"><b>N</b></span></label>
+        <label><span>负责人</span><input name="owner" required placeholder="请输入负责人"></label>
+        <label class="is-full"><span>备注</span><textarea name="notes" rows="3" placeholder="请输入备注"></textarea></label>
+      </div>
+      <datalist id="sampleMoldOptions"></datalist>
+      <footer><button class="command-button" type="button" data-dialog-close>取消</button><button class="command-button is-primary" type="submit">保存样品</button></footer>
+    </form>
+  </dialog>
+
+  <dialog class="order-dialog production-record-dialog" data-sample-production-dialog>
+    <form method="dialog" data-sample-production-form>
+      <header><div><small>NEW PRODUCTION RECORD</small><h2>新增生产记录</h2></div><button class="dialog-close" type="button" data-dialog-close aria-label="关闭">&times;</button></header>
+      <div class="dialog-form-grid">
+        <div class="dialog-section-title"><span>01</span><b>基本信息</b></div>
+        <label class="field-span-2"><span>关联样品任务</span><select name="relatedSampleTask" data-production-task-select required><option value="">请选择样品任务</option></select></label>
+        <label><span>负责人</span><input name="owner" required placeholder="请输入负责人"></label>
+        <label><span>生产时间</span><input name="productionTime" type="datetime-local" required></label>
+        <label class="field-span-2"><span>数量</span><input name="quantity" type="number" min="1" step="1" required placeholder="请输入数量"></label>
+
+        <div class="dialog-section-title"><span>02</span><b>生产参数</b></div>
+        <label><span>A料温度</span><span class="input-with-unit"><input name="aTemp" type="number" step="0.01" required><b>°C</b></span></label>
+        <label><span>B料温度</span><span class="input-with-unit"><input name="bTemp" type="number" step="0.01" required><b>°C</b></span></label>
+        <label><span>模具温度</span><span class="input-with-unit"><input name="moldTemp" type="number" step="0.01" required><b>°C</b></span></label>
+        <label><span>A泵转速</span><input name="aPumpSpeed" type="number" step="0.01" required></label>
+        <label><span>A泵流量</span><input name="aPumpFlow" type="number" step="0.01" required></label>
+        <label><span>B泵转速</span><input name="bPumpSpeed" type="number" step="0.01" required></label>
+        <label><span>B泵流量</span><input name="bPumpFlow" type="number" step="0.01" required></label>
+        <label class="is-full"><span>备注</span><textarea name="notes" rows="3" placeholder="请输入备注"></textarea></label>
+      </div>
+      <footer><button class="command-button" type="button" data-dialog-close>取消</button><button class="command-button is-primary" type="submit">保存生产记录</button></footer>
+    </form>
+  </dialog>
+
+
+  <dialog class="order-dialog shipping-record-dialog" data-sample-shipping-dialog>
+    <form method="dialog" data-sample-shipping-form>
+      <header><div><small>NEW SHIPPING RECORD</small><h2>新增发货</h2></div><button class="dialog-close" type="button" data-dialog-close aria-label="关闭">&times;</button></header>
+      <div class="dialog-form-grid">
+        <div class="dialog-section-title"><span>01</span><b>发货信息</b></div>
+        <label class="field-span-2"><span>关联样品任务</span><select name="relatedSampleTask" data-shipping-task-select required><option value="">请选择样品任务</option></select></label>
+        <label><span>样品单号</span><input name="sampleNo" placeholder="可不填写"></label>
+        <label><span>客户</span><input name="customer" required placeholder="请输入客户名称"></label>
+        <label><span>产品名称</span><input name="productName" required placeholder="请输入产品名称"></label>
+        <label><span>产品类型</span><select name="productType" required><option value="复合枕">复合枕</option><option value="非复合枕">非复合枕</option></select></label>
+        <label><span>业务人员</span><input name="businessPerson" required placeholder="请输入业务人员"></label>
+        <label><span>发货日期</span><input name="shippingDate" type="date" required></label>
+        <label><span>发货数量</span><input name="shippingQuantity" type="number" min="1" step="1" required placeholder="请输入发货数量"></label>
+        <label><span>发货人</span><input name="shipper" required placeholder="请输入发货人"></label>
+        <label class="is-full"><span>备注</span><textarea name="notes" rows="3" placeholder="请输入备注"></textarea></label>
+      </div>
+      <footer><button class="command-button" type="button" data-dialog-close>取消</button><button class="command-button is-primary" type="submit">保存发货记录</button></footer>
+    </form>
+  </dialog>
+
+
+  <dialog class="order-dialog schedule-dialog" data-schedule-dialog>
+    <form method="dialog" data-schedule-form>
+      <header><div><small>PRODUCTION SCHEDULE</small><h2 data-schedule-dialog-title>新增生产排期</h2></div><button class="dialog-close" type="button" data-dialog-close aria-label="关闭">&times;</button></header>
+      <div class="dialog-form-grid">
+        <div class="dialog-section-title"><span>01</span><b>基础信息</b></div>
+        <label class="field-span-2"><span>关联订单</span><select name="orderId" data-schedule-order-select><option value="">不关联订单</option></select></label>
+        <label><span>排期日期</span><input name="scheduledDate" type="date" required></label>
+        <label><span>交货日期</span><input name="deliveryDate" type="date"></label>
+        <label><span>班次</span><select name="shift"><option value="白班">白班</option><option value="夜班">夜班</option></select></label>
+        <label><span>计划数量</span><input name="plannedQty" type="number" min="1" step="1" required placeholder="请输入计划数量"></label>
+        <label><span>排期负责人</span><input name="planner" required placeholder="请输入负责人"></label>
+        <label><span>排期状态</span><select name="status" required><option value="待生产">待生产</option><option value="生产中">生产中</option><option value="已完成">已完成</option><option value="已取消">已取消</option></select></label>
+
+        <div class="dialog-section-title"><span>02</span><b>模具组合</b></div>
+        <div class="schedule-mold-editor field-span-2">
+          <header><div><strong>模具与日产能</strong><small>可添加一个或多个模具</small></div><button class="command-button" type="button" data-add-schedule-mold><span class="button-symbol">+</span><span>添加模具</span></button></header>
+          <div class="schedule-mold-rows" data-schedule-mold-rows></div>
+        </div>
+
+        <div class="dialog-section-title"><span>03</span><b>排期概览</b></div>
+        <div class="schedule-summary field-span-2">
+          <span><small>订单产品</small><strong data-schedule-summary="product">—</strong></span>
+          <span><small>模具总日产能</small><strong data-schedule-summary="capacity">—</strong></span>
+          <span><small>预计生产天数</small><strong data-schedule-summary="days">—</strong></span>
+        </div>
+        <label class="is-full"><span>备注</span><textarea name="notes" rows="3" placeholder="请输入备注"></textarea></label>
+      </div>
+      <footer><button class="command-button" type="button" data-dialog-close>取消</button><button class="command-button is-primary" type="submit" data-schedule-submit>保存排期</button></footer>
+    </form>
+  </dialog>
+
+
+  <dialog class="order-dialog formula-dialog" data-formula-dialog>
+    <form method="dialog" data-formula-form>
+      <header><div><small>NEW MEMORY FOAM FORMULA</small><h2>新增配方</h2></div><button class="dialog-close" type="button" data-dialog-close aria-label="关闭">&times;</button></header>
+      <div class="dialog-form-grid formula-form-grid">
+        <div class="dialog-section-title"><span>01</span><b>基本信息</b></div>
+        <label><span>配方代码</span><input name="formulaCode" required placeholder="请输入配方代码"></label>
+        <label><span>配方名称</span><input name="recipeName" required placeholder="请输入配方名称"></label>
+        <label><span>产品类型</span><select name="productType" required><option value="">请选择产品类型</option><option value="复合枕">复合枕</option><option value="非复合枕">非复合枕</option></select></label>
+        <label><span>适用产品</span><input name="productName" required placeholder="请输入适用产品"></label>
+        <label><span>40%压陷硬度</span><span class="input-with-unit"><input name="hardness40" type="number" min="0" step="0.01"><b>N</b></span></label>
+        <label><span>硬度浮动范围</span><span class="input-with-unit"><input name="hardnessTolerance" type="number" min="0" step="0.01"><b>±N</b></span></label>
+        <label><span>压缩变形上限</span><span class="input-with-unit"><input name="compressionSetLimit" type="number" min="0" step="0.01"><b>%</b></span></label>
+        <label><span>65%/40%压陷硬度比</span><input name="hardnessRatio6540" type="number" min="0" step="0.01"></label>
+        <label><span>发泡重量</span><span class="input-with-unit"><input name="foamWeight" type="number" min="0.01" step="0.01" required><b>g</b></span></label>
+        <label><span>配方状态</span><select name="status" required><option value="draft">草稿</option><option value="active">使用中</option><option value="inactive">已停用</option></select></label>
+        <label class="field-span-2"><span>负责人</span><input name="owner" required placeholder="请输入负责人"></label>
+
+        <div class="dialog-section-title"><span>02</span><b>原料组成</b></div>
+        <div class="formula-composition-editor field-span-2">
+          <header><div><strong>A料配方</strong><small>录入原料名称与配比</small></div><button class="command-button" type="button" data-add-formula-a><span class="button-symbol">+</span><span>添加A料行</span></button></header>
+          <div class="formula-a-rows" data-formula-a-rows></div>
+        </div>
+        <div class="formula-composition-editor field-span-2">
+          <header><div><strong>B料组成</strong><small>录入B料名称与配比</small></div></header>
+          <div class="formula-material-row is-b-material"><label><span>原料名称</span><input name="bMaterialName" required placeholder="请输入B料名称"></label><label><span>配比</span><span class="input-with-unit"><input name="bMaterialRatio" type="number" min="0" step="0.01" required><b>份</b></span></label></div>
+        </div>
+        <label class="is-full"><span>备注</span><textarea name="notes" rows="3" placeholder="请输入备注"></textarea></label>
+      </div>
+      <footer><button class="command-button" type="button" data-dialog-close>取消</button><button class="command-button is-primary" type="submit">保存配方</button></footer>
+    </form>
+  </dialog>
+
+  <dialog class="record-dialog standard-preview-dialog" data-standard-preview-dialog>
+    <header><div><small>WORD DOCUMENT PREVIEW</small><h2 data-standard-preview-title>标准文件预览</h2></div><button class="dialog-close" type="button" data-dialog-close aria-label="关闭">&times;</button></header>
+    <div class="standard-preview-shell">
+      <div class="standard-preview-meta"><span data-standard-preview-filename></span><small data-standard-preview-size></small></div>
+      <article class="standard-document-paper" data-standard-preview-content aria-live="polite"></article>
+    </div>
+    <footer><a class="command-button" data-standard-preview-download href="#" download>下载文件</a><button class="command-button is-primary" type="button" data-dialog-close>关闭</button></footer>
+  </dialog>
+
+
+  <dialog class="record-dialog" data-record-dialog>
+    <header><div><small>RECORD DETAIL</small><h2 data-record-title>记录详情</h2></div><button class="dialog-close" type="button" data-dialog-close aria-label="关闭">&times;</button></header>
+    <dl><div><dt>订单编号</dt><dd data-detail-order>—</dd></div><div><dt>客户 / 负责人</dt><dd data-detail-customer>—</dd></div><div><dt>产品 / 配方</dt><dd data-detail-product>—</dd></div><div><dt>交期 / 生产日期</dt><dd data-detail-delivery>—</dd></div><div><dt>当前状态</dt><dd data-detail-status>—</dd></div></dl>
+    <footer><button class="command-button is-primary" type="button" data-dialog-close>关闭</button></footer>
+  </dialog>
+
+  <div class="order-toast" data-order-toast role="status" aria-live="polite"></div>
+  <script src="./assets/app.js"></script>
+  <script src="./assets/orders.js"></script>
+  <script src="./assets/samples.js"></script>
+  <script src="./assets/formulas.js"></script>
+  <script src="./assets/production.js"></script>
+  <script src="./assets/vendor/jszip.min.js"></script>
+  <script src="./assets/standards.js"></script>
+</body>
+</html>
