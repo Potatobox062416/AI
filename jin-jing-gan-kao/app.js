@@ -13,57 +13,6 @@
     balanced: { label: "高效赶考", start: "07:20", end: "20:45", durationFactor: 0.86 },
     relaxed: { label: "松弛漫游", start: "08:30", end: "19:30", durationFactor: 1 }
   };
-  const transferRules = {
-    rail: {
-      label: "高铁",
-      terminal: "北京铁路到达站",
-      route: "地铁 / 出租车",
-      arrivalSegments: [["出站与步行", 20], ["铁路站至酒店", 55], ["寄存行李", 20]],
-      departureSegments: [["酒店至铁路站", 55], ["进站安检与候车", 60]],
-      dinnerDepartureSegments: [["酒店至铁路站", 55], ["铁路站内简餐", 35], ["进站安检、检票与候车", 60]],
-      dinnerSegmentLabel: "铁路站内简餐"
-    },
-    air: {
-      label: "飞机",
-      terminal: "首都或大兴机场",
-      route: "机场快轨 / 地铁 / 出租车",
-      arrivalSegments: [["下机与取行李", 45], ["机场至酒店", 80], ["寄存行李", 20]],
-      departureSegments: [["酒店至机场", 80], ["值机、安检与登机", 120]],
-      dinnerDepartureSegments: [["酒店至机场", 80], ["值机与安检", 60], ["候机区简餐", 40], ["登机等候", 60]],
-      dinnerSegmentLabel: "候机区简餐"
-    },
-    drive: {
-      label: "自驾",
-      terminal: "酒店",
-      route: "自驾",
-      arrivalSegments: [["停车与入住", 40]],
-      departureSegments: [["退房与装车", 30]],
-      dinnerDepartureSegments: [["酒店片区简餐", 40], ["退房与装车", 30]],
-      dinnerSegmentLabel: "酒店片区简餐"
-    }
-  };
-  const ticketModeConfig = {
-    rail: {
-      serviceLabel: "车次号",
-      fromLabel: "出发站",
-      toLabel: "到达站",
-      departLabel: "发车时间",
-      arriveLabel: "到达时间",
-      priceLabel: "二等座票价",
-      inventoryLabel: "二等座余票",
-      seatName: "二等座"
-    },
-    air: {
-      serviceLabel: "航班号",
-      fromLabel: "出发机场",
-      toLabel: "到达机场",
-      departLabel: "起飞时间",
-      arriveLabel: "落地时间",
-      priceLabel: "经济舱含税价",
-      inventoryLabel: "座位状态",
-      seatName: "经济舱"
-    }
-  };
   const visitRules = {
     "palace-museum": { open: "08:30", latestStart: "15:30", close: "17:00", mondayNotice: true },
     "national-museum": { open: "09:00", latestStart: "16:00", close: "17:30", mondayNotice: true },
@@ -107,16 +56,19 @@
     category: "全部",
     query: "",
     freeOnly: false,
-    transportMode: "rail",
     pace: "balanced",
+    members: [
+      { id: "member-1", name: "成员1", gender: "male", age: 35 },
+      { id: "member-2", name: "成员2", gender: "female", age: 33 },
+      { id: "member-3", name: "成员3", gender: "male", age: 10 },
+      { id: "member-4", name: "成员4", gender: "female", age: 6 }
+    ],
     ages: [35, 33, 10, 6],
     arrivalDateTime: "2026-10-01T09:30",
     departureDateTime: "2026-10-05T18:00",
     startDate: "2026-10-01",
     days: 5,
     nights: 4,
-    origin: "上海",
-    returnCity: "上海",
     weather: [],
     weatherMode: "climate",
     plans: [],
@@ -124,19 +76,10 @@
     foodTier: "all",
     foodAuthor: "all",
     foodQuery: "",
-    transportRecords: {
-      rail: { outbound: [], return: [] },
-      air: { outbound: [], return: [] }
-    },
-    selectedTransport: {
-      rail: { outbound: null, return: null },
-      air: { outbound: null, return: null }
-    },
     editorOpen: false,
     customDraft: null,
     customBasePlanId: null,
-    customRequestAdvice: [],
-    intercity: { low: 3500, high: 4800, label: "距离模型估算" }
+    customRequestAdvice: []
   };
 
   const els = {
@@ -153,20 +96,15 @@
     dialogContent: document.querySelector("#dialog-content"),
     dialogClose: document.querySelector("#dialog-close"),
     plannerForm: document.querySelector("#planner-form"),
-    teamAges: document.querySelector("#team-ages"),
+    teamMembers: document.querySelector("#team-members"),
+    addTeamMember: document.querySelector("#add-team-member"),
     teamCount: document.querySelector("#team-count"),
-    ageMessage: document.querySelector("#age-message"),
-    origin: document.querySelector("#origin"),
-    returnCity: document.querySelector("#return-city"),
+    teamMessage: document.querySelector("#team-message"),
     arrivalDateTime: document.querySelector("#arrival-datetime"),
     departureDateTime: document.querySelector("#departure-datetime"),
-    arrivalTimeLabel: document.querySelector("#arrival-time-label"),
-    departureTimeLabel: document.querySelector("#departure-time-label"),
     timeBindingStatus: document.querySelector("#time-binding-status"),
     tripDuration: document.querySelector("#trip-duration"),
     tripTimeMessage: document.querySelector("#trip-time-message"),
-    transportMode: document.querySelector("#transport-mode"),
-    transportOptions: document.querySelector("#transport-options"),
     paceMode: document.querySelector("#pace-mode"),
     weatherStrip: document.querySelector("#weather-strip"),
     weatherBrief: document.querySelector("#weather-brief"),
@@ -204,6 +142,7 @@
   let planGenerationVersion = 0;
   let restaurantImageSourcesPromise = null;
   let customUid = 0;
+  let memberSequence = 4;
 
   function refreshIcons() {
     if (window.lucide) window.lucide.createIcons({ attrs: { "aria-hidden": "true" } });
@@ -225,11 +164,82 @@
     toastTimer = window.setTimeout(() => els.toast.classList.remove("is-visible"), 2600);
   }
 
-  function parseAges(value) {
-    return String(value)
-      .split(/[，,、;；\s]+/)
-      .map((part) => Number.parseInt(part, 10))
-      .filter((age) => Number.isFinite(age) && age >= 0 && age <= 110);
+  function genderLabel(value) {
+    return { male: "男", female: "女", other: "其他", private: "不便说明" }[value] || "不便说明";
+  }
+
+  function renderTeamMembers(focusMemberId = null) {
+    els.teamMembers.innerHTML = state.members.map((member, index) => `
+      <section class="team-member" data-member-id="${member.id}" aria-label="团队成员${index + 1}">
+        <header>
+          <strong>成员 ${String(index + 1).padStart(2, "0")}</strong>
+          <button class="icon-button" type="button" data-remove-member aria-label="删除${escapeHtml(member.name || `成员${index + 1}`)}" title="删除成员" ${state.members.length === 1 ? "disabled" : ""}>
+            <i data-lucide="trash-2"></i>
+          </button>
+        </header>
+        <label class="member-name"><span>姓名</span><input data-member-field="name" type="text" maxlength="20" value="${escapeHtml(member.name)}" placeholder="请输入姓名" autocomplete="off"></label>
+        <div class="member-facts">
+          <label><span>性别</span><select data-member-field="gender">
+            ${[["male", "男"], ["female", "女"], ["other", "其他"], ["private", "不便说明"]].map(([value, label]) => `<option value="${value}" ${member.gender === value ? "selected" : ""}>${label}</option>`).join("")}
+          </select></label>
+          <label><span>年龄</span><input data-member-field="age" type="number" min="0" max="110" step="1" value="${member.age ?? ""}" placeholder="岁" inputmode="numeric"></label>
+        </div>
+      </section>`).join("");
+    refreshIcons();
+    if (focusMemberId) els.teamMembers.querySelector(`[data-member-id="${focusMemberId}"] [data-member-field="name"]`)?.focus();
+  }
+
+  function captureTeamState() {
+    const rows = Array.from(els.teamMembers.querySelectorAll("[data-member-id]"));
+    state.members = rows.map((row) => {
+      const ageValue = row.querySelector('[data-member-field="age"]').value.trim();
+      return {
+        id: row.dataset.memberId,
+        name: row.querySelector('[data-member-field="name"]').value.trim(),
+        gender: row.querySelector('[data-member-field="gender"]').value,
+        age: ageValue === "" ? null : Number(ageValue)
+      };
+    });
+    rows.forEach((row, index) => {
+      row.querySelector("[data-remove-member]")?.setAttribute("aria-label", `删除${state.members[index].name || `成员${index + 1}`}`);
+    });
+    const valid = state.members.length >= 1
+      && state.members.length <= 20
+      && state.members.every((member) => member.name && Number.isInteger(member.age) && member.age >= 0 && member.age <= 110);
+    els.teamMessage.classList.toggle("is-error", !valid);
+    els.teamCount.textContent = valid ? `${state.members.length}人` : "待补全";
+    if (!valid) {
+      els.teamMessage.textContent = "请为1—20名成员完整填写姓名与0—110岁的整数年龄。";
+      return false;
+    }
+    state.ages = state.members.map((member) => member.age);
+    const children = state.ages.filter((age) => age < 18).length;
+    const seniors = state.ages.filter((age) => age >= 60).length;
+    const adults = state.ages.length - children - seniors;
+    els.teamMessage.textContent = `已添加${state.members.length}人：未成年人${children}人、成人${adults}人、老人${seniors}人。年龄用于票价与强度判断；性别仅用于住宿分房提醒。`;
+    return true;
+  }
+
+  function teamRosterText() {
+    return state.members.map((member) => `${member.name}（${genderLabel(member.gender)}，${member.age}岁）`).join("、");
+  }
+
+  function teamPlanningNote() {
+    const children = state.ages.filter((age) => age < 12).length;
+    const seniors = state.ages.filter((age) => age >= 60).length;
+    const genderCounts = state.members.reduce((counts, member) => {
+      counts[member.gender] = (counts[member.gender] || 0) + 1;
+      return counts;
+    }, {});
+    const notes = [];
+    if (children) notes.push(`含${children}名12岁以下儿童，凌晨候检和长距离步行需预留休息`);
+    if (seniors) notes.push(`含${seniors}名60岁以上成员，优先保留电梯、短途交通与午间休息`);
+    if (!children && !seniors) notes.push("成员年龄未触发儿童或老人专项节奏提醒");
+    const genderParts = [["male", "男"], ["female", "女"], ["other", "其他"], ["private", "未说明"]]
+      .filter(([value]) => genderCounts[value])
+      .map(([value, label]) => `${label}${genderCounts[value]}人`);
+    notes.push(`分房参考：${genderParts.join("、")}；系统不推断同住关系`);
+    return `${notes.join("；")}。`;
   }
 
   function formatDuration(minutes) {
@@ -536,18 +546,6 @@
     refreshIcons();
   }
 
-  function updateAgeState() {
-    const ages = parseAges(els.teamAges.value);
-    const valid = ages.length > 0 && ages.length <= 20;
-    els.ageMessage.classList.toggle("is-error", !valid);
-    els.ageMessage.textContent = valid
-      ? `已识别 ${ages.length} 人；儿童、学生和老人优惠按公开常规政策估算。`
-      : "请输入1—20个有效年龄，用逗号或空格分隔。";
-    els.teamCount.textContent = valid ? `${ages.length}人` : "待修正";
-    if (valid) state.ages = ages;
-    return valid;
-  }
-
   function syncTripRange() {
     const arrival = parseLocalDateTime(els.arrivalDateTime.value);
     const departure = parseLocalDateTime(els.departureDateTime.value);
@@ -558,16 +556,6 @@
       error = "请完整填写到京和离京时间。";
     } else if (departure <= arrival) {
       error = "离京时间必须晚于到京时间。";
-    }
-
-    if (!error) {
-      const rule = transferRules[state.transportMode];
-      const arrivalReadyAt = addMinutes(arrival, rule.arrivalSegments.reduce((sum, segment) => sum + segment[1], 0));
-      const departureSegments = departureSegmentsFor(rule, departure);
-      const leaveForDepartureAt = addMinutes(departure, -departureSegments.reduce((sum, segment) => sum + segment[1], 0));
-      if (arrivalReadyAt >= leaveForDepartureAt) {
-        error = `到京接驳预计${formatTime(arrivalReadyAt)}完成，离京接驳需${formatTime(leaveForDepartureAt)}开始，时间窗口重叠。`;
-      }
     }
 
     const nights = error ? 0 : calendarDayDiff(arrival, departure);
@@ -585,14 +573,8 @@
     const totalMinutes = Math.round((departure - arrival) / 60000);
     const hours = Math.floor(totalMinutes / 60);
     const minutes = totalMinutes % 60;
-    const outbound = selectedTransportRecord("outbound");
-    const returnTrip = selectedTransportRecord("return");
-    const modeNote = state.transportMode === "drive"
-      ? "自驾时间按抵达、驶离酒店理解。"
-      : outbound || returnTrip
-        ? `已按${[outbound?.serviceNo, returnTrip?.serviceNo].filter(Boolean).join(" / ")}的实际时刻绑定。`
-        : "未绑定票单，当前时间为手动计划值。";
-    els.tripTimeMessage.textContent = `共${hours}小时${minutes ? `${minutes}分钟` : ""} · ${modeNote}`;
+    els.timeBindingStatus.textContent = "自动计算";
+    els.tripTimeMessage.textContent = `共${hours}小时${minutes ? `${minutes}分钟` : ""} · 到京时间为可开始市内行程的时间，离京时间为活动截止时间。`;
 
     state.arrivalDateTime = els.arrivalDateTime.value;
     state.departureDateTime = els.departureDateTime.value;
@@ -834,11 +816,7 @@
   }
 
   function collectFormState() {
-    if (!updateAgeState() || !syncTripRange()) return false;
-    state.origin = els.origin.value.trim() || "出发地";
-    state.returnCity = els.returnCity.value.trim() || state.origin;
-    renderTransportOptions();
-    return true;
+    return captureTeamState() && syncTripRange();
   }
 
   function haversineKm(a, b) {
@@ -1030,41 +1008,18 @@
   }
 
   function buildJourneyWindow(profile) {
-    const baseRule = transferRules[state.transportMode];
-    const outboundTicket = selectedTransportRecord("outbound");
-    const returnTicket = selectedTransportRecord("return");
-    const arrivalTerminal = outboundTicket?.to || baseRule.terminal;
-    const departureTerminal = returnTicket?.from || (state.transportMode === "air" ? "北京出发机场" : state.transportMode === "rail" ? "北京铁路出发站" : "酒店");
-    const rule = { ...baseRule, terminal: arrivalTerminal };
     const arrivalAt = parseLocalDateTime(state.arrivalDateTime);
     const departureAt = parseLocalDateTime(state.departureDateTime);
-    const arrivalDefinitions = rule.arrivalSegments.map(([label, minutes]) => [label.includes("至酒店") ? `${arrivalTerminal}至酒店` : label, minutes]);
-    const departureDefinitions = departureSegmentsFor(rule, departureAt).map(([label, minutes]) => [label.startsWith("酒店至") ? `酒店至${departureTerminal}` : label, minutes]);
-    const arrivalSegments = buildSegmentTimeline(arrivalAt, arrivalDefinitions);
-    const departureTotal = departureDefinitions.reduce((sum, segment) => sum + segment[1], 0);
-    const leaveHotelAt = addMinutes(departureAt, -departureTotal);
-    const departureSegments = buildSegmentTimeline(leaveHotelAt, departureDefinitions);
-    const dinnerSegment = departureSegments.find((segment) => segment.label === rule.dinnerSegmentLabel) || null;
     return {
-      mode: state.transportMode,
-      rule,
       hotel: profile.hotel,
       arrival: {
         startAt: arrivalAt,
-        endAt: arrivalSegments.at(-1)?.endAt || arrivalAt,
-        terminal: arrivalTerminal,
-        serviceNo: outboundTicket?.serviceNo || null,
-        totalMinutes: rule.arrivalSegments.reduce((sum, segment) => sum + segment[1], 0),
-        segments: arrivalSegments
+        endAt: arrivalAt
       },
       departure: {
-        startAt: leaveHotelAt,
+        startAt: departureAt,
         endAt: departureAt,
-        terminal: departureTerminal,
-        serviceNo: returnTicket?.serviceNo || null,
-        totalMinutes: departureTotal,
-        segments: departureSegments,
-        dinnerWindow: dinnerSegment ? { startAt: dinnerSegment.startAt, endAt: dinnerSegment.endAt } : null
+        dinnerWindow: null
       }
     };
   }
@@ -1162,11 +1117,7 @@
     const ids = new Set(items.map((item) => item.id));
     if (ids.has("universal")) return { venue: genericMeal("universal-simple", "环球影城园内简餐", "通州", [80, 150], ["主题套餐", "热食", "饮品"], 55), embeddedIn: "universal" };
     if (ids.has("summer-palace")) return { venue: genericMeal("summer-palace-simple", "颐和园园内简餐", "西郊", [35, 75], ["热食", "面食", "饮品"], 45), embeddedIn: "summer-palace" };
-    if (ids.has("badaling")) {
-      const wallLunch = firstAvailableRestaurant(["laofang-bbq"], "lunch", usedRestaurantIds);
-      if (state.transportMode === "drive" && wallLunch) return { venue: wallLunch, embeddedIn: null, extraTransit: 35 };
-      return { venue: genericMeal("badaling-simple", "八达岭景区内简餐", "延庆", [35, 70], ["热饮", "面食", "便携套餐"]), embeddedIn: "badaling" };
-    }
+    if (ids.has("badaling")) return { venue: genericMeal("badaling-simple", "八达岭景区内简餐", "延庆", [35, 70], ["热饮", "面食", "便携套餐"]), embeddedIn: "badaling" };
     if (ids.has("mutianyu")) return { venue: genericMeal("mutianyu-simple", "慕田峪景区内简餐", "怀柔", [35, 70], ["面食", "热饮", "便携套餐"]), embeddedIn: "mutianyu" };
     if (ids.has("temple-heaven")) return { venue: genericMeal("temple-heaven-lunch", "天坛周边午餐", "南城", [45, 90], ["京味热菜", "面食", "时蔬"], 60), embeddedIn: null };
     let venue = null;
@@ -1214,19 +1165,14 @@
   }
 
   function buildDinnerMeal(profile, dayIndex, date, inboundTransit, journey, usedRestaurantIds = new Set()) {
-    if (dayIndex === state.days - 1) {
-      const dinnerWindow = journey.departure.dinnerWindow;
-      if (!dinnerWindow || dateKey(dinnerWindow.startAt) !== dateKey(date)) return null;
-      const venue = genericMeal("terminal-simple", state.transportMode === "air" ? "机场候机区简餐" : state.transportMode === "drive" ? "酒店片区简餐" : "铁路站内简餐", "枢纽", [30, 65], ["热食", "饮品", "便携餐"], 40);
-      return buildMealEvent(venue, "dinner", dinnerWindow.startAt, {
-        duration: Math.round((dinnerWindow.endAt - dinnerWindow.startAt) / 60000),
-        routeNote: state.transportMode === "drive" ? "用餐后退房装车，再按计划驶离" : state.transportMode === "air" ? "完成值机安检后用餐，随后进入登机等候" : "抵达铁路站后用餐，随后完成安检、检票与候车"
-      });
-    }
+    const dayEndsAt = dayIndex === state.days - 1 && dateKey(journey.departure.startAt) === dateKey(date)
+      ? journey.departure.startAt
+      : atLocalTime(date, "21:30");
     const venue = selectDinnerVenue(profile, dayIndex, usedRestaurantIds);
     if (!venue) {
       const fallback = genericMeal("hotel-dinner", "酒店片区晚餐", profile.hotelZone, [45, 95], ["本地热菜", "面食", "时蔬"], 60);
-      return buildMealEvent(fallback, "dinner", inboundTransit?.arriveAt ? addMinutes(inboundTransit.arriveAt, 25) : atLocalTime(date, "17:30"), { routeNote: "酒店周边步行选择" });
+      const meal = buildMealEvent(fallback, "dinner", inboundTransit?.arriveAt ? addMinutes(inboundTransit.arriveAt, 25) : atLocalTime(date, "17:30"), { routeNote: "酒店周边步行选择" });
+      return meal.endAt <= dayEndsAt ? meal : null;
     }
     const service = mealServiceWindow(venue, "dinner", date);
     const hotelReady = inboundTransit?.arriveAt || atLocalTime(date, "17:00");
@@ -1235,10 +1181,11 @@
     if (service && plannedEndAt > service.closeAt) {
       const fallback = genericMeal("hotel-simple", "酒店片区简餐", profile.hotelZone, [40, 90], ["本地家常菜", "面食", "时令菜"], 60);
       startAt = addMinutes(hotelReady, 20);
-      if (addMinutes(startAt, fallback.duration) > atLocalTime(date, "21:30")) return null;
+      if (addMinutes(startAt, fallback.duration) > dayEndsAt) return null;
       return buildMealEvent(fallback, "dinner", startAt, { routeNote: "酒店周边步行选择" });
     }
-    return buildMealEvent(venue, "dinner", startAt, { routeNote: "从酒店短途前往，建议提前取号或预约" });
+    const meal = buildMealEvent(venue, "dinner", startAt, { routeNote: "从酒店短途前往，建议提前取号或预约" });
+    return meal.endAt <= dayEndsAt ? meal : null;
   }
 
   function layoutScheduledItems(items, window, profile, flagInfo, usedRestaurantIds = new Set()) {
@@ -1378,7 +1325,8 @@
       departAt: new Date(cursor),
       arriveAt: addMinutes(cursor, inbound.minutes)
     };
-    timeline.sort((a, b) => a.startAt - b.startAt);
+    const eventStart = (event) => event.startAt || event.departAt || event.arriveAt;
+    timeline.sort((a, b) => eventStart(a) - eventStart(b));
     return { valid: true, outboundTransit, stops, inboundTransit, meals, timeline };
   }
 
@@ -1524,10 +1472,9 @@
       hotel: [hotelLow, hotelHigh],
       food: [foodLow, foodHigh],
       local: [localLow, localHigh],
-      intercity: [state.intercity.low, state.intercity.high],
       total: [
-        roundMoney(state.intercity.low + hotelLow + foodLow + localLow + ticketLow, 50),
-        roundMoney(state.intercity.high + hotelHigh + foodHigh + localHigh + ticketHigh, 50)
+        roundMoney(hotelLow + foodLow + localLow + ticketLow, 50),
+        roundMoney(hotelHigh + foodHigh + localHigh + ticketHigh, 50)
       ]
     };
   }
@@ -1590,10 +1537,9 @@
     refreshIcons();
 
     try {
-      const [weather, intercity] = await Promise.all([loadWeather(), estimateIntercity()]);
+      const weather = await loadWeather();
       if (generationVersion !== planGenerationVersion) return;
       state.weather = weather;
-      state.intercity = intercity;
       const selectedProfiles = profiles.slice(0, 4);
       if (state.ages.some((age) => age >= 60)) selectedProfiles.push(profiles.find((profile) => profile.id === "relaxed"));
       state.plans = selectedProfiles.filter(Boolean).map(buildPlan);
@@ -1740,12 +1686,12 @@
         const { item, entity, startAt, endAt } = entry;
         const dayLabel = `D${day.dayIndex + 1}`;
         if (day.dayIndex === 0 && startAt < basePlan.journey.arrival.endAt) {
-          advice.push({ severity: "error", dayIndex: day.dayIndex, text: `${dayLabel}的${entity.name}早于${formatTime(basePlan.journey.arrival.endAt)}完成到京接驳。` });
+          advice.push({ severity: "error", dayIndex: day.dayIndex, text: `${dayLabel}的${entity.name}早于${formatTime(basePlan.journey.arrival.endAt)}到京时间。` });
         }
         const departureDinner = basePlan.journey.departure.dinnerWindow;
         const withinDepartureDinner = item.kind !== "attraction" && departureDinner && startAt >= departureDinner.startAt && endAt <= departureDinner.endAt;
         if (dateKey(date) === dateKey(basePlan.journey.departure.startAt) && endAt > basePlan.journey.departure.startAt && !withinDepartureDinner) {
-          advice.push({ severity: "error", dayIndex: day.dayIndex, text: `${dayLabel}的${entity.name}晚于${formatTime(basePlan.journey.departure.startAt)}离店赶车窗口。` });
+          advice.push({ severity: "error", dayIndex: day.dayIndex, text: `${dayLabel}的${entity.name}晚于${formatTime(basePlan.journey.departure.startAt)}计划离京时间。` });
         }
         if (item.kind === "attraction") {
           const rule = visitRules[entity.id];
@@ -1915,10 +1861,6 @@
     showToast("自编方案已保存到计划列表。");
   }
 
-  function journeySegmentLabel(segments) {
-    return segments.map((segment) => `${segment.label}${segment.minutes}分钟`).join(" · ");
-  }
-
   function renderMealEvent(meal) {
     const label = meal.mealType === "breakfast" ? "早餐" : meal.mealType === "lunch" ? "午饭" : "晚饭";
     const content = `
@@ -1946,39 +1888,26 @@
       return;
     }
 
-    const agesLabel = state.ages.join("、");
+    const rosterLabel = teamRosterText();
     els.planSheet.innerHTML = `
       <header class="plan-sheet-header">
         <div>
           <p class="section-kicker">PLAN ${plan.name.toUpperCase()}</p>
           <h2>${plan.name} · ${state.days}天${state.nights}晚</h2>
-          <p>${escapeHtml(state.origin)} → 北京 → ${escapeHtml(state.returnCity)} · ${formatDateTime(plan.journey.arrival.startAt)}到京 · ${formatDateTime(plan.journey.departure.endAt)}离京 · ${state.ages.length}人（${agesLabel}岁）</p>
+          <p>${formatDateTime(plan.journey.arrival.startAt)}到京 · ${formatDateTime(plan.journey.departure.endAt)}离京 · ${state.members.length}人</p>
         </div>
-        <div class="plan-total"><span>团队总费用区间</span><strong>${formatMoneyRange(...plan.cost.total)}</strong><small>约${formatMoney(plan.cost.total[0] / state.ages.length)}—${formatMoney(plan.cost.total[1] / state.ages.length)}/人</small></div>
+        <div class="plan-total"><span>北京行程费用区间</span><strong>${formatMoneyRange(...plan.cost.total)}</strong><small>约${formatMoney(plan.cost.total[0] / state.ages.length)}—${formatMoney(plan.cost.total[1] / state.ages.length)}/人</small></div>
       </header>
+      <section class="team-plan-band" aria-label="团队成员与排程参考">
+        <div><span>团队成员</span><strong>${state.members.length}人</strong></div>
+        <p>${escapeHtml(rosterLabel)}</p>
+        <small>${escapeHtml(teamPlanningNote())}</small>
+      </section>
       <div class="hotel-band">
         <div><span>酒店选址</span><strong>${plan.hotel}</strong></div>
         <p>${plan.hotelReason}</p>
         <b>${formatMoney(plan.hotelRange[0])}—${formatMoney(plan.hotelRange[1])}/间夜</b>
       </div>
-      <section class="journey-band" aria-label="往返通勤估算">
-        <div class="journey-leg">
-          <i data-lucide="log-in"></i>
-          <div>
-            <span>到京通勤 · 国庆缓冲估算</span>
-            <strong>${formatDateTime(plan.journey.arrival.startAt)} ${plan.journey.arrival.serviceNo ? `${plan.journey.arrival.serviceNo}抵达` : "抵达"}${plan.journey.mode === "drive" ? "酒店" : plan.journey.arrival.terminal} → ${formatDateTime(plan.journey.arrival.endAt)} 完成寄存</strong>
-            <small>${journeySegmentLabel(plan.journey.arrival.segments)} · ${plan.journey.rule.route}</small>
-          </div>
-        </div>
-        <div class="journey-leg">
-          <i data-lucide="log-out"></i>
-          <div>
-            <span>离京通勤 · 国庆缓冲估算</span>
-            <strong>${formatDateTime(plan.journey.departure.startAt)} 离店 → ${escapeHtml(plan.journey.departure.terminal)} → ${formatDateTime(plan.journey.departure.endAt)} ${plan.journey.departure.serviceNo ? `${plan.journey.departure.serviceNo}出发` : plan.journey.mode === "drive" ? "驶离酒店" : plan.journey.mode === "air" ? "航班计划离京" : "列车计划离京"}</strong>
-            <small>${journeySegmentLabel(plan.journey.departure.segments)} · ${plan.journey.rule.route}</small>
-          </div>
-        </div>
-      </section>
       ${plan.reviewNotes.map((note) => `<div class="plan-review-strip"><i data-lucide="route"></i><span>${note}</span></div>`).join("")}
       <div class="plan-days">
         ${plan.days.map((day) => `
@@ -2023,13 +1952,12 @@
           </section>`).join("")}
       </div>
       <div class="cost-breakdown">
-        <div class="cost-item"><span>城际往返</span><strong>${formatMoneyRange(...plan.cost.intercity)}</strong></div>
         <div class="cost-item"><span>酒店 ${plan.cost.rooms}间 × ${plan.cost.nights}晚</span><strong>${formatMoneyRange(...plan.cost.hotel)}</strong></div>
         <div class="cost-item"><span>景点门票</span><strong>${formatMoneyRange(...plan.cost.ticket)}</strong></div>
         <div class="cost-item"><span>餐饮</span><strong>${formatMoneyRange(...plan.cost.food)}</strong></div>
         <div class="cost-item"><span>市内交通</span><strong>${formatMoneyRange(...plan.cost.local)}</strong></div>
       </div>
-      <div class="plan-caveat"><i data-lucide="triangle-alert"></i><span>${overallWeatherAdvice()} 当前为“${paceRules[state.pace].label}”节奏；行程规则与美食资料核验于2026-09-03，静态站点不会在每次生成时实时抓取平台。往返通勤为分钟级缓冲估算，并非真实车次或航班时刻；索道、游船、优速通和购物未计入。</span></div>`;
+      <div class="plan-caveat"><i data-lucide="triangle-alert"></i><span>${overallWeatherAdvice()} 当前为“${paceRules[state.pace].label}”节奏；行程规则与美食资料核验于2026-09-03，静态站点不会在每次生成时实时抓取平台。费用不含进出北京的大交通，索道、游船、优速通和购物未计入。</span></div>`;
     refreshIcons();
   }
 
@@ -2236,31 +2164,33 @@
       if (event.target === els.restaurantDialog) els.restaurantDialog.close();
     });
 
-    els.teamAges.addEventListener("input", updateAgeState);
-    els.teamAges.addEventListener("change", schedulePlanRegeneration);
-    els.arrivalDateTime.addEventListener("input", () => { clearTransportBindingIfChanged("outbound"); syncTripRange(); renderTransportOptions(); });
-    els.departureDateTime.addEventListener("input", () => { clearTransportBindingIfChanged("return"); syncTripRange(); renderTransportOptions(); });
-    els.origin.addEventListener("input", renderTransportOptions);
-    els.returnCity.addEventListener("input", renderTransportOptions);
-    els.arrivalDateTime.addEventListener("change", schedulePlanRegeneration);
-    els.departureDateTime.addEventListener("change", schedulePlanRegeneration);
-    els.origin.addEventListener("change", schedulePlanRegeneration);
-    els.returnCity.addEventListener("change", schedulePlanRegeneration);
-    els.transportOptions.addEventListener("click", handleTransportOptionClick);
-
-    els.transportMode.addEventListener("click", (event) => {
-      const button = event.target.closest("button[data-value]");
-      if (!button) return;
-      state.transportMode = button.dataset.value;
-      selectSegment(els.transportMode, button);
-      const outbound = selectedTransportRecord("outbound");
-      const returnTrip = selectedTransportRecord("return");
-      if (outbound) els.arrivalDateTime.value = outbound.arriveAt;
-      if (returnTrip) els.departureDateTime.value = returnTrip.departAt;
-      syncTripRange();
-      renderTransportOptions();
+    els.addTeamMember.addEventListener("click", () => {
+      captureTeamState();
+      if (state.members.length >= 20) return showToast("团队成员最多20人。");
+      const member = { id: `member-${++memberSequence}`, name: "", gender: "private", age: null };
+      state.members.push(member);
+      renderTeamMembers(member.id);
+      captureTeamState();
+    });
+    els.teamMembers.addEventListener("click", (event) => {
+      const removeButton = event.target.closest("[data-remove-member]");
+      if (!removeButton) return;
+      captureTeamState();
+      if (state.members.length <= 1) return showToast("团队至少保留1名成员。");
+      const row = removeButton.closest("[data-member-id]");
+      state.members = state.members.filter((member) => member.id !== row.dataset.memberId);
+      renderTeamMembers();
+      captureTeamState();
       schedulePlanRegeneration();
     });
+    els.teamMembers.addEventListener("input", captureTeamState);
+    els.teamMembers.addEventListener("change", () => {
+      if (captureTeamState()) schedulePlanRegeneration();
+    });
+    els.arrivalDateTime.addEventListener("input", syncTripRange);
+    els.departureDateTime.addEventListener("input", syncTripRange);
+    els.arrivalDateTime.addEventListener("change", schedulePlanRegeneration);
+    els.departureDateTime.addEventListener("change", schedulePlanRegeneration);
 
     els.paceMode.addEventListener("click", (event) => {
       const button = event.target.closest("button[data-value]");
@@ -2384,8 +2314,8 @@
     renderAttractions();
     renderFoodFilters();
     renderRestaurants();
-    renderTransportOptions();
-    updateAgeState();
+    renderTeamMembers();
+    captureTeamState();
     setupEvents();
     refreshIcons();
     await generatePlans();

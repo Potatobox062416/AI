@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="进京赶考：北京团队旅行规划、景点信息与门票预约助手。">
-  <title>进京赶考</title>  <link rel="stylesheet" href="styles.css?v=20260903-3">
+  <title>进京赶考</title>  <link rel="stylesheet" href="styles.css?v=20260903-4">
 </head>
 <body>
   <header class="topbar">
@@ -101,52 +101,32 @@
           <p class="section-kicker">TRIP WORKBENCH</p>
           <h1 id="planner-title">旅游计划</h1>
         </div>
-        <p id="planner-heading-note">输入团队与日期，生成可比较的北京行程。</p>
+        <p id="planner-heading-note">添加团队成员并设置到离京时间，生成可比较的北京行程。</p>
       </div>
 
       <div class="planner-layout workspace">
         <form class="planner-form" id="planner-form">
-          <div class="form-section">
-            <div class="form-section-title"><span>团队</span><output id="team-count">4人</output></div>
-            <label class="field-label" for="team-ages">每个人的年龄</label>
-            <textarea id="team-ages" rows="2" inputmode="numeric" placeholder="例如：35、33、10、6">35、33、10、6</textarea>
-            <p class="field-message" id="age-message">用逗号或空格分隔，费用优惠将按年龄估算。</p>
+          <div class="form-section team-section">
+            <div class="form-section-title"><span>团队成员</span><output id="team-count">4人</output></div>
+            <div class="team-members" id="team-members"></div>
+            <button class="secondary-button team-add-button" id="add-team-member" type="button">
+              <i data-lucide="user-plus" aria-hidden="true"></i>添加团队成员
+            </button>
+            <p class="field-message" id="team-message">姓名用于名单核对，年龄用于票价与强度判断。</p>
           </div>
-
-          <div class="form-section two-column-fields">
-            <label>
-              <span class="field-label">出发地</span>
-              <input id="origin" type="text" value="上海" autocomplete="address-level1">
-            </label>
-            <label>
-              <span class="field-label">返回地</span>
-              <input id="return-city" type="text" value="上海" autocomplete="address-level1">
-            </label>
-          </div>
-
-          <div class="form-section">
-            <span class="field-label">往返方式</span>
-            <div class="segmented" id="transport-mode" role="group" aria-label="往返方式">
-              <button class="is-selected" type="button" data-value="rail"><i data-lucide="train-front"></i>高铁</button>
-              <button type="button" data-value="air"><i data-lucide="plane"></i>飞机</button>
-              <button type="button" data-value="drive"><i data-lucide="car-front"></i>自驾</button>
-            </div>
-          </div>
-
-          <div class="form-section transport-options" id="transport-options" aria-live="polite"></div>
 
           <div class="form-section trip-time-fields">
-            <div class="form-section-title"><span>实际行程时间</span><output id="time-binding-status">未绑定票单</output></div>
+            <div class="form-section-title"><span>行程时间</span><output id="time-binding-status">自动计算</output></div>
             <label>
-              <span class="field-label" id="arrival-time-label">计划到京时间</span>
+              <span class="field-label">到京时间</span>
               <input id="arrival-datetime" type="datetime-local" value="2026-10-01T09:30" step="60" required>
             </label>
             <label>
-              <span class="field-label" id="departure-time-label">计划离京时间</span>
+              <span class="field-label">离京时间</span>
               <input id="departure-datetime" type="datetime-local" value="2026-10-05T18:00" step="60" required>
             </label>
             <output class="trip-duration" id="trip-duration" for="arrival-datetime departure-datetime" aria-live="polite">5天4晚</output>
-            <p class="field-message" id="trip-time-message">选择班次后自动采用到站或落地时间；也可手动修改。</p>
+            <p class="field-message" id="trip-time-message">到京时间视为可开始市内行程的时间；离京时间视为当天活动截止时间。</p>
           </div>
 
           <div class="form-section">
@@ -161,7 +141,7 @@
           <button class="primary-button" type="submit">
             <i data-lucide="sparkles" aria-hidden="true"></i>生成旅游计划
           </button>
-          <p class="form-footnote">费用为距离模型与公开票价的区间估算，不等同于实时报价。</p>
+          <p class="form-footnote">费用按酒店、景点、餐饮与市内交通估算，不含进出北京的大交通。</p>
         </form>
 
         <div class="planner-results">
@@ -291,7 +271,7 @@
   <script src="food-data.js?v=20260903-5"></script>
   <script src="food-data-daxiang.js?v=20260903-5"></script>
   <script src="food-data-daba.js?v=20260903-5"></script>
-  <script src="app.js?v=20260903-8"></script>
+  <script src="app.js?v=20260903-10"></script>
 </body>
 </html>
 

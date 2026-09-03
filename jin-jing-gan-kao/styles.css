@@ -634,6 +634,68 @@ svg {
   font-size: 12px;
 }
 
+.team-members {
+  display: grid;
+  gap: 10px;
+}
+
+.team-member {
+  padding: 10px;
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--jade);
+  border-radius: 4px;
+  background: #fafbfa;
+}
+
+.team-member > header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 30px;
+  margin-bottom: 7px;
+}
+
+.team-member > header strong {
+  color: var(--jade);
+  font-family: var(--utility);
+  font-size: 12px;
+}
+
+.team-member > header .icon-button {
+  width: 30px;
+  height: 30px;
+}
+
+.team-member > header .icon-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.35;
+}
+
+.team-member label > span {
+  display: block;
+  margin-bottom: 4px;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.team-member input,
+.team-member select {
+  min-height: 40px;
+}
+
+.member-facts {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(90px, 0.8fr);
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.team-add-button {
+  width: 100%;
+  margin-top: 12px;
+}
+
 input,
 textarea,
 select {
@@ -1172,9 +1234,18 @@ select:focus {
 }
 
 .secondary-button.compact {
+  width: auto;
   min-height: 36px;
   padding-inline: 12px;
   font-size: 10px;
+}
+
+.plan-editor-head > div {
+  min-width: 150px;
+}
+
+.plan-editor-head span {
+  white-space: nowrap;
 }
 
 .form-footnote {
@@ -1571,6 +1642,50 @@ select:focus {
   font-size: 22px;
 }
 
+.team-plan-band {
+  display: grid;
+  grid-template-columns: 140px minmax(0, 1fr);
+  gap: 5px 16px;
+  padding: 14px 24px;
+  border-bottom: 1px solid var(--line);
+  background: #f7f9f7;
+}
+
+.team-plan-band > div {
+  grid-row: 1 / span 2;
+}
+
+.team-plan-band span,
+.team-plan-band strong {
+  display: block;
+}
+
+.team-plan-band span {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.team-plan-band strong {
+  font-size: 16px;
+}
+
+.team-plan-band p,
+.team-plan-band small {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.team-plan-band p {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.team-plan-band small {
+  color: var(--muted);
+  font-size: 12px;
+}
+
 .hotel-band {
   display: grid;
   grid-template-columns: 160px 1fr auto;
@@ -1952,7 +2067,7 @@ button.meal-stop:hover {
 
 .cost-breakdown {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   border-top: 1px solid var(--line);
   background: #fafbfa;
 }
@@ -3318,6 +3433,184 @@ button.meal-stop:hover {
   }
 }
 
+/* Readability pass: keep operational details legible at desktop and mobile sizes. */
+body {
+  font-size: 16px;
+}
+
+.brand small,
+.weather-brief small,
+.filter-note,
+.card-location,
+.card-meta span,
+.view-heading > p,
+.catalog-status {
+  font-size: 13px;
+}
+
+.nav-item {
+  font-size: 15px;
+}
+
+.eyebrow,
+.section-kicker,
+.filter-label,
+.field-label,
+.form-section-title output {
+  font-size: 13px;
+}
+
+.card-category,
+.hero-metrics {
+  font-size: 12px;
+}
+
+input,
+textarea,
+select,
+.segmented button {
+  font-size: 15px;
+}
+
+.field-message,
+.form-footnote {
+  font-size: 13px;
+}
+
+.trip-duration,
+.weather-lead strong,
+.weather-day strong {
+  font-size: 15px;
+}
+
+.weather-lead small,
+.weather-day time,
+.weather-day small {
+  font-size: 12px;
+}
+
+.plan-tab strong {
+  font-size: 15px;
+}
+
+.plan-tab small,
+.plan-editor-head span,
+.plan-editor-request > label,
+.custom-day > header span,
+.custom-day > header small,
+.custom-item-row label span,
+.custom-advice-head span,
+.custom-advice-head strong,
+.custom-add-actions .text-button,
+.plan-editor-actions .text-button {
+  font-size: 12px;
+}
+
+.secondary-button.compact,
+.custom-item-row input,
+.custom-item-row select,
+.custom-advice-item,
+.custom-empty {
+  font-size: 13px;
+}
+
+.plan-sheet-header p,
+.hotel-band p,
+.hotel-band b,
+.plan-review-strip,
+.day-audit-note,
+.day-window-note,
+.plan-caveat {
+  font-size: 13px;
+}
+
+.plan-total span,
+.plan-total small,
+.hotel-band span,
+.cost-item span {
+  font-size: 12px;
+}
+
+.hotel-band strong,
+.day-heading h3 {
+  font-size: 17px;
+}
+
+.day-heading small,
+.day-stop em,
+.meal-stop time,
+.meal-stop em,
+.day-transit,
+.day-commute {
+  font-size: 12px;
+}
+
+.day-stop time,
+.rest-stop {
+  font-size: 13px;
+}
+
+.day-stop strong,
+.meal-stop strong {
+  font-size: 14px;
+}
+
+.day-stop span,
+.meal-stop span,
+.meal-stop small,
+.cost-item strong {
+  font-size: 12px;
+}
+
+.plan-select-label > span,
+.booking-date span,
+.booking-date small,
+.booking-legend,
+.ticket-date-cell time,
+.ticket-date-cell small,
+.ticket-main p,
+.ticket-rule p,
+.ticket-status,
+.ticket-actions,
+.food-card-topline,
+.food-location,
+.food-source-note,
+.restaurant-image-sources > span,
+.restaurant-image-sources a span {
+  font-size: 12px;
+}
+
+.ticket-rule strong,
+.food-description,
+.food-card-footer,
+.dialog-location,
+.highlight-list span,
+.dialog-booking p {
+  font-size: 13px;
+}
+
+.dialog-play,
+.dialog-booking > span {
+  font-size: 14px;
+}
+
+@media (max-width: 860px) {
+  .nav-item {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 600px) {
+  .team-plan-band {
+    grid-template-columns: 1fr;
+    padding: 14px 18px;
+  }
+
+  .team-plan-band > div {
+    grid-row: auto;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -3365,3 +3658,4 @@ button.meal-stop:hover {
     border: 0;
   }
 }
+
