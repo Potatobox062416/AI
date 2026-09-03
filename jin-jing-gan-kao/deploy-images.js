@@ -1,106 +1,106 @@
 (function () {
   const attractionImages = {
   "palace-museum": [
-    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Beijing%20pano.jpg?width=1200",
-    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Corner%20Tower%20of%20Forbidden%20City%20(20240627).jpg?width=1200",
-    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Forbidden%20City%20Panorama%2C%20Beijing%20-%20panoramio.jpg?width=1200",
-    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Forbidden%20City%20Panorama%201.jpg?width=1200"
+    "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2e/Beijing_pano.jpg/1280px-Beijing_pano.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/35/Corner_Tower_of_Forbidden_City_%2820240627%29.jpg/1280px-Corner_Tower_of_Forbidden_City_%2820240627%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6c/Forbidden_City_Panorama%2C_Beijing_-_panoramio.jpg/1280px-Forbidden_City_Panorama%2C_Beijing_-_panoramio.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/04/Forbidden_City_Panorama_1.jpg/1280px-Forbidden_City_Panorama_1.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
   ],
   "tiananmen": [
-    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Beijing%20-Tiananmen%20Square%202016%20pic04.jpg?width=1200",
-    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Beijing%20-Tiananmen%20Square%202016%20pic09.jpg?width=1200",
-    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Beijing%20China%20Tiananmen-Square-01.jpg?width=1200",
-    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Beijing%20China%20Tiananmen-Square-02.jpg?width=1200"
+    "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9e/Beijing_-Tiananmen_Square_2016_pic04.jpg/1280px-Beijing_-Tiananmen_Square_2016_pic04.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/23/Beijing_China_Tiananmen-Square-01.jpg/1280px-Beijing_China_Tiananmen-Square-01.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e4/Beijing_China_Tiananmen-Square-02.jpg/1280px-Beijing_China_Tiananmen-Square-02.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7e/Beijing_China_Tiananmen-Square-03.jpg/1280px-Beijing_China_Tiananmen-Square-03.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
   ],
   "national-museum": [
-    "https://commons.wikimedia.org/wiki/Special:Redirect/file/20200110%20National%20Museum%20of%20China-1.jpg?width=1200",
-    "https://commons.wikimedia.org/wiki/Special:Redirect/file/20200110%20National%20Museum%20of%20China-2.jpg?width=1200",
-    "https://commons.wikimedia.org/wiki/Special:Redirect/file/20200110%20National%20Museum%20of%20China-3.jpg?width=1200",
-    "https://commons.wikimedia.org/wiki/Special:Redirect/file/20200110%20National%20Museum%20of%20China-4.jpg?width=1200"
+    "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/59/20200110_National_Museum_of_China-1.jpg/1280px-20200110_National_Museum_of_China-1.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/10/20200110_National_Museum_of_China-2.jpg/1280px-20200110_National_Museum_of_China-2.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/50/20200110_National_Museum_of_China-3.jpg/1280px-20200110_National_Museum_of_China-3.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7e/20200110_National_Museum_of_China-4.jpg/1280px-20200110_National_Museum_of_China-4.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
   ],
   "jingshan": [
-    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Beijing%20Forbidden%20City%20Viewed%20from%20Jingshan%20Park%20(10553754905).jpg?width=1200",
-    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Beijing%20Jingshan%20Park%20Pavilion%20(10553761515).jpg?width=1200",
-    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Beijing%20Jingshan%20Park%20Pavilion%20(10553770266).jpg?width=1200",
-    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Beijing%20Jingshan%20Park%20View%20of%201991%20Skyline%20(10553984093).jpg?width=1200"
+    "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5c/Beijing_Forbidden_City_Viewed_from_Jingshan_Park_%2810553754905%29.jpg/1280px-Beijing_Forbidden_City_Viewed_from_Jingshan_Park_%2810553754905%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/71/Beijing_Jingshan_Park_Pavilion_%2810553761515%29.jpg/1280px-Beijing_Jingshan_Park_Pavilion_%2810553761515%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8a/Beijing_Jingshan_Park_Pavilion_%2810553770266%29.jpg/1280px-Beijing_Jingshan_Park_Pavilion_%2810553770266%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/53/Beijing_Jingshan_Park_View_of_1991_Skyline_%2810553984093%29.jpg/1280px-Beijing_Jingshan_Park_View_of_1991_Skyline_%2810553984093%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
   ],
   "temple-heaven": [
-    "https://commons.wikimedia.org/wiki/Special:Redirect/file/20200110%20Temple%20of%20Heaven-1.jpg?width=1200",
-    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Beijing%2C%20Tiantan%2C%20Imperial%20Vault%20of%20Heaven%20WLF%202023.jpg?width=1200",
-    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Temple%20of%20Heaven%2C%20Beijing%2C%20China%20(26434809999).jpg?width=1200",
-    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Temple%20of%20Heaven%2C%20Beijing%2C%20China%20(36243505613).jpg?width=1200"
+    "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/86/20200110_Temple_of_Heaven-1.jpg/1280px-20200110_Temple_of_Heaven-1.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0d/Beijing%2C_Tiantan%2C_Imperial_Vault_of_Heaven_WLF_2023.jpg/1280px-Beijing%2C_Tiantan%2C_Imperial_Vault_of_Heaven_WLF_2023.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "https://upload.wikimedia.org/wikipedia/commons/5/55/Temple_of_Heaven%2C_Beijing%2C_China_%2826434809999%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+    "https://upload.wikimedia.org/wikipedia/commons/3/35/Temple_of_Heaven%2C_Beijing%2C_China_%2836243505613%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled"
   ],
   "summer-palace": [
-    "https://commons.wikimedia.org/wiki/Special:Redirect/file/20090530%20Beijing%20Summer%20Palace%208467.jpg?width=1200",
-    "https://commons.wikimedia.org/wiki/Special:Redirect/file/A%20girl%20in%20traditional%20Chinese%20dress%20at%20the%20Summer%20Palace%2C%20Beijing.jpg?width=1200",
-    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Beijing-1978%20Lake%20Summer%20Palace%20Paul%20Burns.jpg?width=1200",
-    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Beijing%20China%20Summer-Palace-01.jpg?width=1200"
+    "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fb/20090530_Beijing_Summer_Palace_8467.jpg/1280px-20090530_Beijing_Summer_Palace_8467.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9f/A_girl_in_traditional_Chinese_dress_at_the_Summer_Palace%2C_Beijing.jpg/1280px-A_girl_in_traditional_Chinese_dress_at_the_Summer_Palace%2C_Beijing.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1f/Beijing-1978_Lake_Summer_Palace_Paul_Burns.jpg/1280px-Beijing-1978_Lake_Summer_Palace_Paul_Burns.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e6/Beijing_China_Summer-Palace-01.jpg/1280px-Beijing_China_Summer-Palace-01.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
   ],
   "yuanmingyuan": [
-    "https://commons.wikimedia.org/wiki/Special:Redirect/file/20090731%20Remains%20of%20the%20Old%20Summer%20Palace%2002.jpg?width=1200",
-    "https://commons.wikimedia.org/wiki/Special:Redirect/file/A%20male%20mandarin%20duck%20in%20the%20Yuanmingyuan%20Wetland%20in%20Beijing%20in%20March%202024.jpg?width=1200",
-    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Belvedere%20of%20the%20God%20of%20Literature%2C%20Summer%20Palace%2C%20Beijing%2C%206%E2%80%9318%20October%2C%201860.jpg?width=1200",
-    "https://commons.wikimedia.org/wiki/Special:Redirect/file/East%20Gate%20of%20Yuanmingyuan%20Park%20(20250426175242).jpg?width=1200"
+    "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9e/20090731_Remains_of_the_Old_Summer_Palace_02.jpg/1280px-20090731_Remains_of_the_Old_Summer_Palace_02.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8b/A_male_mandarin_duck_in_the_Yuanmingyuan_Wetland_in_Beijing_in_March_2024.jpg/1280px-A_male_mandarin_duck_in_the_Yuanmingyuan_Wetland_in_Beijing_in_March_2024.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/ad/Belvedere_of_the_God_of_Literature%2C_Summer_Palace%2C_Beijing%2C_6%E2%80%9318_October%2C_1860.jpg/1280px-Belvedere_of_the_God_of_Literature%2C_Summer_Palace%2C_Beijing%2C_6%E2%80%9318_October%2C_1860.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/80/East_Gate_of_Yuanmingyuan_Park_%2820250426175242%29.jpg/1280px-East_Gate_of_Yuanmingyuan_Park_%2820250426175242%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
   ],
   "beihai": [
-    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Beihai%20Park%20Br%C3%BCcke-20110104-RM-105624.jpg?width=1200",
-    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Beihai%20Park%20Br%C3%BCcke-20110104-RM-110001.jpg?width=1200",
-    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Beihai%20Park%20Kunming%20Lake%20Winter-20110104-RM-140211.jpg?width=1200",
-    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Beihai%20Park%20Tempel-20110104-RM-114911.jpg?width=1200"
+    "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/01/Beihai_Park_Br%C3%BCcke-20110104-RM-105624.jpg/1280px-Beihai_Park_Br%C3%BCcke-20110104-RM-105624.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0a/Beihai_Park_Br%C3%BCcke-20110104-RM-110001.jpg/1280px-Beihai_Park_Br%C3%BCcke-20110104-RM-110001.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c5/Beihai_Park_Kunming_Lake_Winter-20110104-RM-140211.jpg/1280px-Beihai_Park_Kunming_Lake_Winter-20110104-RM-140211.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/ab/Beihai_Park_Kunming_Lake_Winter-20110104-RM-140223.jpg/1280px-Beihai_Park_Kunming_Lake_Winter-20110104-RM-140223.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
   ],
   "prince-gong": [
-    "https://commons.wikimedia.org/wiki/Special:Redirect/file/2014.08.17.154735%20Dingfu%20Jie%20Prince%20Gong's%20Mansion%20Beijing.jpg?width=1200",
-    "https://commons.wikimedia.org/wiki/Special:Redirect/file/2014.08.17.154948%20Entrance%20Prince%20Gong's%20Mansion%20Beijing.jpg?width=1200",
-    "https://commons.wikimedia.org/wiki/Special:Redirect/file/2014.08.17.155256%20Prince%20Gong's%20Mansion%20Beijing.jpg?width=1200",
-    "https://commons.wikimedia.org/wiki/Special:Redirect/file/2014.08.17.160013%20Prince%20Gong's%20Mansion%20Beijing.jpg?width=1200"
+    "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f1/2014.08.17.154735_Dingfu_Jie_Prince_Gong%27s_Mansion_Beijing.jpg/1280px-2014.08.17.154735_Dingfu_Jie_Prince_Gong%27s_Mansion_Beijing.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d8/2014.08.17.154948_Entrance_Prince_Gong%27s_Mansion_Beijing.jpg/1280px-2014.08.17.154948_Entrance_Prince_Gong%27s_Mansion_Beijing.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b3/2014.08.17.160013_Prince_Gong%27s_Mansion_Beijing.jpg/1280px-2014.08.17.160013_Prince_Gong%27s_Mansion_Beijing.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c2/2014.08.17.160114_Prince_Gong%27s_Mansion_Beijing.jpg/1280px-2014.08.17.160114_Prince_Gong%27s_Mansion_Beijing.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
   ],
   "lama-temple": [
-    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Beijing-Lamakloster%20Yonghe-22-Hof2-Opfernde-gje.jpg?width=1200",
-    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Beijing-Lamakloster%20Yonghe-30-Guide-gje.jpg?width=1200",
-    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Beijing-Lamakloster%20Yonghe-46-Betender-gje.jpg?width=1200",
-    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Beijing-Lamakloster%20Yonghe-52-Hof3-Seerosen-gje.jpg?width=1200"
+    "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/52/Beijing-Lamakloster_Yonghe-22-Hof2-Opfernde-gje.jpg/1280px-Beijing-Lamakloster_Yonghe-22-Hof2-Opfernde-gje.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f1/Beijing-Lamakloster_Yonghe-30-Guide-gje.jpg/1280px-Beijing-Lamakloster_Yonghe-30-Guide-gje.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6c/Beijing-Lamakloster_Yonghe-46-Betender-gje.jpg/1280px-Beijing-Lamakloster_Yonghe-46-Betender-gje.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/af/Beijing-Lamakloster_Yonghe-52-Hof3-Seerosen-gje.jpg/1280px-Beijing-Lamakloster_Yonghe-52-Hof3-Seerosen-gje.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
   ],
   "shichahai": [
-    "https://commons.wikimedia.org/wiki/Special:Redirect/file/2016-09-11%20Shichahai%20Beijing%20anagoria%2002.jpg?width=1200",
-    "https://commons.wikimedia.org/wiki/Special:Redirect/file/2016-09-11%20Shichahai%20Beijing%20anagoria%2010.jpg?width=1200",
-    "https://commons.wikimedia.org/wiki/Special:Redirect/file/2016-09-11%20Shichahai%20Beijing%20anagoria%2015.jpg?width=1200",
-    "https://commons.wikimedia.org/wiki/Special:Redirect/file/2016-09-11%20Shichahai%20Beijing%20anagoria%2016.jpg?width=1200"
+    "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/46/2016-09-11_Shichahai_Beijing_anagoria_02.jpg/1280px-2016-09-11_Shichahai_Beijing_anagoria_02.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c9/2016-09-11_Shichahai_Beijing_anagoria_10.jpg/1280px-2016-09-11_Shichahai_Beijing_anagoria_10.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/38/2016-09-11_Shichahai_Beijing_anagoria_11.jpg/1280px-2016-09-11_Shichahai_Beijing_anagoria_11.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/61/2016-09-11_Shichahai_Beijing_anagoria_16.jpg/1280px-2016-09-11_Shichahai_Beijing_anagoria_16.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
   ],
   "badaling": [
-    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Badalingchangcheng%20railway%20station%20building.jpg?width=1200",
-    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Boarding%20channel%20of%20Badaling%20Great%20Wall%20Railway%20Station%20(20220109163307).jpg?width=1200",
-    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Boarding%20escalator%20entrance%20of%20Badaling%20Great%20Wall%20Railway%20Station%20(20220109162828).jpg?width=1200",
-    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Boarding%20faregates%20of%20Badaling%20Great%20Wall%20Railway%20Station%20(20220109162527).jpg?width=1200"
+    "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/eb/Badalingchangcheng_railway_station_building.jpg/1280px-Badalingchangcheng_railway_station_building.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2b/Boarding_channel_of_Badaling_Great_Wall_Railway_Station_%2820220109163307%29.jpg/1280px-Boarding_channel_of_Badaling_Great_Wall_Railway_Station_%2820220109163307%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b6/Boarding_escalator_entrance_of_Badaling_Great_Wall_Railway_Station_%2820220109162828%29.jpg/1280px-Boarding_escalator_entrance_of_Badaling_Great_Wall_Railway_Station_%2820220109162828%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/be/Boarding_faregates_of_Badaling_Great_Wall_Railway_Station_%2820220109162527%29.jpg/1280px-Boarding_faregates_of_Badaling_Great_Wall_Railway_Station_%2820220109162527%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
   ],
   "mutianyu": [
-    "https://commons.wikimedia.org/wiki/Special:Redirect/file/66954-The-Great-Wall%2C%20Mutianyu.jpg?width=1200",
-    "https://commons.wikimedia.org/wiki/Special:Redirect/file/67016-The-Great-Wall%2C%20Mutianyu.jpg?width=1200",
-    "https://commons.wikimedia.org/wiki/Special:Redirect/file/67052-The-Great-Wall%2C%20Mutianyu.jpg?width=1200",
-    "https://commons.wikimedia.org/wiki/Special:Redirect/file/67054-The-Great-Wall%2C%20Mutianyu.jpg?width=1200"
+    "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/ad/66954-The-Great-Wall%2C_Mutianyu.jpg/1280px-66954-The-Great-Wall%2C_Mutianyu.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/43/67016-The-Great-Wall%2C_Mutianyu.jpg/1280px-67016-The-Great-Wall%2C_Mutianyu.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7e/67052-The-Great-Wall%2C_Mutianyu.jpg/1280px-67052-The-Great-Wall%2C_Mutianyu.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ef/67054-The-Great-Wall%2C_Mutianyu.jpg/1280px-67054-The-Great-Wall%2C_Mutianyu.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
   ],
   "beijing-zoo": [
-    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Ailuropoda%20melanoleuca%20-%20Beijing%20Zoo.JPG?width=1200",
-    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Beijing%20Zoo%20Giant%20Panda%20(9870661185).jpg?width=1200",
-    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Beijing%20Zoo%20Giant%20Panda%20(9870667604).jpg?width=1200",
-    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Beijing%20Zoo%20Giant%20Panda%20(9870667704).jpg?width=1200"
+    "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/87/Ailuropoda_melanoleuca_-_Beijing_Zoo.JPG/1280px-Ailuropoda_melanoleuca_-_Beijing_Zoo.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6d/Beijing_Zoo_Giant_Panda_%289870661185%29.jpg/1280px-Beijing_Zoo_Giant_Panda_%289870661185%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/99/Beijing_Zoo_Giant_Panda_%289870667604%29.jpg/1280px-Beijing_Zoo_Giant_Panda_%289870667604%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/50/Beijing_Zoo_Giant_Panda_%289870667704%29.jpg/1280px-Beijing_Zoo_Giant_Panda_%289870667704%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
   ],
   "art-798": [
-    "https://commons.wikimedia.org/wiki/Special:Redirect/file/798%20Art%20District%20banner.jpg?width=1200",
-    "https://commons.wikimedia.org/wiki/Special:Redirect/file/798%20Art%20District%20beijing%20inside%20of%20a%20gallery.jpg?width=1200",
-    "https://commons.wikimedia.org/wiki/Special:Redirect/file/798%20Art%20Zone%20-%20panoramio%20(1).jpg?width=1200",
-    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Beijing%20-%20Art%20789%20Zone%20-%20Mariage%20picture.jpg?width=1200"
+    "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/ac/798_Art_District_banner.jpg/1280px-798_Art_District_banner.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ef/798_Art_District_beijing_inside_of_a_gallery.jpg/1280px-798_Art_District_beijing_inside_of_a_gallery.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/60/798_Art_Zone_-_panoramio_%281%29.jpg/1280px-798_Art_Zone_-_panoramio_%281%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "https://upload.wikimedia.org/wikipedia/commons/e/e4/Beijing_-_Art_789_Zone_-_Mariage_picture.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled"
   ],
   "olympic-park": [
-    "https://commons.wikimedia.org/wiki/Special:Redirect/file/%22Bird%20nest%22%20-%20Olympic%20Stadium%2C%20Beijing%2C%20China%20-%20panoramio.jpg?width=1200",
-    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Beijing%2C%20Birds%20Nest%20-%20National%20Stadium%20-%20panoramio.jpg?width=1200",
-    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Beijing%2C%20Birds%20Nest%20-%20National%20Stadium%20-%20panoramio%20(1).jpg?width=1200",
-    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Beijing%20Bird%20nest.jpg?width=1200"
+    "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/ac/%22Bird_nest%22_-_Olympic_Stadium%2C_Beijing%2C_China_-_panoramio.jpg/1280px-%22Bird_nest%22_-_Olympic_Stadium%2C_Beijing%2C_China_-_panoramio.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c7/Beijing%2C_Birds_Nest_-_National_Stadium_-_panoramio.jpg/1280px-Beijing%2C_Birds_Nest_-_National_Stadium_-_panoramio.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b5/Beijing%2C_Birds_Nest_-_National_Stadium_-_panoramio_%281%29.jpg/1280px-Beijing%2C_Birds_Nest_-_National_Stadium_-_panoramio_%281%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c8/Beijing_Bird_nest.jpg/1280px-Beijing_Bird_nest.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
   ],
   "universal": [
-    "https://commons.wikimedia.org/wiki/Special:Redirect/file/2633126%20at%20Universal%20Resort%2C%20Universal%20Blvd%20(20210826122908).jpg?width=1200",
-    "https://commons.wikimedia.org/wiki/Special:Redirect/file/5727621%20at%20Universal%20Resort%2C%20Universal%20Blvd%20(20210826122713).jpg?width=1200",
-    "https://commons.wikimedia.org/wiki/Special:Redirect/file/5727621%20at%20Universal%20Resort%2C%20Universal%20Blvd%20(20210826122714).jpg?width=1200",
-    "https://commons.wikimedia.org/wiki/Special:Redirect/file/5735448%20at%20Universal%20Resort%2C%20Universal%20Blvd%20(20210826122124).jpg?width=1200"
+    "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c5/2633126_at_Universal_Resort%2C_Universal_Blvd_%2820210826122908%29.jpg/1280px-2633126_at_Universal_Resort%2C_Universal_Blvd_%2820210826122908%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/20/5727621_at_Universal_Resort%2C_Universal_Blvd_%2820210826122713%29.jpg/1280px-5727621_at_Universal_Resort%2C_Universal_Blvd_%2820210826122713%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/67/5727621_at_Universal_Resort%2C_Universal_Blvd_%2820210826122714%29.jpg/1280px-5727621_at_Universal_Resort%2C_Universal_Blvd_%2820210826122714%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/db/5735448_at_Universal_Resort%2C_Universal_Blvd_%2820210826122124%29.jpg/1280px-5735448_at_Universal_Resort%2C_Universal_Blvd_%2820210826122124%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
   ]
 };
   window.ATTRACTIONS?.forEach((item) => {
