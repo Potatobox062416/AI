@@ -13,7 +13,7 @@
     "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7e/Beijing_China_Tiananmen-Square-03.jpg/1280px-Beijing_China_Tiananmen-Square-03.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
   ],
   "national-museum": [
-    "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/59/20200110_National_Museum_of_China-1.jpg/1280px-20200110_National_Museum_of_China-1.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "https://upload.wikimedia.org/wikipedia/commons/5/59/20200110_National_Museum_of_China-1.jpg",
     "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/10/20200110_National_Museum_of_China-2.jpg/1280px-20200110_National_Museum_of_China-2.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
     "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/50/20200110_National_Museum_of_China-3.jpg/1280px-20200110_National_Museum_of_China-3.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
     "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7e/20200110_National_Museum_of_China-4.jpg/1280px-20200110_National_Museum_of_China-4.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
@@ -31,7 +31,7 @@
     "https://upload.wikimedia.org/wikipedia/commons/3/35/Temple_of_Heaven%2C_Beijing%2C_China_%2836243505613%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled"
   ],
   "summer-palace": [
-    "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fb/20090530_Beijing_Summer_Palace_8467.jpg/1280px-20090530_Beijing_Summer_Palace_8467.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "https://upload.wikimedia.org/wikipedia/commons/f/fb/20090530_Beijing_Summer_Palace_8467.jpg",
     "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9f/A_girl_in_traditional_Chinese_dress_at_the_Summer_Palace%2C_Beijing.jpg/1280px-A_girl_in_traditional_Chinese_dress_at_the_Summer_Palace%2C_Beijing.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
     "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1f/Beijing-1978_Lake_Summer_Palace_Paul_Burns.jpg/1280px-Beijing-1978_Lake_Summer_Palace_Paul_Burns.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
     "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e6/Beijing_China_Summer-Palace-01.jpg/1280px-Beijing_China_Summer-Palace-01.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"

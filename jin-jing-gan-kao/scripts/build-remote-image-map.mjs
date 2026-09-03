@@ -5,11 +5,17 @@ const siteRoot = path.resolve(import.meta.dirname, "..");
 const attractionCredits = JSON.parse(await fs.readFile(path.join(siteRoot, "assets", "attractions", "image-credits.json"), "utf8"));
 const restaurantCredits = JSON.parse(await fs.readFile(path.join(siteRoot, "assets", "restaurants", "restaurant-image-credits.json"), "utf8"));
 const restaurantReplacements = JSON.parse(await fs.readFile(path.join(siteRoot, "assets", "restaurants", "restaurant-image-replacements.json"), "utf8"));
+const attractionImageOverrides = {
+  "File:20200110 National Museum of China-1.jpg": "https://upload.wikimedia.org/wikipedia/commons/5/59/20200110_National_Museum_of_China-1.jpg",
+  "File:20090530 Beijing Summer Palace 8467.jpg": "https://upload.wikimedia.org/wikipedia/commons/f/fb/20090530_Beijing_Summer_Palace_8467.jpg"
+};
 
 const attractionImages = {};
 for (const entry of attractionCredits) {
   const fileName = entry.title.replace(/^File:/, "");
-  const image = `https://commons.wikimedia.org/wiki/Special:Redirect/file/${encodeURIComponent(fileName)}?width=1200`;
+  const image = attractionImageOverrides[entry.title]
+    || entry.image
+    || `https://commons.wikimedia.org/wiki/Special:Redirect/file/${encodeURIComponent(fileName)}?width=1200`;
   (attractionImages[entry.attraction] ||= []).push(image);
 }
 
