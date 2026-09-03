@@ -16,12 +16,12 @@ python -m http.server 4173 --bind 127.0.0.1
 
 - GitHub Pages 子站目标：`https://potatobox062416.github.io/AI/jin-jing-gan-kao/`。
 - 页面代码发布到 `Potatobox062416/AI` 仓库的 `jin-jing-gan-kao/`，不会覆盖仓库根目录原站点。
-- `scripts/build-remote-image-map.mjs` 根据来源台账生成 `deploy-images.js`；部署版通过远程来源加载图片，不把约59 MB本地图片复制到公开仓库。
+- `scripts/build-remote-image-map.mjs` 根据来源台账生成 `deploy-images.js`；部署版通过远程来源加载图片，不把本地图片复制到公开仓库。
 - 美食参考仅采用大祥哥来了、大霸子来了、特厨隋卞；视频封面和平台资料图的开放许可未逐张确认，详情页保留来源，公开使用范围应由发布者继续复核。
 
 ## 数据说明
 
-- 景点票价与预约规则整理基准日：2026-09-02。
+- 当前景点库含27处景点及108张配图；票价、预约规则与开放口径整理基准日：2026-09-03。
 - 距出发16天以内时，页面通过 Open-Meteo 读取北京逐日预报；更远日期明确显示季节参考。
 - 行程天数按到京日与离京日的自然日首尾计入；住宿晚数单独计算。
 - 高铁、飞机和自驾的首尾接驳采用分段缓冲估算，并在计划中明确标注；往返方案会给出查询入口、预售提醒和可行性判断，但不代表实际车次、航班、余票或实时路况。
@@ -35,3 +35,4 @@ python -m http.server 4173 --bind 127.0.0.1
 - 酒店按每间2人估算，环球影城采用国庆动态票参考值；索道、游船、优速通和购物不计入基础预算。
 - 景点图片来源记录在 `assets/attractions/*-image-credits.json`；餐馆配图来源记录在 `assets/restaurants/restaurant-image-credits.json` 与 `assets/restaurants/restaurant-image-replacements.json`。
 - 当前图片集用于本地原型与学习展示；如需公开部署或商业使用，应逐张核对原页面授权并替换未明确开放许可的图片。
+

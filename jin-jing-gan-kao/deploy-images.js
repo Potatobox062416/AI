@@ -38,12 +38,12 @@
   ],
   "yuanmingyuan": [
     "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9e/20090731_Remains_of_the_Old_Summer_Palace_02.jpg/1280px-20090731_Remains_of_the_Old_Summer_Palace_02.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-    "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8b/A_male_mandarin_duck_in_the_Yuanmingyuan_Wetland_in_Beijing_in_March_2024.jpg/1280px-A_male_mandarin_duck_in_the_Yuanmingyuan_Wetland_in_Beijing_in_March_2024.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-    "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/ad/Belvedere_of_the_God_of_Literature%2C_Summer_Palace%2C_Beijing%2C_6%E2%80%9318_October%2C_1860.jpg/1280px-Belvedere_of_the_God_of_Literature%2C_Summer_Palace%2C_Beijing%2C_6%E2%80%9318_October%2C_1860.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-    "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/80/East_Gate_of_Yuanmingyuan_Park_%2820250426175242%29.jpg/1280px-East_Gate_of_Yuanmingyuan_Park_%2820250426175242%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
+    "https://newbbs-fd.zol-img.com.cn/t_s800x2000/g8/M00/02/0B/ChMkLWlskLKIE46DAATRzj0v0-YAAHLTwMz7yUABNHm793.jpg",
+    "https://p1.ssl.qhimg.com/t01b6b3c100c39385bf.jpg",
+    "https://youimg1.c-ctrip.com/target/100q0x000000lfjon24FD_D_10000_1200.jpg?proc=autoorient"
   ],
   "beihai": [
-    "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/01/Beihai_Park_Br%C3%BCcke-20110104-RM-105624.jpg/1280px-Beihai_Park_Br%C3%BCcke-20110104-RM-105624.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "https://d2mgzmtdeipcjp.cloudfront.net/files/good/2024/12/05/17333696006843.jpg?s=1360x1032",
     "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0a/Beihai_Park_Br%C3%BCcke-20110104-RM-110001.jpg/1280px-Beihai_Park_Br%C3%BCcke-20110104-RM-110001.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
     "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c5/Beihai_Park_Kunming_Lake_Winter-20110104-RM-140211.jpg/1280px-Beihai_Park_Kunming_Lake_Winter-20110104-RM-140211.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
     "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/ab/Beihai_Park_Kunming_Lake_Winter-20110104-RM-140223.jpg/1280px-Beihai_Park_Kunming_Lake_Winter-20110104-RM-140223.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
@@ -68,27 +68,27 @@
   ],
   "badaling": [
     "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/eb/Badalingchangcheng_railway_station_building.jpg/1280px-Badalingchangcheng_railway_station_building.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-    "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2b/Boarding_channel_of_Badaling_Great_Wall_Railway_Station_%2820220109163307%29.jpg/1280px-Boarding_channel_of_Badaling_Great_Wall_Railway_Station_%2820220109163307%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "https://www.chinevoyage.com/image/a-large-size/pekin/grande-muraille-badaling-3-1920x700.jpg",
     "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b6/Boarding_escalator_entrance_of_Badaling_Great_Wall_Railway_Station_%2820220109162828%29.jpg/1280px-Boarding_escalator_entrance_of_Badaling_Great_Wall_Railway_Station_%2820220109162828%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
     "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/be/Boarding_faregates_of_Badaling_Great_Wall_Railway_Station_%2820220109162527%29.jpg/1280px-Boarding_faregates_of_Badaling_Great_Wall_Railway_Station_%2820220109162527%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
   ],
   "mutianyu": [
     "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/ad/66954-The-Great-Wall%2C_Mutianyu.jpg/1280px-66954-The-Great-Wall%2C_Mutianyu.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-    "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/43/67016-The-Great-Wall%2C_Mutianyu.jpg/1280px-67016-The-Great-Wall%2C_Mutianyu.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-    "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7e/67052-The-Great-Wall%2C_Mutianyu.jpg/1280px-67052-The-Great-Wall%2C_Mutianyu.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "https://p5crires.cri.cn/photoworkspace/cri/contentimg/2024/10/30/2024103021051480737.jpg",
+    "https://p1crires.cri.cn/photoworkspace/cri/contentimg/2022/10/27/2022102711564062565.jpeg",
     "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ef/67054-The-Great-Wall%2C_Mutianyu.jpg/1280px-67054-The-Great-Wall%2C_Mutianyu.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
   ],
   "beijing-zoo": [
     "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/87/Ailuropoda_melanoleuca_-_Beijing_Zoo.JPG/1280px-Ailuropoda_melanoleuca_-_Beijing_Zoo.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
     "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6d/Beijing_Zoo_Giant_Panda_%289870661185%29.jpg/1280px-Beijing_Zoo_Giant_Panda_%289870661185%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
     "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/99/Beijing_Zoo_Giant_Panda_%289870667604%29.jpg/1280px-Beijing_Zoo_Giant_Panda_%289870667604%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-    "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/50/Beijing_Zoo_Giant_Panda_%289870667704%29.jpg/1280px-Beijing_Zoo_Giant_Panda_%289870667704%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
+    "https://kr.people.com.cn/NMediaFile/2023/0705/FOREIGN1688538113759I29IZH5KEX.jpg"
   ],
   "art-798": [
     "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/ac/798_Art_District_banner.jpg/1280px-798_Art_District_banner.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
     "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ef/798_Art_District_beijing_inside_of_a_gallery.jpg/1280px-798_Art_District_beijing_inside_of_a_gallery.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
     "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/60/798_Art_Zone_-_panoramio_%281%29.jpg/1280px-798_Art_Zone_-_panoramio_%281%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-    "https://upload.wikimedia.org/wikipedia/commons/e/e4/Beijing_-_Art_789_Zone_-_Mariage_picture.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled"
+    "https://www.fodors.com/assets/destinations/1092608/modern-art-museum-dashanzi-art-district-chaoyang-district-beijing.jpg"
   ],
   "olympic-park": [
     "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/ac/%22Bird_nest%22_-_Olympic_Stadium%2C_Beijing%2C_China_-_panoramio.jpg/1280px-%22Bird_nest%22_-_Olympic_Stadium%2C_Beijing%2C_China_-_panoramio.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
@@ -97,10 +97,70 @@
     "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c8/Beijing_Bird_nest.jpg/1280px-Beijing_Bird_nest.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
   ],
   "universal": [
-    "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c5/2633126_at_Universal_Resort%2C_Universal_Blvd_%2820210826122908%29.jpg/1280px-2633126_at_Universal_Resort%2C_Universal_Blvd_%2820210826122908%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-    "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/20/5727621_at_Universal_Resort%2C_Universal_Blvd_%2820210826122713%29.jpg/1280px-5727621_at_Universal_Resort%2C_Universal_Blvd_%2820210826122713%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "https://am.zdmimg.com/202307/20/64b90210bdac04945.jpg_e1080.jpg",
+    "https://images.chinahighlights.com/allpicture/2025/02/40d618922eb54b96b1c9e511cd6c0d03_cut_750x400_446_1739374904.jpg",
     "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/67/5727621_at_Universal_Resort%2C_Universal_Blvd_%2820210826122714%29.jpg/1280px-5727621_at_Universal_Resort%2C_Universal_Blvd_%2820210826122714%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
     "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/db/5735448_at_Universal_Resort%2C_Universal_Blvd_%2820210826122124%29.jpg/1280px-5735448_at_Universal_Resort%2C_Universal_Blvd_%2820210826122124%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
+  ],
+  "tiananmen-rostrum": [
+    "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/57/1996_-247-15a_Beijing_Tiananmen_Gate_%285068462443%29.jpg/1280px-1996_-247-15a_Beijing_Tiananmen_Gate_%285068462443%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f0/Beijing-Verbotene_Stadt-Mittagstor-02-Tiananmen-gje.jpg/1280px-Beijing-Verbotene_Stadt-Mittagstor-02-Tiananmen-gje.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/68/Beijing-Verbotene_Stadt-Mittagstor-04-Tiananmen-gje.jpg/1280px-Beijing-Verbotene_Stadt-Mittagstor-04-Tiananmen-gje.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/28/Beijing-Verbotene_Stadt-Mittagstor-08-Tiananmen-gje.jpg/1280px-Beijing-Verbotene_Stadt-Mittagstor-08-Tiananmen-gje.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
+  ],
+  "mao-memorial": [
+    "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/38/Alberto_Fern%C3%A1ndez_visited_the_Chairman_Mao_Memorial_Hall_%281%29.jpg/1280px-Alberto_Fern%C3%A1ndez_visited_the_Chairman_Mao_Memorial_Hall_%281%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8b/Alberto_Fern%C3%A1ndez_visited_the_Chairman_Mao_Memorial_Hall_%282%29.jpg/1280px-Alberto_Fern%C3%A1ndez_visited_the_Chairman_Mao_Memorial_Hall_%282%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0e/Alberto_Fern%C3%A1ndez_visited_the_Chairman_Mao_Memorial_Hall_%283%29.jpg/1280px-Alberto_Fern%C3%A1ndez_visited_the_Chairman_Mao_Memorial_Hall_%283%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/45/Alberto_Fern%C3%A1ndez_visited_the_Chairman_Mao_Memorial_Hall_%284%29.jpg/1280px-Alberto_Fern%C3%A1ndez_visited_the_Chairman_Mao_Memorial_Hall_%284%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
+  ],
+  "confucius-guozijian": [
+    "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/aa/Beijing_Confucius_Temple_2009-07-03_16-18-40_DSC-H2_DSC06609_%2846306706965%29.jpg/1280px-Beijing_Confucius_Temple_2009-07-03_16-18-40_DSC-H2_DSC06609_%2846306706965%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9f/Beijing_Confucius_Temple_2009-07-03_16-19-03_DSC-H2_DSC06610_%2840256080623%29.jpg/1280px-Beijing_Confucius_Temple_2009-07-03_16-19-03_DSC-H2_DSC06610_%2840256080623%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/19/Beijing_Confucius_Temple_2009-07-03_16-21-39_DSC-H2_DSC06614_%2840256081763%29.jpg/1280px-Beijing_Confucius_Temple_2009-07-03_16-21-39_DSC-H2_DSC06614_%2840256081763%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b7/Beijing_Confucius_Temple_2009-07-03_16-22-44_DSC-H2_DSC06616_%2847168993202%29.jpg/1280px-Beijing_Confucius_Temple_2009-07-03_16-22-44_DSC-H2_DSC06616_%2847168993202%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
+  ],
+  "military-museum": [
+    "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/db/2019_Chinese_People%27s_Revolutionary_Military_Museum.jpg/1280px-2019_Chinese_People%27s_Revolutionary_Military_Museum.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "https://r1.visitbeijing.com.cn/vbj-s/2021/1124/20211124095608576.jpeg",
+    "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/dc/64702-Beijing-Military-Museum_%2828608638322%29.jpg/1280px-64702-Beijing-Military-Museum_%2828608638322%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/00/64724-Beijing-Military-Museum_%2828096787684%29.jpg/1280px-64724-Beijing-Military-Museum_%2828096787684%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
+  ],
+  "science-museum": [
+    "https://www.beijing.gov.cn/renwen/rwzyd/qxdw/shaozhcqychy/zhgkxjshg/202309/W020240902569552086508.png",
+    "https://ak-d.tripcdn.com/images/1mi6g12000mjxs4zf38DC.jpg?proc=source%2Ftrip",
+    "https://www.stdaily.com/web/English/pic/2022-06/09/1890142_88c5a28b4f44941c9a67a6ea4bb8.jpg",
+    "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2d/Beijing_science_and_technology_museum_14_Aug_2010.jpg/1280px-Beijing_science_and_technology_museum_14_Aug_2010.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
+  ],
+  "natural-history": [
+    "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4a/Beijing_Museum_of_Natural_History_2.jpg/1280px-Beijing_Museum_of_Natural_History_2.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9c/Bubalus_wansjocki_NNHM.jpg/1280px-Bubalus_wansjocki_NNHM.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "https://r1.visitbeijing.com.cn/vbj-s/2024/0630/2e1ce91661ecc03ea1f584f67fccf5f5.jpg",
+    "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3b/Chleuastochoerus_NNHM.jpg/1280px-Chleuastochoerus_NNHM.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
+  ],
+  "archaeology-museum": [
+    "https://www.news.cn/photo/2023-09/15/1129864885_16947665648231n.JPG",
+    "https://www.news.cn/2023-09/15/1129865475_16947722673031n.JPG",
+    "https://upload.wikimedia.org/wikipedia/commons/b/b8/Bone_spoon_and_adze%2C_Neolithic%2C_9000-7000_BC%2C_Donghulin_site%2C_Beijing.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+    "https://upload.wikimedia.org/wikipedia/commons/e/e2/Bone_spoon_and_stone%2C_Neolithic%2C_9000-7000_BC%2C_Donghulin_site%2C_Beijing.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled"
+  ],
+  "xiangshan": [
+    "https://russian.beijing.gov.cn/specials/parktours/guidevisitors/fragranthillspark/tips/202301/W020230105700594555916.jpg",
+    "https://img-rs.huanqiucdn.cn/dp/api/files/image/1e079443e0eb13540f53457bdf8fc400c5.jpg",
+    "https://img1.bjd.com.cn/2022/11/03/9f5e81f1d9b10a73e4dea9eb7c76a74e7aa2a759.jpeg",
+    "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0b/Entrance_of_Shuangqing_Villa_%2820190918150857%29.jpg/1280px-Entrance_of_Shuangqing_Villa_%2820190918150857%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
+  ],
+  "ming-tombs": [
+    "https://img1.qunarzz.com/travel/d6/1803/1d/df962624168921b5.jpg",
+    "https://newbbs-fd.zol-img.com.cn/t_s1200x5000/g7/M00/0F/0A/ChMkLGQX-feIVzZ_AARh-O3KMN4AAN9kQPuXmYABGIQ979.jpg",
+    "https://mmbiz.qpic.cn/sz_mmbiz_jpg/0ia4rhRSGjaKiauic1F4zR0Mkjvc3I8iaWlgvjZ2YznWXyKRmxu7xr7dKORzk3X8lwsBhDZ1CJNtdpalZickSeuztNA/640?wx_fmt=jpeg",
+    "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/86/East_Skyline_of_Ming_Tomb_Reservoir.jpg/1280px-East_Skyline_of_Ming_Tomb_Reservoir.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
+  ],
+  "grand-canal-museum": [
+    "https://r1.visitbeijing.com.cn/vbj-s/2024/0102/e527ea5520c814835535c64539ed97b5.jpg",
+    "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b6/The_Grand_Canal_Museum_of_Beijing.jpg/1280px-The_Grand_Canal_Museum_of_Beijing.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a2/The_Grand_Canal_Museum_of_Beijing_1.jpg/1280px-The_Grand_Canal_Museum_of_Beijing_1.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/58/The_Grand_Canal_Museum_of_Beijing_2.jpg/1280px-The_Grand_Canal_Museum_of_Beijing_2.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
   ]
 };
   window.ATTRACTIONS?.forEach((item) => {
@@ -241,3 +301,4 @@
   ]
 };
 })();
+

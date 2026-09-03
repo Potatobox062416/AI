@@ -78,7 +78,17 @@
     mutianyu: { open: "07:30", latestStart: "17:00", close: "18:00" },
     "beijing-zoo": { open: "07:30", latestStart: "17:30", close: "19:00" },
     "art-798": { open: "10:00", latestStart: "17:00", close: "18:00", mondayNotice: true },
-    universal: { open: "09:30", latestStart: "18:00", close: "20:00", dynamicHours: true }
+    universal: { open: "09:30", latestStart: "18:00", close: "20:00", dynamicHours: true },
+    "tiananmen-rostrum": { open: "08:30", latestStart: "16:20", close: "17:00", mondayNotice: true },
+    "mao-memorial": { open: "08:00", latestStart: "11:00", close: "12:00", mondayNotice: true, dynamicHours: true },
+    "confucius-guozijian": { open: "08:30", latestStart: "17:00", close: "18:00", mondayNotice: true },
+    "military-museum": { open: "08:30", latestStart: "16:00", close: "17:00", mondayNotice: true, dynamicHours: true },
+    "science-museum": { open: "09:30", latestStart: "15:30", close: "17:00", mondayNotice: true },
+    "natural-history": { open: "09:00", latestStart: "16:00", close: "17:00", mondayNotice: true },
+    "archaeology-museum": { open: "09:00", latestStart: "15:30", close: "16:30", mondayNotice: true, dynamicHours: true },
+    xiangshan: { open: "06:00", latestStart: "18:00", close: "19:30" },
+    "ming-tombs": { open: "08:00", latestStart: "16:00", close: "17:30", dynamicHours: true },
+    "grand-canal-museum": { open: "10:00", latestStart: "19:00", close: "20:00", mondayNotice: true, dynamicHours: true }
   };
   const officialFlagUrl = "https://tamgw.beijing.gov.cn/sy/sjqsj/";
   const officialFlag2026Url = "https://tamgw.beijing.gov.cn/sy/sjqsj/202512/t20251222_4356494.html";
@@ -995,6 +1005,7 @@
     if (new Set([from.zone, to.zone]).has("东城") && new Set([from.zone, to.zone]).has("通州")) return { minutes: 50, label: "地铁7号线" };
     if (to.zone === "延庆" || from.zone === "延庆") return { minutes: 105, label: "京张高铁 + 景区接驳" };
     if (to.zone === "怀柔" || from.zone === "怀柔") return { minutes: 120, label: "旅游专线 / 公交接驳" };
+    if (to.zone === "昌平" || from.zone === "昌平") return { minutes: 120, label: "地铁昌平线 + 景区接驳" };
     if (to.zone === "通州" || from.zone === "通州") return { minutes: 65, label: "地铁7号线或1号线" };
     if (new Set([from.zone, to.zone]).has("西郊")) return { minutes: 48, label: "地铁4号线换乘" };
     if (new Set([from.zone, to.zone]).has("东北城")) return { minutes: 42, label: "地铁换乘" };
@@ -2382,3 +2393,4 @@
 
   initialize();
 })();
+

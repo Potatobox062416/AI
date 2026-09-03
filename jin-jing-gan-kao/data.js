@@ -1,5 +1,5 @@
 (function () {
-  const webp = new Set();
+  const webp = new Set(["art-798-3", "olympic-park-3", "universal-3"]);
   const gallery = (slug) => [1, 2, 3, 4].map((index) => {
     const key = `${slug}-${index}`;
     return `assets/attractions/${slug}/${key}.${webp.has(key) ? "webp" : "jpg"}`;
@@ -379,6 +379,226 @@
         rule: "购买指定日期票即完成日期锁定；国庆动态价格以官方价格日历为准。"
       },
       images: gallery("universal")
+    },
+    {
+      id: "tiananmen-rostrum",
+      name: "天安门城楼",
+      category: "古都",
+      district: "东城区",
+      zone: "中轴线",
+      address: "天安门广场北端，城楼北侧存包后入场",
+      duration: 40,
+      priceLabel: "成人 ¥15",
+      prices: { adult: 15, youth: 0, child: 0, senior: 0 },
+      tags: ["北京中轴线", "城楼", "俯瞰广场"],
+      environment: "mixed",
+      summary: "登临天安门城楼近距离观察城台、屋顶和金水桥，并从城楼上俯瞰天安门广场与北京中轴线。",
+      highlights: ["城楼建筑", "金水桥", "广场全景", "中轴线视角"],
+      play: "官方规定自验票起参观不超过40分钟；禁止携带包、液体、食品、充电宝、自拍杆等，须先到北侧存包处寄存。",
+      booking: {
+        kind: "urgent", days: 7, time: null, channel: "天安门城楼参观预约官网 / 公众号 / 京通小程序",
+        miniProgram: "天安门城楼参观预约", url: "https://www.tiananmenchenglou.com/index?userType=1",
+        rule: "实名预约次日起7日内门票，无当日票和现场售票；国庆开放安排与具体票种以官方页面为准。"
+      },
+      images: gallery("tiananmen-rostrum")
+    },
+    {
+      id: "mao-memorial",
+      name: "毛主席纪念堂",
+      category: "博物馆",
+      district: "东城区",
+      zone: "中轴线",
+      address: "天安门广场南侧",
+      duration: 60,
+      priceLabel: "免费",
+      prices: { adult: 0, youth: 0, child: 0, senior: 0 },
+      tags: ["红色文化", "实名预约", "上午开放"],
+      environment: "indoor",
+      summary: "位于天安门广场中轴线上，以瞻仰厅和革命业绩纪念室为核心，参观秩序和携带物品限制严格。",
+      highlights: ["瞻仰厅", "北大厅", "南大厅", "革命业绩纪念室"],
+      play: "常规开放为周二至周日上午8:00—12:00；建议与天安门广场组合，但不能安排在下午，并预留安检排队时间。",
+      booking: {
+        kind: "urgent", days: 6, time: null, channel: "毛主席纪念堂公众号 / 预约小程序 / 人民网专题页",
+        miniProgram: "毛主席纪念堂", url: "https://jnt.mfu.com.cn/page/",
+        rule: "免费实名预约，提前1—6日办理；法定节假日和纪念日开放时间以官方临时公告为准。"
+      },
+      images: gallery("mao-memorial")
+    },
+    {
+      id: "confucius-guozijian",
+      name: "孔庙和国子监博物馆",
+      category: "古都",
+      district: "东城区",
+      zone: "东北城",
+      address: "国子监街15号",
+      duration: 150,
+      priceLabel: "成人 ¥30",
+      prices: { adult: 30, youth: 0, child: 0, senior: 0 },
+      tags: ["孔庙", "古代教育", "科举文化"],
+      environment: "mixed",
+      summary: "由北京孔庙和国子监组成，是理解元明清国家祭孔、最高学府和科举制度的重要建筑群。",
+      highlights: ["辟雍", "大成殿", "进士题名碑", "琉璃牌坊"],
+      play: "适合与雍和宫组成半日路线；建筑和碑刻信息密度高，建议预留讲解或语音导览时间。",
+      booking: {
+        kind: "urgent", days: 3, time: null, channel: "孔庙和国子监博物馆微信公众号",
+        miniProgram: "孔庙和国子监博物馆", url: "https://kmgzj.hdwbcloud.com/choose_date?stack-key=d406eaab",
+        rule: "实名预约当前开放的3日内时段，预约成功后按官方页面要求购票入馆；周一常规闭馆。"
+      },
+      images: gallery("confucius-guozijian")
+    },
+    {
+      id: "military-museum",
+      name: "中国人民革命军事博物馆",
+      category: "博物馆",
+      district: "海淀区",
+      zone: "西直门",
+      address: "复兴路9号",
+      duration: 240,
+      priceLabel: "免费",
+      prices: { adult: 0, youth: 0, child: 0, senior: 0 },
+      tags: ["军事装备", "革命历史", "亲子"],
+      environment: "indoor",
+      summary: "以中国军事历史和大型装备实物为主，展厅体量大，适合对飞机、坦克、舰船和兵器感兴趣的团队。",
+      highlights: ["兵器陈列", "飞机与坦克", "革命战争陈列", "军事互动"],
+      play: "至少按半天安排；暑期模式曾为8:30—17:00，国庆开放时间和公益讲解须以军博当期公告为准。",
+      booking: {
+        kind: "urgent", days: 8, time: null, channel: "中国人民革命军事博物馆微信公众号",
+        miniProgram: "中国人民革命军事博物馆", url: "https://s.visitbeijing.com.cn/attraction/119065",
+        rule: "全员实名免费预约，可预约8日内参观；军博未授权第三方售卖或代约门票。"
+      },
+      images: gallery("military-museum")
+    },
+    {
+      id: "science-museum",
+      name: "中国科学技术馆",
+      category: "亲子",
+      district: "朝阳区",
+      zone: "北城",
+      address: "北辰东路5号",
+      duration: 300,
+      priceLabel: "主展厅 ¥30",
+      prices: { adult: 30, youth: 20, child: 0, senior: 0 },
+      tags: ["互动科技", "儿童科学乐园", "特效影院"],
+      environment: "indoor",
+      summary: "大型互动科普场馆，主展厅、儿童科学乐园和特效影院分别售票，适合亲子与青少年团队。",
+      highlights: ["华夏之光", "探索与发现", "科技与生活", "儿童科学乐园"],
+      play: "主展厅建议4小时以上；3—8岁儿童可单独选择儿童科学乐园，上下午票不通用，影院须另选场次。",
+      booking: {
+        kind: "urgent", days: 7, time: "18:00", channel: "中国科学技术馆官网 / 官方公众号",
+        miniProgram: "中国科学技术馆", url: "https://www.cstm.org.cn/ykfw/yygp/index.html",
+        rule: "所有观众均须实名购票，最早于参观7日前18:00预订；主展厅、儿童乐园和特效影院分别购票。"
+      },
+      images: gallery("science-museum")
+    },
+    {
+      id: "natural-history",
+      name: "国家自然博物馆",
+      category: "博物馆",
+      district: "东城区",
+      zone: "南城",
+      address: "天桥南大街126号",
+      duration: 210,
+      priceLabel: "基本陈列免费",
+      prices: { adult: 0, youth: 0, child: 0, senior: 0 },
+      tags: ["恐龙", "古生物", "自然科学"],
+      environment: "indoor",
+      summary: "以古生物、动物、植物和人类演化为主的自然史博物馆，恐龙与古生物展尤其适合亲子。",
+      highlights: ["恐龙公园", "古生物", "动物世界", "人类演化"],
+      play: "可与天坛或天桥一带组合，基本陈列建议3小时；4D电影、临展和教育活动按当日项目另行预约购票。",
+      booking: {
+        kind: "urgent", days: 3, time: "11:00", channel: "国家自然博物馆官网 / 微信公众号",
+        miniProgram: "国家自然博物馆", url: "https://www.nnhm.org.cn/cgzx/cgxx/index.shtml",
+        rule: "个人观众提前1—3日预约，每日11:00更新；周一常规闭馆，特展票价以官方页面为准。"
+      },
+      images: gallery("natural-history")
+    },
+    {
+      id: "archaeology-museum",
+      name: "中国考古博物馆",
+      category: "博物馆",
+      district: "朝阳区",
+      zone: "北城",
+      address: "国家体育场北路1号院1号楼南门",
+      duration: 180,
+      priceLabel: "免费",
+      prices: { adult: 0, youth: 0, child: 0, senior: 0 },
+      tags: ["考古", "中华文明", "奥林匹克公园"],
+      environment: "indoor",
+      summary: "以考古出土文物和珍贵文献梳理中华文明起源与发展，位于奥林匹克公园核心区。",
+      highlights: ["文明起源", "考古发现", "出土文物", "历史文献"],
+      play: "适合与鸟巢、水立方组合；普通公众主要在周三至周日参观，周二的开放对象和国庆安排须复核。",
+      booking: {
+        kind: "urgent", days: 3, time: null, channel: "中国历史研究网 / 中国考古博物馆微信公众号",
+        miniProgram: "中国考古博物馆", url: "https://www.beijing.gov.cn/fuwu/bmfw/sy/jrts/tzxx/202309/t20230915_3260182.html",
+        rule: "免费实名分时预约，个人观众提前3日办理；周一闭馆，节假日开闭馆以公告为准。"
+      },
+      images: gallery("archaeology-museum")
+    },
+    {
+      id: "xiangshan",
+      name: "香山公园",
+      category: "园林",
+      district: "海淀区",
+      zone: "西郊",
+      address: "香山买卖街40号",
+      duration: 270,
+      priceLabel: "旺季 ¥10",
+      prices: { adult: 10, youth: 5, child: 0, senior: 0 },
+      tags: ["皇家园林", "登山", "红叶"],
+      environment: "outdoor",
+      summary: "以山林、静宜园遗迹和革命纪念地构成的皇家园林，秋季红叶客流集中。",
+      highlights: ["香炉峰", "双清别墅", "香山寺", "碧云寺"],
+      play: "国庆通常早于红叶最佳期，但适合登山和园林游览；旺季6:00开园，徒步登顶应预留4—5小时。",
+      booking: {
+        kind: "advance", days: 1, time: null, channel: "畅游公园微信公众号 / 现场购票",
+        miniProgram: "畅游公园", url: "https://www.xiangshan-park.cn/cn/",
+        rule: "旺季公园票10元、含碧云寺联票15元；国庆客流较大，建议提前通过官方渠道购票并复核限流。"
+      },
+      images: gallery("xiangshan")
+    },
+    {
+      id: "ming-tombs",
+      name: "明十三陵",
+      category: "古都",
+      district: "昌平区",
+      zone: "昌平",
+      address: "十三陵镇天寿山麓",
+      duration: 240,
+      priceLabel: "单点 ¥30—¥60",
+      prices: { adult: 60, youth: 30, child: 0, senior: 0 },
+      tags: ["世界遗产", "皇家陵寝", "神道"],
+      environment: "mixed",
+      summary: "明代十三位皇帝陵墓群，开放区域分散，以定陵、长陵、昭陵和总神道为主要游览点。",
+      highlights: ["定陵地宫", "长陵祾恩殿", "总神道石像生", "陵寝格局"],
+      play: "各陵之间距离较远，建议选择定陵或长陵搭配总神道；公共交通换乘较多，自驾或包车更高效。",
+      booking: {
+        kind: "advance", days: 1, time: null, channel: "明十三陵景区官方渠道 / 昌平文旅集团小程序",
+        miniProgram: "昌平文旅集团", url: "https://www.mingshisanling.com/page/ticket_notice.html",
+        rule: "旺季定陵60元、长陵45元、昭陵30元、总神道30元；新开放陵寝可能实行预约讲解，须按具体景点购票。"
+      },
+      images: gallery("ming-tombs")
+    },
+    {
+      id: "grand-canal-museum",
+      name: "北京大运河博物馆",
+      category: "博物馆",
+      district: "通州区",
+      zone: "通州",
+      address: "绿心路1号院5号楼",
+      duration: 210,
+      priceLabel: "免费免预约",
+      prices: { adult: 0, youth: 0, child: 0, senior: 0 },
+      tags: ["大运河", "城市副中心", "新建筑"],
+      environment: "indoor",
+      summary: "首都博物馆东馆，以运河历史、漕运制度和沿线城市文化为核心，也是北京城市副中心代表性新建筑。",
+      highlights: ["京华通惠运河展", "漕运历史", "运河风物", "运河之舟建筑"],
+      play: "馆体较大，建议至少3小时；可与城市绿心森林公园、北京艺术中心组成通州文化半日或一日路线。",
+      booking: {
+        kind: "open", days: 0, time: null, channel: "持有效证件直接入馆",
+        miniProgram: null, url: "https://www.bjwmb.gov.cn/yw/10051236.html",
+        rule: "目前免费免预约，常规开放10:00—20:00、周一闭馆；临展、活动和节假日限流以官方公告为准。"
+      },
+      images: gallery("grand-canal-museum")
     }
   ];
 
@@ -445,3 +665,4 @@
     }
   ];
 })();
+
