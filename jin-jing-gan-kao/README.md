@@ -6,7 +6,8 @@
 
 - `auth.js` 接入 Supabase Auth，覆盖邮箱注册与确认、密码登录、会话保持、找回密码、更新密码和退出登录。
 - `auth-config.js` 只填写 Supabase `Project URL` 与 `Publishable key`；禁止写入数据库密码、`service_role` key 或其他服务端密钥。
-- Supabase 未配置时现有网站保持可访问；访问 `?auth-preview=1` 可预览登录与注册界面，但不能提交账号请求。
+- 正式项目引用为 `fidtelkdzygunsmpnmgl`，区域为 `ap-southeast-2`；邮箱注册和邮箱确认已启用。
+- Supabase 配置缺失时现有网站保持可访问；正式配置下，未登录用户会进入登录或注册页面。
 - 正式启用前须在 Supabase Auth URL Configuration 中把本站地址设为 Site URL，并加入 Redirect URLs。
 - 静态站点的认证门禁只控制页面交互，HTML、JavaScript 和图片仍是公开资源，不得把敏感数据直接打包到前端。
 
