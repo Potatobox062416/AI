@@ -2,6 +2,14 @@
 
 北京团队旅行规划单页站点，包含景点索引、四图详情、逐人团队成员资料、分钟级到离京时间、节奏与预算方式、自动行程天数、3—5套行程、自编排程与冲突建议、升旗与开闭馆审查、午晚餐排程、美食资料、天气提醒、费用区间和门票预约清单。
 
+## 账号系统
+
+- `auth.js` 接入 Supabase Auth，覆盖邮箱注册与确认、密码登录、会话保持、找回密码、更新密码和退出登录。
+- `auth-config.js` 只填写 Supabase `Project URL` 与 `Publishable key`；禁止写入数据库密码、`service_role` key 或其他服务端密钥。
+- Supabase 未配置时现有网站保持可访问；访问 `?auth-preview=1` 可预览登录与注册界面，但不能提交账号请求。
+- 正式启用前须在 Supabase Auth URL Configuration 中把本站地址设为 Site URL，并加入 Redirect URLs。
+- 静态站点的认证门禁只控制页面交互，HTML、JavaScript 和图片仍是公开资源，不得把敏感数据直接打包到前端。
+
 ## 本地运行
 
 在本目录启动任意静态文件服务器，例如：

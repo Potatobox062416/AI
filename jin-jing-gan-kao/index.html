@@ -4,9 +4,69 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="进京赶考：北京团队旅行规划、景点信息与门票预约助手。">
-  <title>进京赶考</title>  <link rel="stylesheet" href="styles.css?v=20260903-6">
+  <title>进京赶考</title>  <link rel="stylesheet" href="styles.css?v=20260904-1">
 </head>
-<body>
+<body class="auth-loading">
+  <section class="auth-screen" id="auth-screen" aria-labelledby="auth-title">
+    <div class="auth-visual">
+      <a class="auth-brand" href="#" aria-label="进京赶考">
+        <span class="brand-mark" aria-hidden="true">京</span>
+        <span><strong>进京赶考</strong><small>团队旅行工作台</small></span>
+      </a>
+      <div class="auth-visual-copy">
+        <p class="eyebrow">BEIJING TRAVEL DESK</p>
+        <h1>进京赶考</h1>
+        <p>把团队成员、每日行程与预约节点放在同一个账号里。</p>
+      </div>
+      <p class="auth-image-credit">北京中轴线 · 故宫全景</p>
+    </div>
+
+    <div class="auth-panel">
+      <div class="auth-panel-inner">
+        <p class="section-kicker">MEMBER ENTRY</p>
+        <h2 id="auth-title">登录账号</h2>
+        <p class="auth-subtitle" id="auth-subtitle">登录后继续规划北京行程。</p>
+
+        <div class="auth-tabs" id="auth-tabs" role="tablist" aria-label="登录或注册">
+          <button class="is-selected" type="button" role="tab" aria-selected="true" data-auth-mode="login">登录</button>
+          <button type="button" role="tab" aria-selected="false" data-auth-mode="register">注册账号</button>
+        </div>
+
+        <form class="auth-form" id="auth-form" novalidate>
+          <label class="auth-field" id="auth-name-field" hidden>
+            <span>昵称</span>
+            <input id="auth-name" name="displayName" type="text" maxlength="30" autocomplete="name" placeholder="用于站内显示">
+          </label>
+          <label class="auth-field" id="auth-email-field">
+            <span>邮箱</span>
+            <input id="auth-email" name="email" type="email" autocomplete="email" placeholder="name@example.com" required>
+          </label>
+          <label class="auth-field" id="auth-password-field">
+            <span id="auth-password-label">密码</span>
+            <span class="password-control">
+              <input id="auth-password" name="password" type="password" minlength="8" autocomplete="current-password" placeholder="至少8位" required>
+              <button class="icon-button auth-password-toggle" type="button" data-password-target="auth-password" aria-label="显示密码" title="显示密码"><i data-lucide="eye"></i></button>
+            </span>
+          </label>
+          <label class="auth-field" id="auth-confirm-field" hidden>
+            <span>确认密码</span>
+            <span class="password-control">
+              <input id="auth-confirm" name="confirmPassword" type="password" minlength="8" autocomplete="new-password" placeholder="再次输入密码">
+              <button class="icon-button auth-password-toggle" type="button" data-password-target="auth-confirm" aria-label="显示确认密码" title="显示确认密码"><i data-lucide="eye"></i></button>
+            </span>
+          </label>
+          <button class="auth-submit" id="auth-submit" type="submit"><i data-lucide="log-in"></i><span>登录</span></button>
+        </form>
+
+        <button class="auth-link-button" id="auth-forgot" type="button">忘记密码</button>
+        <button class="auth-link-button" id="auth-back" type="button" hidden>返回登录</button>
+        <p class="auth-status" id="auth-status" role="status" aria-live="polite"></p>
+        <p class="auth-config-note" id="auth-config-note" hidden>Supabase 项目尚未连接，当前仅用于界面预览。</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="site-shell" id="site-shell" aria-hidden="true">
   <header class="topbar">
     <a class="brand" href="#attractions" aria-label="进京赶考首页">
       <span class="brand-mark" aria-hidden="true">京</span>
@@ -28,9 +88,22 @@
       </button>
     </nav>
 
-    <div class="weather-brief" id="weather-brief" aria-live="polite">
-      <i data-lucide="cloud-sun" aria-hidden="true"></i>
-      <span><strong>北京</strong><small>等待行程日期</small></span>
+    <div class="topbar-actions">
+      <div class="weather-brief" id="weather-brief" aria-live="polite">
+        <i data-lucide="cloud-sun" aria-hidden="true"></i>
+        <span><strong>北京</strong><small>等待行程日期</small></span>
+      </div>
+      <div class="account-shell">
+        <button class="account-trigger" id="account-trigger" type="button" aria-expanded="false" aria-controls="account-menu">
+          <span class="account-avatar" id="account-avatar" aria-hidden="true">京</span>
+          <span class="account-label"><strong id="account-name">旅行成员</strong><small id="account-email"></small></span>
+          <i data-lucide="chevron-down" aria-hidden="true"></i>
+        </button>
+        <div class="account-menu" id="account-menu" hidden>
+          <div><strong id="account-menu-name">旅行成员</strong><small id="account-menu-email"></small></div>
+          <button id="auth-signout" type="button"><i data-lucide="log-out"></i>退出登录</button>
+        </div>
+      </div>
     </div>
   </header>
 
@@ -273,8 +346,10 @@
   </dialog>
 
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  </div>
 
   <script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js"></script>
+  <script src="auth-config.js?v=20260904-1"></script>
   <script src="vendor/suncalc.js?v=20260903-2"></script>
   <script src="data.js?v=20260903-9"></script>
   <script src="deploy-images.js?v=20260903-9"></script>
@@ -282,6 +357,7 @@
   <script src="food-data-daxiang.js?v=20260903-5"></script>
   <script src="food-data-daba.js?v=20260903-5"></script>
   <script src="app.js?v=20260903-11"></script>
+  <script src="auth.js?v=20260904-1"></script>
 </body>
 </html>
 

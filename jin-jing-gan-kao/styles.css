@@ -74,6 +74,377 @@ svg {
   stroke-width: 1.8;
 }
 
+.auth-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(400px, 460px);
+  min-height: 100dvh;
+  overflow: auto;
+  background: var(--surface);
+}
+
+.auth-visual {
+  position: relative;
+  display: flex;
+  min-height: 100dvh;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 34px 42px;
+  overflow: hidden;
+  background-color: var(--night);
+  background-image: url("https://thumb.wikimedia.org/wikipedia/commons/thumb/0/04/Forbidden_City_Panorama_1.jpg/1280px-Forbidden_City_Panorama_1.jpg");
+  background-position: center;
+  background-size: cover;
+  color: #fff;
+}
+
+.auth-visual::before {
+  position: absolute;
+  inset: 0;
+  background: rgba(20, 29, 27, 0.66);
+  content: "";
+}
+
+.auth-brand {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  align-self: flex-start;
+  gap: 12px;
+  color: #fff;
+  text-decoration: none;
+}
+
+.auth-brand > span:last-child {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.25;
+}
+
+.auth-brand strong {
+  font-family: var(--display);
+  font-size: 22px;
+}
+
+.auth-brand small,
+.auth-image-credit {
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 12px;
+}
+
+.auth-visual-copy {
+  position: relative;
+  z-index: 1;
+  max-width: 640px;
+  padding-block: 80px;
+}
+
+.auth-visual-copy h1 {
+  margin: 0;
+  font-family: var(--display);
+  font-size: 64px;
+  line-height: 1.1;
+}
+
+.auth-visual-copy > p:last-child {
+  max-width: 520px;
+  margin: 18px 0 0;
+  color: rgba(255, 255, 255, 0.84);
+  font-size: 18px;
+}
+
+.auth-image-credit {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+}
+
+.auth-panel {
+  display: grid;
+  min-height: 100dvh;
+  place-items: center;
+  padding: 42px 38px;
+  border-left: 1px solid var(--line);
+  background: var(--surface);
+}
+
+.auth-panel-inner {
+  width: min(100%, 350px);
+}
+
+.auth-panel h2 {
+  margin: 0;
+  font-family: var(--display);
+  font-size: 34px;
+  line-height: 1.2;
+}
+
+.auth-subtitle {
+  margin: 8px 0 22px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.auth-tabs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin-bottom: 22px;
+  border-bottom: 1px solid var(--line);
+}
+
+.auth-tabs button {
+  min-height: 44px;
+  border: 0;
+  border-bottom: 3px solid transparent;
+  background: transparent;
+  color: var(--muted);
+  font-weight: 800;
+}
+
+.auth-tabs button.is-selected {
+  border-bottom-color: var(--vermilion);
+  color: var(--ink);
+}
+
+.auth-form {
+  display: grid;
+  gap: 14px;
+}
+
+.auth-field > span:first-child {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.auth-field input {
+  min-height: 46px;
+  font-size: 15px;
+}
+
+.password-control {
+  position: relative;
+  display: block;
+}
+
+.password-control input {
+  padding-right: 48px;
+}
+
+.auth-password-toggle {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+}
+
+.auth-submit {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  gap: 8px;
+  margin-top: 5px;
+  border: 1px solid var(--vermilion);
+  border-radius: 4px;
+  background: var(--vermilion);
+  color: #fff;
+  font-weight: 800;
+}
+
+.auth-submit:hover {
+  border-color: var(--vermilion-dark);
+  background: var(--vermilion-dark);
+}
+
+.auth-submit:disabled {
+  cursor: wait;
+  opacity: 0.68;
+}
+
+.auth-link-button {
+  margin-top: 14px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--jade);
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.auth-status,
+.auth-config-note {
+  min-height: 22px;
+  margin: 14px 0 0;
+  padding: 9px 10px;
+  border-left: 3px solid transparent;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.auth-status:empty {
+  display: none;
+}
+
+.auth-status.is-error {
+  border-left-color: var(--vermilion);
+  background: var(--danger-soft);
+  color: #7b342d;
+}
+
+.auth-status.is-success {
+  border-left-color: var(--jade);
+  background: var(--jade-soft);
+  color: #315e57;
+}
+
+.auth-config-note {
+  border-left-color: var(--brass);
+  background: #fbf3e5;
+  color: #735221;
+}
+
+body.auth-loading .site-shell,
+body.auth-required .site-shell,
+body.auth-preview .site-shell {
+  max-height: 100vh;
+  overflow: hidden;
+  pointer-events: none;
+  visibility: hidden;
+}
+
+body.authenticated .auth-screen,
+body.auth-unconfigured:not(.auth-preview) .auth-screen {
+  display: none;
+}
+
+body.authenticated .site-shell,
+body.auth-unconfigured .site-shell {
+  visibility: visible;
+}
+
+body.auth-unconfigured .account-shell {
+  display: none;
+}
+
+.topbar-actions {
+  display: flex;
+  align-items: center;
+  justify-self: end;
+  gap: 18px;
+}
+
+.account-shell {
+  position: relative;
+}
+
+.account-trigger {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  gap: 8px;
+  padding: 3px 7px 3px 3px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  background: transparent;
+  text-align: left;
+}
+
+.account-trigger:hover,
+.account-trigger[aria-expanded="true"] {
+  border-color: var(--line);
+  background: var(--paper);
+}
+
+.account-avatar {
+  display: grid;
+  width: 34px;
+  height: 34px;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--jade);
+  color: #fff;
+  font-family: var(--display);
+  font-weight: 800;
+}
+
+.account-label {
+  display: flex;
+  max-width: 140px;
+  flex-direction: column;
+  line-height: 1.25;
+}
+
+.account-label strong,
+.account-label small {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.account-label strong {
+  font-size: 13px;
+}
+
+.account-label small {
+  color: var(--muted);
+  font-size: 10px;
+}
+
+.account-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  z-index: 40;
+  width: 240px;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  background: var(--surface);
+  box-shadow: var(--shadow);
+}
+
+.account-menu > div {
+  padding: 13px 14px;
+  border-bottom: 1px solid var(--line);
+}
+
+.account-menu strong,
+.account-menu small {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.account-menu small {
+  margin-top: 2px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.account-menu button {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  min-height: 44px;
+  gap: 8px;
+  padding: 0 14px;
+  border: 0;
+  background: transparent;
+  color: var(--vermilion);
+  font-weight: 800;
+  text-align: left;
+}
+
+.account-menu button:hover {
+  background: var(--danger-soft);
+}
+
 :focus-visible {
   outline: 3px solid rgba(40, 104, 95, 0.3);
   outline-offset: 2px;
@@ -2975,6 +3346,39 @@ button.meal-stop:hover {
 }
 
 @media (max-width: 860px) {
+  .auth-screen {
+    grid-template-columns: 1fr;
+  }
+
+  .auth-visual {
+    min-height: 300px;
+    padding: 20px 24px;
+  }
+
+  .auth-visual-copy {
+    padding: 28px 0 10px;
+  }
+
+  .auth-visual-copy h1 {
+    font-size: 44px;
+  }
+
+  .auth-visual-copy > p:last-child {
+    margin-top: 10px;
+    font-size: 15px;
+  }
+
+  .auth-image-credit {
+    display: none;
+  }
+
+  .auth-panel {
+    min-height: calc(100dvh - 300px);
+    padding: 32px 24px 42px;
+    border-top: 1px solid var(--line);
+    border-left: 0;
+  }
+
   .topbar {
     grid-template-columns: 1fr auto;
     min-height: 62px;
@@ -2984,6 +3388,15 @@ button.meal-stop:hover {
   }
 
   .weather-brief {
+    display: none;
+  }
+
+  .topbar-actions {
+    gap: 0;
+  }
+
+  .account-label,
+  .account-trigger > svg {
     display: none;
   }
 
