@@ -427,6 +427,32 @@ body.auth-unconfigured .account-shell {
   font-size: 12px;
 }
 
+.account-sync-status {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 10px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.account-sync-status svg {
+  width: 14px;
+  height: 14px;
+}
+
+.account-sync-status.is-saving {
+  color: var(--brass);
+}
+
+.account-sync-status.is-synced {
+  color: var(--jade);
+}
+
+.account-sync-status.is-error {
+  color: var(--vermilion);
+}
+
 .account-menu button {
   display: flex;
   align-items: center;

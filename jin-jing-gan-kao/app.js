@@ -178,6 +178,7 @@
   let restaurantImageSourcesPromise = null;
   let customUid = 0;
   let memberSequence = 4;
+  let workspaceEventsMuted = false;
 
   function refreshIcons() {
     if (window.lucide) window.lucide.createIcons({ attrs: { "aria-hidden": "true" } });
@@ -197,6 +198,129 @@
     els.toast.classList.add("is-visible");
     window.clearTimeout(toastTimer);
     toastTimer = window.setTimeout(() => els.toast.classList.remove("is-visible"), 2600);
+  }
+
+  function serializePlan(plan) {
+    const iso = (value) => value instanceof Date ? value.toISOString() : value || null;
+    return {
+      id: plan.id,
+      name: plan.name,
+      short: plan.short,
+      hotel: plan.hotel,
+      hotelReason: plan.hotelReason,
+      hotelRange: plan.hotelRange,
+      travelStyle: plan.travelStyle,
+      cost: plan.cost,
+      journey: {
+        arrivalAt: iso(plan.journey?.arrival?.startAt),
+        departureAt: iso(plan.journey?.departure?.endAt)
+      },
+      days: plan.days.map((day) => ({
+        index: day.index,
+        date: iso(day.date),
+        title: day.title,
+        weatherNote: day.weatherNote,
+        stops: day.stops.map((stop) => ({
+          attractionId: stop.attraction.id,
+          startAt: iso(stop.startAt),
+          endAt: iso(stop.endAt),
+          stay: stop.stay
+        })),
+        meals: day.meals.map((meal) => ({
+          venueId: meal.venue.id,
+          venueName: meal.venue.name,
+          mealType: meal.mealType,
+          startAt: iso(meal.startAt),
+          endAt: iso(meal.endAt),
+          duration: meal.duration
+        }))
+      }))
+    };
+  }
+
+  function exportWorkspace() {
+    return {
+      version: 1,
+      savedAt: new Date().toISOString(),
+      members: state.members.map((member) => ({ ...member })),
+      planner: {
+        arrivalDateTime: state.arrivalDateTime,
+        departureDateTime: state.departureDateTime,
+        pace: state.pace,
+        travelStyle: state.travelStyle,
+        activePlanId: state.activePlanId
+      },
+      custom: {
+        editorOpen: state.editorOpen,
+        basePlanId: state.customBasePlanId,
+        draft: state.customDraft ? JSON.parse(JSON.stringify(state.customDraft)) : null,
+        adjustmentRequest: els.adjustmentRequest?.value || ""
+      },
+      generatedPlans: state.plans.map(serializePlan)
+    };
+  }
+
+  function emitWorkspaceChange(reason) {
+    if (workspaceEventsMuted) return;
+    window.dispatchEvent(new CustomEvent("travel-workspace:changed", {
+      detail: { reason, workspace: exportWorkspace() }
+    }));
+  }
+
+  async function importWorkspace(workspace) {
+    if (!workspace || workspace.version !== 1 || !Array.isArray(workspace.members)) return false;
+    const validMembers = workspace.members.length >= 1
+      && workspace.members.length <= 20
+      && workspace.members.every((member) => member?.id && member?.name && Number.isInteger(member.age) && member.age >= 0 && member.age <= 110);
+    if (!validMembers) return false;
+    workspaceEventsMuted = true;
+    try {
+      state.members = workspace.members.map((member) => ({
+        id: String(member.id),
+        name: String(member.name).slice(0, 20),
+        gender: ["male", "female", "other", "private"].includes(member.gender) ? member.gender : "private",
+        age: member.age
+      }));
+      memberSequence = Math.max(memberSequence, ...state.members.map((member) => Number(String(member.id).match(/\d+$/)?.[0]) || 0));
+      renderTeamMembers();
+      captureTeamState();
+
+      const planner = workspace.planner || {};
+      if (/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}$/.test(planner.arrivalDateTime || "")) els.arrivalDateTime.value = planner.arrivalDateTime;
+      if (/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}$/.test(planner.departureDateTime || "")) els.departureDateTime.value = planner.departureDateTime;
+      if (paceRules[planner.pace]) state.pace = planner.pace;
+      if (travelStyleRules[planner.travelStyle]) state.travelStyle = planner.travelStyle;
+      els.paceMode.querySelectorAll("button[data-value]").forEach((button) => button.classList.toggle("is-selected", button.dataset.value === state.pace));
+      els.travelStyleMode.querySelectorAll("button[data-value]").forEach((button) => button.classList.toggle("is-selected", button.dataset.value === state.travelStyle));
+      syncTripRange();
+      renderTravelStyleNote();
+
+      const custom = workspace.custom || {};
+      state.editorOpen = Boolean(custom.editorOpen);
+      state.customBasePlanId = typeof custom.basePlanId === "string" ? custom.basePlanId : null;
+      state.customDraft = Array.isArray(custom.draft) ? custom.draft.map((day, dayIndex) => ({
+        dayIndex,
+        date: addDays(parseLocalDate(state.startDate), dayIndex),
+        items: Array.isArray(day.items) ? day.items.map((item) => ({ ...item })) : []
+      })) : null;
+      state.customRequestAdvice = [];
+      els.adjustmentRequest.value = typeof custom.adjustmentRequest === "string" ? custom.adjustmentRequest.slice(0, 500) : "";
+
+      const requestedPlanId = planner.activePlanId;
+      await generatePlans();
+      if (state.customDraft) saveCustomPlan({ silent: true });
+      if (requestedPlanId && state.plans.some((plan) => plan.id === requestedPlanId)) {
+        state.activePlanId = requestedPlanId;
+        renderPlanSwitcher();
+        renderActivePlan();
+        renderTicketPlanSelect();
+        renderTickets();
+      }
+      renderPlanEditor();
+      return true;
+    } finally {
+      workspaceEventsMuted = false;
+    }
   }
 
   function genderLabel(value) {
@@ -252,6 +376,7 @@
     const seniors = state.ages.filter((age) => age >= 60).length;
     const adults = state.ages.length - children - seniors;
     els.teamMessage.textContent = `已添加${state.members.length}人：未成年人${children}人、成人${adults}人、老人${seniors}人。年龄用于票价与强度判断；性别仅用于住宿分房提醒。`;
+    emitWorkspaceChange("members");
     return true;
   }
 
@@ -639,6 +764,7 @@
     state.startDate = dateKey(arrival);
     state.days = days;
     state.nights = nights;
+    emitWorkspaceChange("trip-range");
     return true;
   }
 
@@ -1616,7 +1742,8 @@
       renderTickets();
       if (state.editorOpen && !state.customDraft) loadCurrentPlanIntoEditor();
       else renderPlanEditor();
-      showToast(`已生成${state.plans.length}套行程，费用按${state.ages.length}人估算。`);
+      if (!workspaceEventsMuted) showToast(`已生成${state.plans.length}套行程，费用按${state.ages.length}人估算。`);
+      emitWorkspaceChange("generated-plans");
     } finally {
       if (generationVersion !== planGenerationVersion) return;
       submit.disabled = false;
@@ -1693,6 +1820,7 @@
     state.customRequestAdvice = [];
     renderPlanEditor();
     showToast(`已载入“${plan.name}”作为自编底稿。`);
+    emitWorkspaceChange("custom-draft-loaded");
   }
 
   function customItemOptions(selectedValue, currentItem) {
@@ -1835,6 +1963,7 @@
     const start = last ? clockFromMinutes(clockMinutes(last.start) + Number(last.duration) + 30) : "09:00";
     day.items.push({ uid: `custom-${++customUid}`, kind, id: entity.id, start, duration: kind === "meal" ? entity.duration || 60 : Math.min(entity.duration, 240), embedded: false });
     renderPlanEditor();
+    emitWorkspaceChange("custom-item-added");
   }
 
   function analyzeAdjustmentRequest() {
@@ -1866,9 +1995,10 @@
     state.customRequestAdvice = advice;
     renderCustomAdvice();
     refreshIcons();
+    emitWorkspaceChange("custom-request-analyzed");
   }
 
-  function saveCustomPlan() {
+  function saveCustomPlan(options = {}) {
     if (!state.customDraft) {
       loadCurrentPlanIntoEditor();
       return;
@@ -1924,7 +2054,8 @@
     renderActivePlan();
     renderTicketPlanSelect();
     renderTickets();
-    showToast("自编方案已保存到计划列表。");
+    if (!options.silent) showToast("自编方案已保存到计划列表。");
+    emitWorkspaceChange("custom-plan-saved");
   }
 
   function renderMealEvent(meal) {
@@ -2288,16 +2419,19 @@
       renderActivePlan();
       renderTicketPlanSelect();
       renderTickets();
+      emitWorkspaceChange("active-plan");
     });
 
     els.togglePlanEditor.addEventListener("click", () => {
       state.editorOpen = !state.editorOpen;
       if (state.editorOpen && !state.customDraft) loadCurrentPlanIntoEditor();
       renderPlanEditor();
+      emitWorkspaceChange("editor-visibility");
     });
     els.loadCurrentPlan.addEventListener("click", loadCurrentPlanIntoEditor);
     els.analyzeAdjustment.addEventListener("click", analyzeAdjustmentRequest);
     els.saveCustomPlan.addEventListener("click", saveCustomPlan);
+    els.adjustmentRequest.addEventListener("change", () => emitWorkspaceChange("adjustment-request"));
     els.customDays.addEventListener("click", (event) => {
       const dayElement = event.target.closest("[data-custom-day]");
       if (!dayElement || !state.customDraft) return;
@@ -2315,6 +2449,7 @@
       if (event.target.closest("[data-remove-custom]")) {
         day.items.splice(itemIndex, 1);
         renderPlanEditor();
+        emitWorkspaceChange("custom-item-removed");
         return;
       }
       const moveButton = event.target.closest("[data-move-custom]");
@@ -2326,6 +2461,7 @@
       day.items[targetIndex].start = currentStart;
       [day.items[itemIndex], day.items[targetIndex]] = [day.items[targetIndex], day.items[itemIndex]];
       renderPlanEditor();
+      emitWorkspaceChange("custom-item-moved");
     });
     els.customDays.addEventListener("change", (event) => {
       const field = event.target.closest("[data-custom-field]");
@@ -2348,6 +2484,7 @@
       state.customRequestAdvice = [];
       renderCustomAdvice();
       refreshIcons();
+      emitWorkspaceChange("custom-item-updated");
     });
 
     els.planSheet.addEventListener("click", (event) => {
@@ -2360,6 +2497,7 @@
       renderPlanSwitcher();
       renderActivePlan();
       renderTickets();
+      emitWorkspaceChange("active-plan");
     });
 
     els.ticketList.addEventListener("click", (event) => {
@@ -2397,6 +2535,12 @@
     await generatePlans();
   }
 
+  window.TRAVEL_APP = Object.freeze({
+    exportWorkspace,
+    importWorkspace
+  });
+  document.documentElement.dataset.travelWorkspaceVersion = "1";
+  window.dispatchEvent(new CustomEvent("travel-app:ready"));
   initialize();
 })();
 

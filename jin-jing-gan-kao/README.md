@@ -7,6 +7,9 @@
 - `auth.js` 接入 Supabase Auth，覆盖邮箱注册与确认、密码登录、会话保持、找回密码、更新密码和退出登录。
 - `auth-config.js` 只填写 Supabase `Project URL` 与 `Publishable key`；禁止写入数据库密码、`service_role` key 或其他服务端密钥。
 - 正式项目引用为 `fidtelkdzygunsmpnmgl`，区域为 `ap-southeast-2`；邮箱注册和邮箱确认已启用。
+- `public.travel_workspaces` 为每个登录账号保存一条版本化工作区，包含成员资料、行程输入、生成方案快照和自编草稿。
+- 工作区修改后700毫秒自动合并保存，账户菜单显示载入、等待保存、保存中、已同步或失败状态；退出登录前会先刷新待保存数据。
+- 表已启用 RLS：匿名用户无权限，登录用户只能查询、新增和更新 `user_id = auth.uid()` 的记录，前端不具备删除权限。
 - Supabase 配置缺失时现有网站保持可访问；正式配置下，未登录用户会进入登录或注册页面。
 - 正式启用前须在 Supabase Auth URL Configuration 中把本站地址设为 Site URL，并加入 Redirect URLs。
 - 静态站点的认证门禁只控制页面交互，HTML、JavaScript 和图片仍是公开资源，不得把敏感数据直接打包到前端。

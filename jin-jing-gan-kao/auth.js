@@ -36,10 +36,17 @@
     accountEmail: document.querySelector("#account-email"),
     accountMenuName: document.querySelector("#account-menu-name"),
     accountMenuEmail: document.querySelector("#account-menu-email"),
+    syncStatus: document.querySelector("#account-sync-status"),
     signout: document.querySelector("#auth-signout")
   };
   let mode = "login";
   let client = null;
+  let currentUser = null;
+  let syncReady = false;
+  let saveTimer = null;
+  let pendingWorkspace = null;
+  let savePromise = Promise.resolve();
+  let activationPromise = null;
 
   function refreshIcons() {
     if (window.lucide) window.lucide.createIcons({ attrs: { "aria-hidden": "true" } });
@@ -54,6 +61,12 @@
   function setStatus(message = "", kind = "") {
     els.status.textContent = message;
     els.status.className = `auth-status${kind ? ` is-${kind}` : ""}`;
+  }
+
+  function setSyncStatus(message, kind = "", icon = "cloud") {
+    els.syncStatus.className = `account-sync-status${kind ? ` is-${kind}` : ""}`;
+    els.syncStatus.innerHTML = `<i data-lucide="${icon}"></i><span>${message}</span>`;
+    refreshIcons();
   }
 
   function setSubmit(label, icon) {
@@ -144,6 +157,91 @@
     refreshIcons();
   }
 
+  async function travelApp() {
+    if (window.TRAVEL_APP) return window.TRAVEL_APP;
+    await new Promise((resolve) => window.addEventListener("travel-app:ready", resolve, { once: true }));
+    return window.TRAVEL_APP;
+  }
+
+  function formatSyncTime(value = new Date()) {
+    const date = value instanceof Date ? value : new Date(value);
+    return new Intl.DateTimeFormat("zh-CN", { hour: "2-digit", minute: "2-digit", hour12: false }).format(date);
+  }
+
+  async function loadWorkspace(user) {
+    syncReady = false;
+    setSyncStatus("正在载入云端数据", "saving", "cloud-download");
+    try {
+      const { data, error } = await client
+        .from("travel_workspaces")
+        .select("workspace, updated_at")
+        .eq("user_id", user.id)
+        .maybeSingle();
+      if (error) throw error;
+      const app = await travelApp();
+      if (data?.workspace) {
+        const imported = await app.importWorkspace(data.workspace);
+        if (!imported) throw new Error("云端数据版本无法识别");
+        setSyncStatus(`已同步 ${formatSyncTime(data.updated_at)}`, "synced", "cloud-check");
+      } else {
+        setSyncStatus("云端空间已就绪", "synced", "cloud-check");
+      }
+      syncReady = true;
+      if (!data?.workspace) queueWorkspace(app.exportWorkspace());
+    } catch (error) {
+      syncReady = false;
+      setSyncStatus("云端数据载入失败", "error", "cloud-alert");
+      console.error("Workspace load failed", error);
+    }
+  }
+
+  async function flushWorkspace() {
+    window.clearTimeout(saveTimer);
+    saveTimer = null;
+    if (!syncReady || !currentUser || !pendingWorkspace) return;
+    const workspace = pendingWorkspace;
+    pendingWorkspace = null;
+    setSyncStatus("正在保存", "saving", "cloud-upload");
+    const { error } = await client
+      .from("travel_workspaces")
+      .upsert({
+        user_id: currentUser.id,
+        workspace,
+        updated_at: new Date().toISOString()
+      }, { onConflict: "user_id" });
+    if (error) {
+      pendingWorkspace = workspace;
+      setSyncStatus("保存失败，将在下次修改时重试", "error", "cloud-alert");
+      console.error("Workspace save failed", error);
+      return;
+    }
+    setSyncStatus(`已同步 ${formatSyncTime()}`, "synced", "cloud-check");
+    if (pendingWorkspace) queueWorkspace(pendingWorkspace);
+  }
+
+  function queueWorkspace(workspace) {
+    if (!syncReady || !currentUser || !workspace) return;
+    pendingWorkspace = workspace;
+    setSyncStatus("等待保存", "saving", "cloud-upload");
+    window.clearTimeout(saveTimer);
+    saveTimer = window.setTimeout(() => {
+      savePromise = savePromise.then(flushWorkspace).catch((error) => {
+        setSyncStatus("保存失败，将在下次修改时重试", "error", "cloud-alert");
+        console.error("Workspace save queue failed", error);
+      });
+    }, 700);
+  }
+
+  async function activateUser(user) {
+    showSite(user);
+    if (currentUser?.id === user.id && syncReady) return;
+    if (currentUser?.id === user.id && activationPromise) return activationPromise;
+    currentUser = user;
+    pendingWorkspace = null;
+    activationPromise = loadWorkspace(user).finally(() => { activationPromise = null; });
+    return activationPromise;
+  }
+
   function showAuth(next = "login") {
     setBodyState("auth-required");
     setMode(next);
@@ -203,7 +301,7 @@
           }
         });
         if (error) throw error;
-        if (data.session) showSite(data.user);
+        if (data.session) await activateUser(data.user);
         else setStatus("注册申请已提交，请打开确认邮件完成激活。", "success");
       } else if (mode === "reset") {
         const { error } = await client.auth.resetPasswordForEmail(els.email.value.trim(), {
@@ -216,14 +314,14 @@
         if (error) throw error;
         setStatus("密码已更新，正在进入网站。", "success");
         const { data } = await client.auth.getUser();
-        window.setTimeout(() => showSite(data.user), 500);
+        window.setTimeout(() => activateUser(data.user), 500);
       } else {
         const { data, error } = await client.auth.signInWithPassword({
           email: els.email.value.trim(),
           password: els.password.value
         });
         if (error) throw error;
-        showSite(data.user);
+        await activateUser(data.user);
       }
     } catch (error) {
       setStatus(authMessage(error), "error");
@@ -248,11 +346,26 @@
   els.signout.addEventListener("click", async () => {
     if (!client) return;
     els.signout.disabled = true;
+    window.clearTimeout(saveTimer);
+    savePromise = savePromise.then(flushWorkspace);
+    await savePromise;
+    if (pendingWorkspace) {
+      els.signout.disabled = false;
+      window.alert("云端数据尚未保存，请检查网络后再次退出。");
+      return;
+    }
     const { error } = await client.auth.signOut();
     els.signout.disabled = false;
     if (error) return window.alert(authMessage(error));
+    syncReady = false;
+    currentUser = null;
+    pendingWorkspace = null;
     els.accountMenu.hidden = true;
     showAuth("login");
+  });
+
+  window.addEventListener("travel-workspace:changed", (event) => {
+    queueWorkspace(event.detail?.workspace);
   });
 
   setMode("login");
@@ -278,12 +391,20 @@
     if (error) throw error;
     const recoveryRequested = new URLSearchParams(window.location.search).get("auth") === "recovery";
     if (recoveryRequested) showAuth("update");
-    else if (data.session?.user) showSite(data.session.user);
+    else if (data.session?.user) await activateUser(data.session.user);
     else showAuth("login");
     client.auth.onAuthStateChange((event, session) => {
-      if (event === "PASSWORD_RECOVERY") showAuth("update");
-      else if (event === "SIGNED_OUT") showAuth("login");
-      else if (session?.user && mode !== "update") showSite(session.user);
+      window.setTimeout(() => {
+        if (event === "PASSWORD_RECOVERY") showAuth("update");
+        else if (event === "SIGNED_OUT") {
+          syncReady = false;
+          currentUser = null;
+          pendingWorkspace = null;
+          showAuth("login");
+        } else if (session?.user && mode !== "update") {
+          activateUser(session.user);
+        }
+      }, 0);
     });
   } catch (error) {
     showAuth("login");
