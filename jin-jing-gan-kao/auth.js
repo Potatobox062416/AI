@@ -261,6 +261,7 @@
     if (previewMode) {
       setBodyState("auth-unconfigured");
       body.classList.add("auth-preview");
+      els.siteShell.setAttribute("aria-hidden", "true");
     } else {
       setBodyState("auth-unconfigured");
     }

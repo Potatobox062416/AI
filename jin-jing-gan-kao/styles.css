@@ -324,7 +324,7 @@ body.auth-unconfigured:not(.auth-preview) .auth-screen {
 }
 
 body.authenticated .site-shell,
-body.auth-unconfigured .site-shell {
+body.auth-unconfigured:not(.auth-preview) .site-shell {
   visibility: visible;
 }
 
