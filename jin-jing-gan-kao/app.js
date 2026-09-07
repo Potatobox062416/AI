@@ -10,6 +10,7 @@
   const attractionById = new Map(attractions.map((item) => [item.id, item]));
   const restaurantById = new Map(restaurants.map((item) => [item.id, item]));
   const categoryOrder = ["全部", "古都", "园林", "博物馆", "长城", "亲子", "现代", "街区"];
+  const allowedMemberGenders = new Set(["male", "female", "other", "private"]);
   const paceRules = {
     early: { label: "特种兵", start: "06:30", end: "21:30", durationFactor: 0.75 },
     balanced: { label: "高效赶考", start: "07:20", end: "20:45", durationFactor: 0.86 },
@@ -185,6 +186,7 @@
   let customUid = 0;
   let memberSequence = 4;
   let workspaceEventsMuted = false;
+  let lastValidMembers = state.members.map(memberSnapshot);
 
   function refreshIcons() {
     if (window.lucide) window.lucide.createIcons({ attrs: { "aria-hidden": "true" } });
@@ -204,6 +206,15 @@
     els.toast.classList.add("is-visible");
     window.clearTimeout(toastTimer);
     toastTimer = window.setTimeout(() => els.toast.classList.remove("is-visible"), 2600);
+  }
+
+  function memberSnapshot(member) {
+    return {
+      id: String(member.id),
+      name: String(member.name).slice(0, 20),
+      gender: allowedMemberGenders.has(member.gender) ? member.gender : "private",
+      age: Number.isInteger(member.age) ? member.age : null
+    };
   }
 
   function serializePlan(plan) {
@@ -245,10 +256,16 @@
   }
 
   function exportWorkspace() {
+    const savedMembers = lastValidMembers.map(memberSnapshot);
     return {
       version: 1,
       savedAt: new Date().toISOString(),
-      members: state.members.map((member) => ({ ...member })),
+      team: {
+        schemaVersion: 1,
+        memberCount: savedMembers.length,
+        members: savedMembers.map((member) => ({ ...member }))
+      },
+      members: savedMembers.map((member) => ({ ...member })),
       planner: {
         arrivalDateTime: state.arrivalDateTime,
         departureDateTime: state.departureDateTime,
@@ -274,19 +291,18 @@
   }
 
   async function importWorkspace(workspace) {
-    if (!workspace || workspace.version !== 1 || !Array.isArray(workspace.members)) return false;
-    const validMembers = workspace.members.length >= 1
-      && workspace.members.length <= 20
-      && workspace.members.every((member) => member?.id && member?.name && Number.isInteger(member.age) && member.age >= 0 && member.age <= 110);
+    if (!workspace || workspace.version !== 1) return false;
+    const savedMembers = Array.isArray(workspace.team?.members) ? workspace.team.members : workspace.members;
+    if (!Array.isArray(savedMembers)) return false;
+    if (workspace.team && workspace.team.memberCount !== savedMembers.length) return false;
+    const validMembers = savedMembers.length >= 1
+      && savedMembers.length <= 20
+      && savedMembers.every((member) => member?.id && member?.name && Number.isInteger(member.age) && member.age >= 0 && member.age <= 110);
     if (!validMembers) return false;
     workspaceEventsMuted = true;
     try {
-      state.members = workspace.members.map((member) => ({
-        id: String(member.id),
-        name: String(member.name).slice(0, 20),
-        gender: ["male", "female", "other", "private"].includes(member.gender) ? member.gender : "private",
-        age: member.age
-      }));
+      state.members = savedMembers.map(memberSnapshot);
+      lastValidMembers = state.members.map(memberSnapshot);
       memberSequence = Math.max(memberSequence, ...state.members.map((member) => Number(String(member.id).match(/\d+$/)?.[0]) || 0));
       renderTeamMembers();
       captureTeamState();
@@ -378,6 +394,7 @@
       return false;
     }
     state.ages = state.members.map((member) => member.age);
+    lastValidMembers = state.members.map(memberSnapshot);
     const children = state.ages.filter((age) => age < 18).length;
     const seniors = state.ages.filter((age) => age >= 60).length;
     const adults = state.ages.length - children - seniors;
@@ -2597,10 +2614,12 @@
   }
 
   window.TRAVEL_APP = Object.freeze({
+    teamStorageVersion: 1,
     exportWorkspace,
     importWorkspace
   });
   document.documentElement.dataset.travelWorkspaceVersion = "1";
+  document.documentElement.dataset.travelTeamStorageVersion = "1";
   window.dispatchEvent(new CustomEvent("travel-app:ready"));
   initialize();
 })();

@@ -170,6 +170,7 @@
 
   async function loadWorkspace(user) {
     syncReady = false;
+    let shouldUpgradeTeamStorage = false;
     setSyncStatus("正在载入云端数据", "saving", "cloud-download");
     try {
       const { data, error } = await client
@@ -182,12 +183,14 @@
       if (data?.workspace) {
         const imported = await app.importWorkspace(data.workspace);
         if (!imported) throw new Error("云端数据版本无法识别");
+        shouldUpgradeTeamStorage = data.workspace.team?.schemaVersion !== app.teamStorageVersion
+          || data.workspace.team?.memberCount !== data.workspace.team?.members?.length;
         setSyncStatus(`已同步 ${formatSyncTime(data.updated_at)}`, "synced", "cloud-check");
       } else {
         setSyncStatus("云端空间已就绪", "synced", "cloud-check");
       }
       syncReady = true;
-      if (!data?.workspace) queueWorkspace(app.exportWorkspace());
+      if (!data?.workspace || shouldUpgradeTeamStorage) queueWorkspace(app.exportWorkspace());
     } catch (error) {
       syncReady = false;
       setSyncStatus("云端数据载入失败", "error", "cloud-alert");
@@ -411,4 +414,3 @@
     setStatus(`认证服务连接失败：${authMessage(error)}`, "error");
   }
 })();
-
