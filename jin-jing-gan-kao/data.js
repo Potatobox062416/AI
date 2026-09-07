@@ -599,6 +599,28 @@
         rule: "目前免费免预约，常规开放10:00—20:00、周一闭馆；临展、活动和节假日限流以官方公告为准。"
       },
       images: gallery("grand-canal-museum")
+    },
+    {
+      id: "peking-university",
+      name: "北京大学",
+      category: "古都",
+      district: "海淀区",
+      zone: "西郊",
+      address: "颐和园路5号",
+      duration: 180,
+      priceLabel: "免费预约",
+      prices: { adult: 0, youth: 0, child: 0, senior: 0 },
+      tags: ["燕园", "未名湖", "人文校园"],
+      environment: "mixed",
+      summary: "燕园兼具近现代大学史、皇家园林遗存与校园人文，可沿西校门、未名湖、博雅塔和校史景观串联游览。",
+      highlights: ["西校门", "未名湖", "博雅塔", "燕园古建"],
+      play: "建议预留3小时，按预约时段从东侧门核验入校；教学、科研、办公、宿舍、图书馆和体育馆等非开放区域不得进入。",
+      booking: {
+        kind: "urgent", days: 8, time: "17:00", channel: "“参观北大”微信小程序",
+        miniProgram: "参观北大", url: "https://visitor.pku.edu.cn/",
+        rule: "校园参观免费。即时预约每日8:00—17:00开放、最多提前7日；抽签预约每日17:00—21:45开放、最多提前8日。一般在双休日、法定节假日和寒暑假开放，具体以小程序通知为准。"
+      },
+      images: gallery("peking-university")
     }
   ];
 
@@ -665,4 +687,3 @@
     }
   ];
 })();
-

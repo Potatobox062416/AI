@@ -4,7 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="进京赶考：北京团队旅行规划、景点信息与门票预约助手。">
-  <title>进京赶考</title>  <link rel="stylesheet" href="styles.css?v=20260904-3">
+  <title>进京赶考</title>
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="stylesheet" href="styles.css?v=20260907-1">
 </head>
 <body class="auth-loading">
   <section class="auth-screen" id="auth-screen" aria-labelledby="auth-title">
@@ -120,9 +122,9 @@
           <h1 id="attractions-title">进京赶考</h1>
           <p>北京景点、路线、预算与预约节点</p>
           <div class="hero-metrics" aria-label="景点库摘要">
-            <span><strong>27</strong>处景点</span>
-            <span><strong>108</strong>张实景</span>
-            <span><strong>33</strong>家餐馆</span>
+            <span><strong>28</strong>处景点</span>
+            <span><strong>112</strong>张实景</span>
+            <span><strong>38</strong>家餐馆</span>
           </div>
         </div>
         <label class="hero-search" for="attraction-search">
@@ -160,7 +162,7 @@
               <p class="section-kicker">ATTRACTION INDEX</p>
               <h2>景点索引</h2>
             </div>
-            <div class="catalog-status"><span id="attraction-count">27</span> 个结果</div>
+            <div class="catalog-status"><span id="attraction-count">28</span> 个结果</div>
           </div>
           <div class="attraction-grid" id="attraction-grid"></div>
           <div class="empty-state" id="attraction-empty" hidden>
@@ -318,6 +320,14 @@
       </div>
 
       <div class="food-workspace workspace">
+        <section class="food-type-index" aria-labelledby="food-type-title">
+          <div class="food-type-heading">
+            <p class="section-kicker">BEIJING FOOD INDEX</p>
+            <h2 id="food-type-title">北京名吃种类</h2>
+          </div>
+          <div class="food-type-filters" id="food-type-filters" role="group" aria-label="北京名吃种类筛选"></div>
+          <div class="food-type-note" id="food-type-note"></div>
+        </section>
         <div class="food-filter-groups">
           <div class="food-filter-bar" id="food-price-filters" role="group" aria-label="美食价位筛选"></div>
           <div class="food-filter-bar" id="food-author-filters" role="group" aria-label="视频作者筛选"></div>
@@ -330,7 +340,7 @@
           <div class="catalog-status"><span id="food-count">0</span> 个结果</div>
         </div>
         <div class="food-grid" id="food-grid"></div>
-        <p class="food-source-note"><i data-lucide="badge-info"></i>餐馆视频参考仅采用大祥哥来了、大霸子来了、特厨隋卞；参考人均、营业状态与视频观点均可能变化，临行须在餐厅或平台页面复核。</p>
+        <p class="food-source-note"><i data-lucide="badge-info"></i>视频参考采用大祥哥来了、大霸子来了、特厨隋卞；北京名吃餐馆可附小红书站内口碑检索入口。地址、人均与营业时间以北京文旅或门店事实页为准，临行仍须复核。</p>
       </div>
     </section>
   </main>
@@ -355,13 +365,13 @@
   <script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js"></script>
   <script src="auth-config.js?v=20260904-3"></script>
   <script src="vendor/suncalc.js?v=20260903-2"></script>
-  <script src="data.js?v=20260903-9"></script>
-  <script src="deploy-images.js?v=20260903-9"></script>
+  <script src="data.js?v=20260907-1"></script>
   <script src="food-data.js?v=20260903-5"></script>
   <script src="food-data-daxiang.js?v=20260903-5"></script>
   <script src="food-data-daba.js?v=20260903-5"></script>
-  <script src="app.js?v=20260904-12"></script>
+  <script src="food-data-beijing.js?v=20260907-1"></script>
+  <script src="deploy-images.js?v=20260907-1"></script>
+  <script src="app.js?v=20260907-1"></script>
   <script src="auth.js?v=20260904-3"></script>
 </body>
 </html>
-

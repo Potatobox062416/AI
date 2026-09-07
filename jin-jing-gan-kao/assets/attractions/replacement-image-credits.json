@@ -148,6 +148,128 @@
         "file": "assets/attractions/grand-canal-museum/grand-canal-museum-1.jpg",
         "source": "https://s.visitbeijing.com.cn/index.php/gallery/22517",
         "image": "https://r1.visitbeijing.com.cn/vbj-s/2024/0102/e527ea5520c814835535c64539ed97b5.jpg"
+    },
+    {
+        "attraction": "peking-university",
+        "file": "assets/attractions/peking-university/peking-university-1.jpg",
+        "title": "北京大学招生宣传片：西校门",
+        "source": "https://news.pku.edu.cn/xwzh/75e2566d00a64f5bae7266e30e6ddcc7.htm",
+        "image": "https://news.pku.edu.cn/images/2020-07/4fd49dcee49b4be386723143df91925d.jpg",
+        "license": "北京大学官方公开资料图"
+    },
+    {
+        "attraction": "peking-university",
+        "file": "assets/attractions/peking-university/peking-university-2.jpg",
+        "title": "北京大学房地产管理部：博雅塔",
+        "source": "https://fdcb.pku.edu.cn/yyww/wwxx/0322a24e16a748928a26e260ff721b76.htm",
+        "image": "https://fdcb.pku.edu.cn/images/2025-08/d5aaea75e40048a4b2a64c21841c278b.jpg",
+        "license": "北京大学官方公开资料图"
+    },
+    {
+        "attraction": "peking-university",
+        "file": "assets/attractions/peking-university/peking-university-3.jpg",
+        "title": "北京大学摄影网：未名湖与博雅塔灯光",
+        "source": "https://photo.pku.edu.cn/detail/207.html",
+        "image": "https://photo.pku.edu.cn/Uploads/Bdtpw/Picture/2025/01/12/s6783d511c8afb.jpg",
+        "license": "北京大学官方公开资料图"
+    },
+    {
+        "attraction": "peking-university",
+        "file": "assets/attractions/peking-university/peking-university-4.jpg",
+        "title": "北京大学房地产管理部：钟亭",
+        "source": "https://fdcb.pku.edu.cn/yyww/wwxx/a2eee7429a1a414980df8cbd041a6196.htm",
+        "image": "https://fdcb.pku.edu.cn/images/2025-08/e11848ac8e944da18aecd9c1b24bf8e8.jpg",
+        "license": "北京大学官方公开资料图"
+    },
+    {
+        "attraction": "tiananmen",
+        "file": "assets/attractions/tiananmen/tiananmen-1.jpg",
+        "title": "北京旅游网：天安门广场",
+        "source": "https://s.visitbeijing.com.cn/attraction/101404",
+        "image": "https://r1.visitbeijing.com.cn/vbj-s/2023/0331/fefbd719e6fb76b91c9be1363febd63d.jpg"
+    },
+    {
+        "attraction": "tiananmen",
+        "file": "assets/attractions/tiananmen/tiananmen-2.jpg",
+        "title": "北京旅游网：天安门城楼",
+        "source": "https://s.visitbeijing.com.cn/attraction/101404",
+        "image": "https://r1.visitbeijing.com.cn/vbj-s/2015/0807/20150807035448561.jpg"
+    },
+    {
+        "attraction": "tiananmen",
+        "file": "assets/attractions/tiananmen/tiananmen-3.jpg",
+        "title": "北京旅游网：人民英雄纪念碑",
+        "source": "https://s.visitbeijing.com.cn/attraction/101404",
+        "image": "https://r1.visitbeijing.com.cn/vbj-s/2015/0807/20150807035624799.jpg"
+    },
+    {
+        "attraction": "tiananmen",
+        "file": "assets/attractions/tiananmen/tiananmen-4.jpg",
+        "title": "北京旅游网：人民大会堂",
+        "source": "https://s.visitbeijing.com.cn/attraction/101404",
+        "image": "https://r1.visitbeijing.com.cn/vbj-s/2023/0331/d288dd80ffe78da85ba342c5e1bbca5b.jpg"
+    },
+    {
+        "attraction": "tiananmen-rostrum",
+        "file": "assets/attractions/tiananmen-rostrum/tiananmen-rostrum-2.jpg",
+        "title": "北京旅游网：天安门城楼",
+        "source": "https://s.visitbeijing.com.cn/gallery/24468",
+        "image": "https://r1.visitbeijing.com.cn/vbj-s/2024/1127/d7878a5f15bd9992939f7815d6327d72.jpg"
+    },
+    {
+        "attraction": "tiananmen-rostrum",
+        "file": "assets/attractions/tiananmen-rostrum/tiananmen-rostrum-3.jpg",
+        "title": "北京旅游网：天安门城楼侧景",
+        "source": "https://s.visitbeijing.com.cn/gallery/24468",
+        "image": "https://r1.visitbeijing.com.cn/vbj-s/2024/1127/46671984c70ffc965687c2f791b9d697.jpg"
+    },
+    {
+        "attraction": "temple-heaven",
+        "file": "assets/attractions/temple-heaven/temple-heaven-2.jpg",
+        "title": "北京旅游网：祈年殿夜景",
+        "source": "https://s.visitbeijing.com.cn/gallery/24780",
+        "image": "https://r1.visitbeijing.com.cn/vbj-s/2025/0216/66fc70cd56c39c3418be10288e8864a2.jpg"
+    },
+    {
+        "attraction": "universal",
+        "file": "assets/attractions/universal/universal-3.jpg",
+        "title": "北京环球度假区：变形金刚基地",
+        "source": "https://www.universalbeijingresort.com/zh_CN/ThemeLands/Transformer",
+        "image": "https://www.universalbeijingresort.com/sites/default/files/2021-01/TF-1.png"
+    },
+    {
+        "attraction": "national-museum",
+        "file": "assets/attractions/national-museum/national-museum-2.jpg",
+        "title": "中国国家博物馆：庞贝特展现场",
+        "source": "https://www.chnmuseum.cn/zx/gbxw/202602/t20260223_278218.shtml",
+        "image": "https://www.chnmuseum.cn/zx/gbxw/202602/W020260311521522995508.jpg"
+    },
+    {
+        "attraction": "national-museum",
+        "file": "assets/attractions/national-museum/national-museum-4.jpg",
+        "title": "中国国家博物馆：庞贝特展展陈",
+        "source": "https://www.chnmuseum.cn/zx/gbxw/202602/t20260223_278218.shtml",
+        "image": "https://www.chnmuseum.cn/zx/gbxw/202602/W020260311521523017192.jpg"
+    },
+    {
+        "attraction": "art-798",
+        "file": "assets/attractions/art-798/art-798-4.jpg",
+        "title": "北京旅游网：798艺术区美景",
+        "source": "https://s.visitbeijing.com.cn/gallery/27138",
+        "image": "https://r1.visitbeijing.com.cn/vbj-s/2026/0531/58f417ee9f56cf1f668a2e247fd1f68d.jpg"
+    },
+    {
+        "attraction": "archaeology-museum",
+        "file": "assets/attractions/archaeology-museum/archaeology-museum-3.jpg",
+        "title": "新华社：中国考古博物馆展厅",
+        "source": "https://www.news.cn/photo/2023-09/15/c_1129864885_14.htm",
+        "image": "https://www.news.cn/photo/2023-09/15/1129864885_16947665648281n.JPG"
+    },
+    {
+        "attraction": "archaeology-museum",
+        "file": "assets/attractions/archaeology-museum/archaeology-museum-4.jpg",
+        "title": "新华社：中国考古博物馆展厅陈设",
+        "source": "https://www.news.cn/photo/2023-09/15/c_1129864885_15.htm",
+        "image": "https://www.news.cn/photo/2023-09/15/1129864885_16947665648361n.JPG"
     }
 ]
-

@@ -2786,6 +2786,93 @@ button.meal-stop:hover {
   padding-block: 26px 60px;
 }
 
+.food-type-index {
+  display: grid;
+  grid-template-columns: 180px minmax(0, 1fr);
+  gap: 14px 24px;
+  margin-bottom: 24px;
+  padding: 20px 0;
+  border-top: 3px solid var(--jade);
+  border-bottom: 1px solid var(--line);
+}
+
+.food-type-heading {
+  grid-row: 1 / span 2;
+}
+
+.food-type-heading h2 {
+  margin: 5px 0 0;
+  font-family: var(--display);
+  font-size: 24px;
+}
+
+.food-type-filters {
+  display: flex;
+  gap: 6px;
+  min-width: 0;
+  padding-bottom: 4px;
+  overflow-x: auto;
+}
+
+.food-type-filter {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 40px;
+  padding: 0 12px;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  background: var(--surface);
+  color: var(--muted);
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.food-type-filter strong {
+  min-width: 20px;
+  padding-left: 7px;
+  border-left: 1px solid var(--line);
+  color: var(--ink);
+  font-family: var(--utility);
+  text-align: center;
+}
+
+.food-type-filter.is-selected {
+  border-color: var(--jade);
+  background: var(--jade-soft);
+  color: var(--jade);
+  font-weight: 800;
+}
+
+.food-type-note {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 10px;
+  min-height: 34px;
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.food-type-note strong {
+  color: var(--ink);
+}
+
+.food-type-note a {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--jade);
+  font-weight: 800;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.food-type-note svg {
+  width: 14px;
+  height: 14px;
+}
+
 .food-filter-groups {
   display: flex;
   align-items: center;
@@ -2934,6 +3021,27 @@ button.meal-stop:hover {
   margin: 0 0 13px;
   color: #4e5c58;
   font-size: 11px;
+}
+
+.food-type-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin: 0 0 10px;
+}
+
+.food-type-tags span {
+  padding: 3px 7px;
+  border-left: 2px solid var(--brass);
+  background: #fbf5e9;
+  color: #7c5b23;
+  font-size: 10px;
+  font-weight: 800;
+}
+
+.restaurant-detail-head .food-type-tags {
+  margin-top: 10px;
+  margin-bottom: 0;
 }
 
 .dish-list,
@@ -3570,6 +3678,24 @@ button.meal-stop:hover {
     grid-template-columns: 18px minmax(0, 1fr);
   }
 
+  .food-type-index {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 12px;
+  }
+
+  .food-type-heading {
+    grid-row: auto;
+  }
+
+  .food-type-note {
+    grid-template-columns: 1fr;
+    gap: 5px;
+  }
+
+  .food-type-note a {
+    width: fit-content;
+  }
+
   .food-filter-groups {
     display: grid;
     grid-template-columns: minmax(0, 1fr);
@@ -4126,4 +4252,3 @@ select,
     border: 0;
   }
 }
-

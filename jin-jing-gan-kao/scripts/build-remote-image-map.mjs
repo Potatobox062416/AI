@@ -12,11 +12,11 @@ const attractionContext = vm.createContext({ window: {} });
 vm.runInContext(await fs.readFile(path.join(siteRoot, "data.js"), "utf8"), attractionContext, { filename: "data.js" });
 const attractionIds = new Set(attractionContext.window.ATTRACTIONS.map((item) => item.id));
 const foodContext = vm.createContext({ window: {} });
-for (const file of ["food-data.js", "food-data-daxiang.js", "food-data-daba.js"]) {
+for (const file of ["food-data.js", "food-data-daxiang.js", "food-data-daba.js", "food-data-beijing.js"]) {
   vm.runInContext(await fs.readFile(path.join(siteRoot, file), "utf8"), foodContext, { filename: file });
 }
 const approvedCreators = new Set(["大祥哥来了", "大霸子来了", "特厨隋卞"]);
-const approvedRestaurantIds = new Set(foodContext.window.RESTAURANTS.filter((item) => approvedCreators.has(item.video?.creator)).map((item) => item.id));
+const approvedRestaurantIds = new Set(foodContext.window.RESTAURANTS.filter((item) => approvedCreators.has(item.video?.creator) || item.social?.platform === "xiaohongshu").map((item) => item.id));
 const attractionImageOverrides = {
   "File:20200110 National Museum of China-1.jpg": "https://upload.wikimedia.org/wikipedia/commons/5/59/20200110_National_Museum_of_China-1.jpg",
   "File:20090530 Beijing Summer Palace 8467.jpg": "https://upload.wikimedia.org/wikipedia/commons/f/fb/20090530_Beijing_Summer_Palace_8467.jpg"
@@ -68,4 +68,3 @@ if (Object.keys(restaurantImages).length !== approvedRestaurantIds.size || missi
 const output = `(function () {\n  const attractionImages = ${JSON.stringify(attractionImages, null, 2)};\n  window.ATTRACTIONS?.forEach((item) => {\n    if (attractionImages[item.id]) item.images = attractionImages[item.id];\n  });\n  window.RESTAURANT_IMAGE_URLS = ${JSON.stringify(restaurantImages, null, 2)};\n})();\n`;
 await fs.writeFile(path.join(siteRoot, "deploy-images.js"), output, "utf8");
 process.stdout.write(`deploy-images.js: ${attractionIds.size} attractions and ${approvedRestaurantIds.size} restaurants.\n`);
-

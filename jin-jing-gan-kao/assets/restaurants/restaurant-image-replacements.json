@@ -160,5 +160,85 @@
     "page": "https://www.visitbeijing.com.cn/article/4Nljbtl8lso",
     "title": "北京旅游网：砂锅居西四店外观",
     "verification": "北京旅游网页面图片，门头清晰显示砂锅居。"
+  },
+  {
+    "restaurant": "menkuang",
+    "file": "assets/restaurants/menkuang/menkuang-1.jpg",
+    "image": "https://r1.visitbeijing.com.cn/vbj-s/2022/0412/efc0052434a5ea8edbc556b3399c5ba6.jpg",
+    "page": "https://s.visitbeijing.com.cn/gallery/18188",
+    "title": "北京旅游网：门框卤煮",
+    "verification": "北京市文化和旅游局宣传中心图库正文图。"
+  },
+  {
+    "restaurant": "menkuang",
+    "file": "assets/restaurants/menkuang/menkuang-2.jpg",
+    "image": "https://r1.visitbeijing.com.cn/vbj-s/2022/0412/74a4741b1358ee947080e6e923640039.jpg",
+    "page": "https://s.visitbeijing.com.cn/gallery/18188",
+    "title": "北京旅游网：门框卤煮菜品",
+    "verification": "北京市文化和旅游局宣传中心图库正文图。"
+  },
+  {
+    "restaurant": "fangzhuan",
+    "file": "assets/restaurants/fangzhuan/fangzhuan-1.jpg",
+    "image": "https://r1.visitbeijing.com.cn/vbj-s/2021/0812/20210812162152495.jpg",
+    "page": "https://s.visitbeijing.com.cn/gallery/17056",
+    "title": "北京旅游网：方砖厂69号炸酱面",
+    "verification": "北京市文化和旅游局宣传中心图库正文图。"
+  },
+  {
+    "restaurant": "fangzhuan",
+    "file": "assets/restaurants/fangzhuan/fangzhuan-2.jpg",
+    "image": "https://r1.visitbeijing.com.cn/vbj-s/2021/0812/20210812162152633.jpg",
+    "page": "https://s.visitbeijing.com.cn/gallery/17056",
+    "title": "北京旅游网：方砖厂69号炸酱面门店",
+    "verification": "北京市文化和旅游局宣传中心图库正文图。"
+  },
+  {
+    "restaurant": "yaoji",
+    "file": "assets/restaurants/yaoji/yaoji-1.jpg",
+    "image": "https://r1.visitbeijing.com.cn/vbj-s/2021/0127/20210127014607768.jpg",
+    "page": "https://s.visitbeijing.com.cn/gallery/15600",
+    "title": "北京旅游网：姚记炒肝",
+    "verification": "北京市文化和旅游局宣传中心图库正文图。"
+  },
+  {
+    "restaurant": "yaoji",
+    "file": "assets/restaurants/yaoji/yaoji-2.jpg",
+    "image": "https://r1.visitbeijing.com.cn/vbj-s/2021/0127/20210127014607169.jpg",
+    "page": "https://s.visitbeijing.com.cn/gallery/15600",
+    "title": "北京旅游网：姚记炒肝门店与菜品",
+    "verification": "北京市文化和旅游局宣传中心图库正文图。"
+  },
+  {
+    "restaurant": "baodufeng",
+    "file": "assets/restaurants/baodufeng/baodufeng-1.jpg",
+    "image": "https://r1.visitbeijing.com.cn/vbj-s/2019/0923/20190923104242953.jpg",
+    "page": "https://s.visitbeijing.com.cn/gallery/11777",
+    "title": "北京旅游网：爆肚冯",
+    "verification": "北京市文化和旅游局宣传中心图库正文图。"
+  },
+  {
+    "restaurant": "baodufeng",
+    "file": "assets/restaurants/baodufeng/baodufeng-2.jpg",
+    "image": "https://r1.visitbeijing.com.cn/vbj-s/2019/0923/20190923104242177.jpg",
+    "page": "https://s.visitbeijing.com.cn/gallery/11777",
+    "title": "北京旅游网：爆肚冯菜品",
+    "verification": "北京市文化和旅游局宣传中心图库正文图。"
+  },
+  {
+    "restaurant": "huguosi",
+    "file": "assets/restaurants/huguosi/huguosi-1.jpg",
+    "image": "https://r1.visitbeijing.com.cn/vbj-s/2024/1126/68ea897cc02287d7f60e28cd6794d3f1.jpeg",
+    "page": "https://s.visitbeijing.com.cn/gallery/24263",
+    "title": "北京旅游网：护国寺小吃街",
+    "verification": "北京市文化和旅游局宣传中心图库正文图。"
+  },
+  {
+    "restaurant": "huguosi",
+    "file": "assets/restaurants/huguosi/huguosi-2.jpg",
+    "image": "https://r1.visitbeijing.com.cn/vbj-s/2024/1126/0228a57d2f029339c128e40807026290.jpeg",
+    "page": "https://s.visitbeijing.com.cn/gallery/24263",
+    "title": "北京旅游网：护国寺京味小吃",
+    "verification": "北京市文化和旅游局宣传中心图库正文图。"
   }
 ]

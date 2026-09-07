@@ -7,16 +7,16 @@
     "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/04/Forbidden_City_Panorama_1.jpg/1280px-Forbidden_City_Panorama_1.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
   ],
   "tiananmen": [
-    "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9e/Beijing_-Tiananmen_Square_2016_pic04.jpg/1280px-Beijing_-Tiananmen_Square_2016_pic04.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-    "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/23/Beijing_China_Tiananmen-Square-01.jpg/1280px-Beijing_China_Tiananmen-Square-01.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-    "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e4/Beijing_China_Tiananmen-Square-02.jpg/1280px-Beijing_China_Tiananmen-Square-02.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-    "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7e/Beijing_China_Tiananmen-Square-03.jpg/1280px-Beijing_China_Tiananmen-Square-03.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
+    "https://r1.visitbeijing.com.cn/vbj-s/2023/0331/fefbd719e6fb76b91c9be1363febd63d.jpg",
+    "https://r1.visitbeijing.com.cn/vbj-s/2015/0807/20150807035448561.jpg",
+    "https://r1.visitbeijing.com.cn/vbj-s/2015/0807/20150807035624799.jpg",
+    "https://r1.visitbeijing.com.cn/vbj-s/2023/0331/d288dd80ffe78da85ba342c5e1bbca5b.jpg"
   ],
   "national-museum": [
     "https://upload.wikimedia.org/wikipedia/commons/5/59/20200110_National_Museum_of_China-1.jpg",
-    "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/10/20200110_National_Museum_of_China-2.jpg/1280px-20200110_National_Museum_of_China-2.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "https://www.chnmuseum.cn/zx/gbxw/202602/W020260311521522995508.jpg",
     "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/50/20200110_National_Museum_of_China-3.jpg/1280px-20200110_National_Museum_of_China-3.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-    "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7e/20200110_National_Museum_of_China-4.jpg/1280px-20200110_National_Museum_of_China-4.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
+    "https://www.chnmuseum.cn/zx/gbxw/202602/W020260311521523017192.jpg"
   ],
   "jingshan": [
     "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5c/Beijing_Forbidden_City_Viewed_from_Jingshan_Park_%2810553754905%29.jpg/1280px-Beijing_Forbidden_City_Viewed_from_Jingshan_Park_%2810553754905%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
@@ -26,7 +26,7 @@
   ],
   "temple-heaven": [
     "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/86/20200110_Temple_of_Heaven-1.jpg/1280px-20200110_Temple_of_Heaven-1.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-    "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0d/Beijing%2C_Tiantan%2C_Imperial_Vault_of_Heaven_WLF_2023.jpg/1280px-Beijing%2C_Tiantan%2C_Imperial_Vault_of_Heaven_WLF_2023.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "https://r1.visitbeijing.com.cn/vbj-s/2025/0216/66fc70cd56c39c3418be10288e8864a2.jpg",
     "https://upload.wikimedia.org/wikipedia/commons/5/55/Temple_of_Heaven%2C_Beijing%2C_China_%2826434809999%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
     "https://upload.wikimedia.org/wikipedia/commons/3/35/Temple_of_Heaven%2C_Beijing%2C_China_%2836243505613%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled"
   ],
@@ -88,7 +88,7 @@
     "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/ac/798_Art_District_banner.jpg/1280px-798_Art_District_banner.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
     "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ef/798_Art_District_beijing_inside_of_a_gallery.jpg/1280px-798_Art_District_beijing_inside_of_a_gallery.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
     "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/60/798_Art_Zone_-_panoramio_%281%29.jpg/1280px-798_Art_Zone_-_panoramio_%281%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-    "https://www.fodors.com/assets/destinations/1092608/modern-art-museum-dashanzi-art-district-chaoyang-district-beijing.jpg"
+    "https://r1.visitbeijing.com.cn/vbj-s/2026/0531/58f417ee9f56cf1f668a2e247fd1f68d.jpg"
   ],
   "olympic-park": [
     "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/ac/%22Bird_nest%22_-_Olympic_Stadium%2C_Beijing%2C_China_-_panoramio.jpg/1280px-%22Bird_nest%22_-_Olympic_Stadium%2C_Beijing%2C_China_-_panoramio.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
@@ -99,13 +99,13 @@
   "universal": [
     "https://am.zdmimg.com/202307/20/64b90210bdac04945.jpg_e1080.jpg",
     "https://images.chinahighlights.com/allpicture/2025/02/40d618922eb54b96b1c9e511cd6c0d03_cut_750x400_446_1739374904.jpg",
-    "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/67/5727621_at_Universal_Resort%2C_Universal_Blvd_%2820210826122714%29.jpg/1280px-5727621_at_Universal_Resort%2C_Universal_Blvd_%2820210826122714%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "https://www.universalbeijingresort.com/sites/default/files/2021-01/TF-1.png",
     "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/db/5735448_at_Universal_Resort%2C_Universal_Blvd_%2820210826122124%29.jpg/1280px-5735448_at_Universal_Resort%2C_Universal_Blvd_%2820210826122124%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
   ],
   "tiananmen-rostrum": [
     "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/57/1996_-247-15a_Beijing_Tiananmen_Gate_%285068462443%29.jpg/1280px-1996_-247-15a_Beijing_Tiananmen_Gate_%285068462443%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-    "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f0/Beijing-Verbotene_Stadt-Mittagstor-02-Tiananmen-gje.jpg/1280px-Beijing-Verbotene_Stadt-Mittagstor-02-Tiananmen-gje.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-    "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/68/Beijing-Verbotene_Stadt-Mittagstor-04-Tiananmen-gje.jpg/1280px-Beijing-Verbotene_Stadt-Mittagstor-04-Tiananmen-gje.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "https://r1.visitbeijing.com.cn/vbj-s/2024/1127/d7878a5f15bd9992939f7815d6327d72.jpg",
+    "https://r1.visitbeijing.com.cn/vbj-s/2024/1127/46671984c70ffc965687c2f791b9d697.jpg",
     "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/28/Beijing-Verbotene_Stadt-Mittagstor-08-Tiananmen-gje.jpg/1280px-Beijing-Verbotene_Stadt-Mittagstor-08-Tiananmen-gje.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
   ],
   "mao-memorial": [
@@ -141,8 +141,8 @@
   "archaeology-museum": [
     "https://www.news.cn/photo/2023-09/15/1129864885_16947665648231n.JPG",
     "https://www.news.cn/2023-09/15/1129865475_16947722673031n.JPG",
-    "https://upload.wikimedia.org/wikipedia/commons/b/b8/Bone_spoon_and_adze%2C_Neolithic%2C_9000-7000_BC%2C_Donghulin_site%2C_Beijing.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
-    "https://upload.wikimedia.org/wikipedia/commons/e/e2/Bone_spoon_and_stone%2C_Neolithic%2C_9000-7000_BC%2C_Donghulin_site%2C_Beijing.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled"
+    "https://www.news.cn/photo/2023-09/15/1129864885_16947665648281n.JPG",
+    "https://www.news.cn/photo/2023-09/15/1129864885_16947665648361n.JPG"
   ],
   "xiangshan": [
     "https://russian.beijing.gov.cn/specials/parktours/guidevisitors/fragranthillspark/tips/202301/W020230105700594555916.jpg",
@@ -161,6 +161,12 @@
     "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b6/The_Grand_Canal_Museum_of_Beijing.jpg/1280px-The_Grand_Canal_Museum_of_Beijing.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
     "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a2/The_Grand_Canal_Museum_of_Beijing_1.jpg/1280px-The_Grand_Canal_Museum_of_Beijing_1.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
     "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/58/The_Grand_Canal_Museum_of_Beijing_2.jpg/1280px-The_Grand_Canal_Museum_of_Beijing_2.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
+  ],
+  "peking-university": [
+    "https://news.pku.edu.cn/images/2020-07/4fd49dcee49b4be386723143df91925d.jpg",
+    "https://fdcb.pku.edu.cn/images/2025-08/d5aaea75e40048a4b2a64c21841c278b.jpg",
+    "https://photo.pku.edu.cn/Uploads/Bdtpw/Picture/2025/01/12/s6783d511c8afb.jpg",
+    "https://fdcb.pku.edu.cn/images/2025-08/e11848ac8e944da18aecd9c1b24bf8e8.jpg"
   ]
 };
   window.ATTRACTIONS?.forEach((item) => {
@@ -170,6 +176,14 @@
   "yin-san": [
     "https://i2.hdslb.com/bfs/archive/ccc7580fddbf4fffadf27a22c2ac0cde16ec1201.jpg",
     "https://ak-d.tripcdn.com/images/1mi5q12000fzxo68080D2.jpg?proc=source%2Ftrip"
+  ],
+  "menkuang": [
+    "https://r1.visitbeijing.com.cn/vbj-s/2022/0412/efc0052434a5ea8edbc556b3399c5ba6.jpg",
+    "https://r1.visitbeijing.com.cn/vbj-s/2022/0412/74a4741b1358ee947080e6e923640039.jpg"
+  ],
+  "huguosi": [
+    "https://r1.visitbeijing.com.cn/vbj-s/2024/1126/68ea897cc02287d7f60e28cd6794d3f1.jpeg",
+    "https://r1.visitbeijing.com.cn/vbj-s/2024/1126/0228a57d2f029339c128e40807026290.jpeg"
   ],
   "liu-ji": [
     "https://i0.hdslb.com/bfs/archive/01499c3c29be1f0f60f53c02d3554ad286a26b4a.jpg",
@@ -298,7 +312,18 @@
   "shaguoju": [
     "https://i2.hdslb.com/bfs/archive/5cb2ffd02fa2e5e563b0b44e1071b01d050ea89a.jpg",
     "https://img-rs.huanqiucdn.cn/dp/api/files/imageDir/66b5b6fa3f56b872927f3a2cee3e3df6.png"
+  ],
+  "fangzhuan": [
+    "https://r1.visitbeijing.com.cn/vbj-s/2021/0812/20210812162152495.jpg",
+    "https://r1.visitbeijing.com.cn/vbj-s/2021/0812/20210812162152633.jpg"
+  ],
+  "yaoji": [
+    "https://r1.visitbeijing.com.cn/vbj-s/2021/0127/20210127014607768.jpg",
+    "https://r1.visitbeijing.com.cn/vbj-s/2021/0127/20210127014607169.jpg"
+  ],
+  "baodufeng": [
+    "https://r1.visitbeijing.com.cn/vbj-s/2019/0923/20190923104242953.jpg",
+    "https://r1.visitbeijing.com.cn/vbj-s/2019/0923/20190923104242177.jpg"
   ]
 };
 })();
-
