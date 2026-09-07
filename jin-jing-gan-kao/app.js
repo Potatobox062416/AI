@@ -10,6 +10,14 @@
   const attractionById = new Map(attractions.map((item) => [item.id, item]));
   const restaurantById = new Map(restaurants.map((item) => [item.id, item]));
   const categoryOrder = ["全部", "古都", "园林", "博物馆", "长城", "亲子", "现代", "街区"];
+  const attractionHeatOrder = [
+    "palace-museum", "badaling", "universal", "tiananmen", "national-museum", "prince-gong", "temple-heaven",
+    "summer-palace", "olympic-park", "shichahai", "mutianyu", "yuanmingyuan", "beijing-zoo", "beihai",
+    "lama-temple", "jingshan", "tiananmen-rostrum", "mao-memorial", "peking-university", "xiangshan",
+    "science-museum", "natural-history", "military-museum", "ming-tombs", "art-798", "grand-canal-museum",
+    "confucius-guozijian", "archaeology-museum"
+  ];
+  const attractionHeatRank = new Map(attractionHeatOrder.map((id, index) => [id, index]));
   const allowedMemberGenders = new Set(["male", "female", "other", "private"]);
   const paceRules = {
     early: { label: "特种兵", start: "06:30", end: "21:30", durationFactor: 0.75 },
@@ -561,7 +569,7 @@
       const freeMatch = !state.freeOnly || item.prices.adult === 0;
       const haystack = [item.name, item.category, item.district, item.zone, item.address, item.summary, ...item.tags, ...item.highlights].join(" ").toLowerCase();
       return categoryMatch && freeMatch && (!query || haystack.includes(query));
-    });
+    }).sort((left, right) => (attractionHeatRank.get(left.id) ?? Number.MAX_SAFE_INTEGER) - (attractionHeatRank.get(right.id) ?? Number.MAX_SAFE_INTEGER));
 
     els.attractionCount.textContent = String(filtered.length);
     els.attractionEmpty.hidden = filtered.length !== 0;
