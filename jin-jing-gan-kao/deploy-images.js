@@ -181,6 +181,10 @@
     "https://r1.visitbeijing.com.cn/vbj-s/2022/0412/efc0052434a5ea8edbc556b3399c5ba6.jpg",
     "https://r1.visitbeijing.com.cn/vbj-s/2022/0412/74a4741b1358ee947080e6e923640039.jpg"
   ],
+  "duyichu": [
+    "https://r1.visitbeijing.com.cn/vbj-s/2016/0524/20160524021631120.jpg",
+    "https://i2.hdslb.com/bfs/archive/7a119d711cac9244a76fdd0f3759256659cc1c3e.jpg"
+  ],
   "huguosi": [
     "https://r1.visitbeijing.com.cn/vbj-s/2024/1126/68ea897cc02287d7f60e28cd6794d3f1.jpeg",
     "https://r1.visitbeijing.com.cn/vbj-s/2024/1126/0228a57d2f029339c128e40807026290.jpeg"
@@ -324,6 +328,18 @@
   "baodufeng": [
     "https://r1.visitbeijing.com.cn/vbj-s/2019/0923/20190923104242953.jpg",
     "https://r1.visitbeijing.com.cn/vbj-s/2019/0923/20190923104242177.jpg"
+  ],
+  "fuxian-mingjia": [
+    "https://i2.hdslb.com/bfs/archive/0eea394dee94d631229000da39f0aa6d6a1372bc.jpg",
+    "assets/restaurants/fuxian-mingjia/fuxian-mingjia-2.jpg"
+  ],
+  "mango-russian": [
+    "https://r1.visitbeijing.com.cn/vbj-korean/2026/0508/ca44efea23f96710a41fbc35264616b6.JPG",
+    "https://r1.visitbeijing.com.cn/vbj-korean/2026/0508/ffb5682fc503f318b4fef2914baa4919.JPG@base@tag=imgScale&m=1&w=600&h=400&c=1"
+  ],
+  "jubaoyuan": [
+    "https://i1.hdslb.com/bfs/archive/71ed9013fc7e2bd5fe6a8978fef20577f81093ba.jpg",
+    "https://i1.hdslb.com/bfs/archive/1422a3769abf32f0cb4802e4aa218a390f10ac2d.jpg"
   ]
 };
 })();

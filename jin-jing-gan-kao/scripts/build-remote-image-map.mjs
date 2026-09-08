@@ -12,10 +12,10 @@ const attractionContext = vm.createContext({ window: {} });
 vm.runInContext(await fs.readFile(path.join(siteRoot, "data.js"), "utf8"), attractionContext, { filename: "data.js" });
 const attractionIds = new Set(attractionContext.window.ATTRACTIONS.map((item) => item.id));
 const foodContext = vm.createContext({ window: {} });
-for (const file of ["food-data.js", "food-data-daxiang.js", "food-data-daba.js", "food-data-beijing.js"]) {
+for (const file of ["food-data.js", "food-data-daxiang.js", "food-data-daba.js", "food-data-beijing.js", "food-data-more.js"]) {
   vm.runInContext(await fs.readFile(path.join(siteRoot, file), "utf8"), foodContext, { filename: file });
 }
-const approvedCreators = new Set(["大祥哥来了", "大霸子来了", "特厨隋卞"]);
+const approvedCreators = new Set(["大祥哥来了", "大霸子来了", "特厨隋卞", "食贫道"]);
 const approvedRestaurantIds = new Set(foodContext.window.RESTAURANTS.filter((item) => approvedCreators.has(item.video?.creator) || item.social?.platform === "xiaohongshu").map((item) => item.id));
 const attractionImageOverrides = {
   "File:20200110 National Museum of China-1.jpg": "https://upload.wikimedia.org/wikipedia/commons/5/59/20200110_National_Museum_of_China-1.jpg",

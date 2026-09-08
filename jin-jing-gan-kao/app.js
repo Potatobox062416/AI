@@ -3,7 +3,7 @@
 
   const attractions = window.ATTRACTIONS || [];
   const profiles = window.PLAN_PROFILES || [];
-  const approvedFoodCreators = new Set(["大祥哥来了", "大霸子来了", "特厨隋卞"]);
+  const approvedFoodCreators = new Set(["大祥哥来了", "大霸子来了", "特厨隋卞", "食贫道"]);
   const restaurants = (window.RESTAURANTS || []).filter((item) => approvedFoodCreators.has(item.video?.creator) || item.social?.platform === "xiaohongshu");
   const foodTypes = window.BEIJING_FOOD_TYPES || [];
   const foodTypeById = new Map(foodTypes.map((item) => [item.id, item]));
@@ -617,6 +617,20 @@
     return "事实资料";
   }
 
+  function restaurantReferenceMarkup(item) {
+    const links = [];
+    if (item.video) {
+      links.push(`<a href="${escapeHtml(item.video.url)}" target="_blank" rel="noopener noreferrer"><i data-lucide="play-circle"></i><strong>视频参考</strong><small>${escapeHtml(item.video.creator)} · ${escapeHtml(item.video.title)}</small></a>`);
+    }
+    if (item.social?.platform === "xiaohongshu") {
+      links.push(`<a href="${escapeHtml(item.social.url)}" target="_blank" rel="noopener noreferrer"><i data-lucide="notebook-tabs"></i><strong>小红书口碑入口</strong><small>${escapeHtml(item.social.label)}</small></a>`);
+    }
+    (item.references || []).forEach((reference) => {
+      links.push(`<a href="${escapeHtml(reference.url)}" target="_blank" rel="noopener noreferrer"><i data-lucide="${reference.type === "video" ? "play-circle" : "external-link"}"></i><strong>${escapeHtml(reference.label)}</strong><small>${escapeHtml(reference.title)}</small></a>`);
+    });
+    return links.join("") || `<div class="source-empty">暂无可靠体验资料，保留事实来源。</div>`;
+  }
+
   function renderFoodFilters() {
     const foodTypeCounts = restaurants.reduce((counts, item) => {
       restaurantFoodTypes(item).forEach((id) => { counts[id] = (counts[id] || 0) + 1; });
@@ -644,12 +658,13 @@
     const authorCounts = restaurants.reduce((counts, item) => {
       const creator = item.video?.creator || "";
       if (creator === "大祥哥来了") counts.daxiang += 1;
-      else if (creator === "大霸子来了") counts.daba += 1;
-      else if (creator === "特厨隋卞") counts.suibian += 1;
-      else if (item.social?.platform === "xiaohongshu") counts.xiaohongshu += 1;
+      if (creator === "大霸子来了") counts.daba += 1;
+      if (creator === "特厨隋卞") counts.suibian += 1;
+      if (creator === "食贫道") counts.shipindao += 1;
+      if (item.social?.platform === "xiaohongshu") counts.xiaohongshu += 1;
       return counts;
-    }, { all: restaurants.length, daxiang: 0, daba: 0, suibian: 0, xiaohongshu: 0 });
-    const authorFilters = [["all", "全部来源"], ["daxiang", "大祥哥来了"], ["daba", "大霸子来了"], ["suibian", "特厨隋卞"], ["xiaohongshu", "小红书参考"]];
+    }, { all: restaurants.length, daxiang: 0, daba: 0, suibian: 0, shipindao: 0, xiaohongshu: 0 });
+    const authorFilters = [["all", "全部来源"], ["daxiang", "大祥哥来了"], ["daba", "大霸子来了"], ["suibian", "特厨隋卞"], ["shipindao", "食贫道"], ["xiaohongshu", "小红书参考"]];
     els.foodAuthorFilters.innerHTML = authorFilters.map(([value, label]) => `
       <button class="food-filter ${state.foodAuthor === value ? "is-selected" : ""}" type="button" data-food-author="${value}">${label} ${authorCounts[value]}</button>
     `).join("");
@@ -657,6 +672,7 @@
   }
 
   function restaurantImageFiles(item) {
+    if (Array.isArray(item.imageFiles) && item.imageFiles.length >= 2) return item.imageFiles.slice(0, 2);
     return [1, 2].map((index) => `assets/restaurants/${item.id}/${item.id}-${index}.jpg`);
   }
 
@@ -708,6 +724,7 @@
         || (state.foodAuthor === "daxiang" && creator === "大祥哥来了")
         || (state.foodAuthor === "daba" && creator === "大霸子来了")
         || (state.foodAuthor === "suibian" && creator === "特厨隋卞")
+        || (state.foodAuthor === "shipindao" && creator === "食贫道")
         || (state.foodAuthor === "xiaohongshu" && item.social?.platform === "xiaohongshu");
       const typeLabels = itemTypes.map((id) => foodTypeById.get(id)?.label || "");
       const haystack = [item.name, item.district, item.zone, item.address, item.style, item.description, ...item.dishes, ...typeLabels].join(" ").toLowerCase();
@@ -761,9 +778,9 @@
           <div class="restaurant-constraint"><i data-lucide="triangle-alert"></i><span>${item.constraint}</span></div>
         </div>
         <aside class="restaurant-sources">
-          <span>资料核验 · 2026-09-07</span>
+          <span>资料核验 · 2026-09-08</span>
           <a href="${item.fact.url}" target="_blank" rel="noopener noreferrer"><i data-lucide="badge-check"></i><strong>事实来源</strong><small>${item.fact.label}</small></a>
-          ${item.video ? `<a href="${item.video.url}" target="_blank" rel="noopener noreferrer"><i data-lucide="play-circle"></i><strong>视频参考</strong><small>${item.video.creator} · ${item.video.title}</small></a>` : item.social ? `<a href="${item.social.url}" target="_blank" rel="noopener noreferrer"><i data-lucide="notebook-tabs"></i><strong>小红书口碑入口</strong><small>${item.social.label}</small></a>` : `<div class="source-empty">暂无可靠单店视频，保留事实来源。</div>`}
+          ${restaurantReferenceMarkup(item)}
           <div class="restaurant-image-sources" data-image-source-list><span>正在载入2张配图的来源…</span></div>
           <p>视频或小红书内容反映发布者当时的个人体验，不代表当前价格、营业状态或稳定出品。</p>
           <p>新增北京名吃餐馆的配图优先采用北京市文旅公开图库；具体菜品与门店现状仍须临行复核。</p>
@@ -1390,8 +1407,8 @@
     let venue = null;
     if (ids.has("beijing-zoo")) venue = firstAvailableRestaurant(["huifeng", "taipo", "chaishi"], "lunch", usedRestaurantIds);
     else if (ids.has("prince-gong") || ids.has("beihai") || ids.has("shichahai")) venue = firstAvailableRestaurant(["fangzhuan", "shaguoju", "taipo", "chaishi", "side-street"], "lunch", usedRestaurantIds);
-    else if (ids.has("palace-museum") || ids.has("tiananmen") || ids.has("national-museum")) venue = firstAvailableRestaurant(["menkuang", "baodufeng", "shaguoju", "side-street", "jiangniu", "dadong"], "lunch", usedRestaurantIds);
-    else if (ids.has("art-798") || ids.has("olympic-park")) venue = firstAvailableRestaurant(["dadong", "yisitan", "jinghualou", "five-guys", "xiding"], "lunch", usedRestaurantIds);
+    else if (ids.has("palace-museum") || ids.has("tiananmen") || ids.has("national-museum")) venue = firstAvailableRestaurant(["duyichu", "menkuang", "baodufeng", "jubaoyuan", "shaguoju", "side-street", "jiangniu", "dadong"], "lunch", usedRestaurantIds);
+    else if (ids.has("art-798") || ids.has("olympic-park")) venue = firstAvailableRestaurant(["fuxian-mingjia", "mango-russian", "dadong", "yisitan", "jinghualou", "five-guys", "xiding"], "lunch", usedRestaurantIds);
     else if (ids.has("lama-temple")) venue = firstAvailableRestaurant(["fangzhuan", "jiangniu", "side-street", "mai-thai", "maiden-tower"], "lunch", usedRestaurantIds);
     venue ||= firstAvailableRestaurant(["jiangniu", "side-street", "chaishi", "five-guys"], "lunch", usedRestaurantIds);
     return { venue: venue || genericMeal("city-lunch", "行程片区午餐", items[0]?.zone || "中轴线", [45, 90], ["本地热菜", "面食", "时蔬"], 60), embeddedIn: null };
@@ -1399,10 +1416,10 @@
 
   function selectDinnerVenue(profile, dayIndex, usedRestaurantIds = new Set()) {
     const options = {
-      classic: ["nanmen", "menkuang", "baodufeng", "liu-ji", "dadong", "jiangniu", "taipo", "side-street", "jinghualou"],
+      classic: ["nanmen", "jubaoyuan", "duyichu", "menkuang", "baodufeng", "liu-ji", "dadong", "jiangniu", "taipo", "side-street", "jinghualou"],
       family: ["nanmen", "jiangniu", "five-guys", "taipo", "yisitan", "liu-ji", "side-street"],
       culture: ["nanmen", "menkuang", "baodufeng", "liu-ji", "qulangyuan", "jinghualou", "taipo", "jiangniu", "dadong"],
-      modern: ["dadong", "five-guys", "yisitan", "xiding", "jiangniu", "mai-thai", "taco-bar"],
+      modern: ["fuxian-mingjia", "mango-russian", "dadong", "five-guys", "yisitan", "xiding", "jiangniu", "mai-thai", "taco-bar"],
       relaxed: ["nanmen", "fangzhuan", "menkuang", "taipo", "side-street", "jiangniu", "jinghualou", "liu-ji", "dadong"]
     };
     const ordered = options[profile.id] || options.classic;
